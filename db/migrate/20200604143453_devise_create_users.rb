@@ -34,8 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       
       t.string :name
       t.text :profile_text
-      t.integer :profile_image
-
+      t.string :profile_image_id
       t.timestamps null: false
     end
 

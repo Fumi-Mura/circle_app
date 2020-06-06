@@ -1,0 +1,26 @@
+<section class="section">
+  <div class="container">
+    <div class="user__detail">
+    <%= form_for @user do |f| %>
+    <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "users__image" %>
+    <div class="user__name">
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="user__email">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.text_field :email %>
+    </div>
+    <div class="user__profile_text">
+      <%= f.label :profile_text, "プロフィール" %>
+      <%= f.text_field :profile_text %>
+    </div>
+    <div class="user__profile__image">
+      <%= f.label :profile_image, "プロフィール画像" %>
+      <%= f.attachment_field :profile_image %>
+    </div>
+      <%= f.submit "更新", class: "btn btn-primary" %>
+    <% end %>
+    </div>
+  </div>
+</section>

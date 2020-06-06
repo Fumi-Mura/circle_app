@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="container">
+    <div class="user__detail">
+      <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "users__image" %>
+      <div class="user__name">
+        <%= @user.name %>
+      </div>
+      <div class="user__profile_text">
+        <%= @user.profile_text%>
+      </div>
+      <% if @user.id == current_user.id %>
+      <div class="user__email">
+        <%= @user.email %>
+      </div>
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary"  %>
+      <% end %>
+    </div>
+  </div>
+</section>

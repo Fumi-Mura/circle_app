@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20200604143453) do
     t.string "unconfirmed_email"
     t.string "name"
     t.text "profile_text"
-    t.integer "profile_image"
+    t.string "profile_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
