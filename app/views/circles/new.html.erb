@@ -1,0 +1,37 @@
+<h1>Circles#new</h1>
+<p>Find me in app/views/circles/new.html.erb</p>
+サークル作成
+
+<%= form_for @circle do |f| %>
+
+  <%= f.attachment_field :image %>
+  
+  <div class="circle__name">
+    <%= f.label :name, "サークルの名前" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="circle__content">
+    <%= f.label :content, "活動内容" %>
+    <%= f.text_area :content %>
+  </div>
+  
+  <div class="circle__category">
+    <%= f.label :category, "カテゴリ" %>
+    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :kind) do |category| %>
+     <div>
+       <%= category.label do %>
+         <%= category.check_box %>
+         <%= category.text %>
+       <% end %>
+     </div>
+   <% end %>
+  </div>
+  
+  <div class="circle__place">
+    <%= f.label :content, "活動場所" %>
+    <%= f.select :content, [["北海道", "北海道"], ["東京都", "東京都"], ["大阪府", "大阪府"], ["愛知県", "愛知県"], ["福岡県", "福岡県"], ["その他", "その他"]], include_blank: "選択して下さい" %>
+  </div>
+  
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,33 @@
+<h1>Circles#show</h1>
+<p>Find me in app/views/circles/show.html.erb</p>
+サークル詳細
+
+<section class="section">
+  <div class="container">
+    <div class="circle__detail">
+      <%= link_to user_path(@circle.user) do %>
+        <%= @circle.user.name %>
+      <% end %>
+      さんがこのサークルを作成しました
+      <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
+      <div class="circle__name">
+        <%= @circle.name %>
+      </div>
+      <div class="circle__content">
+        <%= simple_format @circle.content %>
+      </div>
+      <div class="circle__kind">
+        <%= @circle.category_ids %>
+      </div>
+      <div class="circle__place">
+        <%= @circle.category_ids %>
+      </div>
+      <% if @circle.user.id == current_user.id %>
+      </div>
+        <%= link_to "編集", edit_circle_path(@circle), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+

@@ -12,11 +12,12 @@
     
   <section class="header">  
     <div class="header__nav">
-      <%= link_to "ワンプレ", root_path, class: "header__logo"  %>
+      <%= link_to "ワンプレ", root_path, class: "header__logo" %>
       <div class="header__right">
+        <%= link_to "サークルを創る", new_circle_path %>
         <% if user_signed_in? %>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          <%= link_to "マイページ", users_path %>
+          <%= link_to "マイページ", current_user %>
         <% else %>
           <%= link_to "新規登録", new_user_registration_path %>
           <%= link_to "ログイン", new_user_session_path %>

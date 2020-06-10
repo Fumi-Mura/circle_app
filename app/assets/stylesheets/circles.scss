@@ -1,0 +1,19 @@
+// Place all the styles related to the circles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.circle__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px 0 0 0 ;
+}
+.circle__item {
+  width: 45%;
+  margin: 0 20px 30px;
+  box-shadow: 5px 5px 10px #bfbfbf, -5px -5px 10px #ffffff;
+}
+
+.circle__discription {
+  display: flex;
+  justify-content: space-between;
+}

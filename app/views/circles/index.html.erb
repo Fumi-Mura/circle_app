@@ -1,0 +1,42 @@
+<h1>Circles#index</h1>
+<p>Find me in app/views/circles/index.html.erb</p>
+サークル一覧
+
+<section class="section">
+  <div class="container">
+    <div class="circle__list">
+        <% @circle.each do |circle| %>
+        <div class="circle__item">
+          <%= link_to circle_path(circle) do %>
+            <%= attachment_image_tag circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
+          <% end %>
+          <div class="circle__discription">
+            <div class="circle__discription__left">
+              <%= link_to circle.name, user_path(circle), class: "circle__name" %>
+              <%= link_to circle.category_ids, class: "circle__category" %>
+            </div>
+            <div class="circle__discription__right">
+              <%= link_to circle.content, class: "circle__content" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+
+<%= form_tag circles_path, method: :get, class: 'search' do %>
+  <%= select_tag :category_id, options_from_collection_for_select(
+    Category.all, :id, :kind, params[:category_id] ),
+    { prompt: 'カテゴリで絞り込み検索', onchange: 'submit(this.form);'}
+  %>
+<% end %>
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :kind, "Keyword" %>
+  <%= f.search_field :name_cont %>
+
+  <%= f.submit "検索" %>
+<% end %>
+    

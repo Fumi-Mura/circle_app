@@ -39,6 +39,7 @@ gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
