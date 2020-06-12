@@ -2,18 +2,18 @@
 <p>Find me in app/views/circles/new.html.erb</p>
 サークル作成
 
-<%= form_for @circle do |f| %>
+<%= render 'shared/error_messages' %>
 
+<%= form_for @circle do |f| %>
   <%= f.attachment_field :image %>
-  
   <div class="circle__name">
     <%= f.label :name, "サークルの名前" %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="circle__content">
     <%= f.label :content, "活動内容" %>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, class: 'form-control', rows: 10 %>
   </div>
   
   <div class="circle__category">

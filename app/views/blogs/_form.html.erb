@@ -1,0 +1,17 @@
+
+<%= render 'shared/error_messages' %>
+
+<%= form_for blog do |f| %>
+  <%= f.label :image, "写真" %>
+  <%= f.attachment_field :image %>
+  <%= attachment_image_tag @blog, :image, fallback: "default_blog_image.jpg", class: "blog__image" %>
+  <div class="blog__title">
+    <%= f.label :title, "ブログのタイトル" %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="blog__content">
+    <%= f.label :content, "ブログの内容" %>
+    <%= f.text_area :content, class: 'form-control', rows: 10 %>
+  </div>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

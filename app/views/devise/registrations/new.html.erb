@@ -10,7 +10,7 @@
     <div class="field">
       <%= f.label :name, class: "label" %>
       <p class="control has-icons-left">
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "名前", class: "input" %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "名前", class: "input form-control" %>
       <span class="icon is-left">
         <i class="fas fa-user"></i>
       </span>
@@ -20,7 +20,7 @@
     <div class="field">
       <%= f.label :email, class: "label" %>
       <p class="control has-icons-left">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "メールアドレス", class: "input" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "メールアドレス", class: "input form-control" %>
       <span class="icon is-left">
         <i class="fas fa-envelope"></i>
       </span>
@@ -33,7 +33,7 @@
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %>
       <p class="control has-icons-left">
-      <%= f.password_field :password, autocomplete: "new-password", :placeholder => "password", class: "input" %>
+      <%= f.password_field :password, autocomplete: "new-password", :placeholder => "password", class: "input form-control" %>
         <span class="icon is-left">
           <i class="fas fa-lock"></i>
         </span>
@@ -43,7 +43,7 @@
     <div class="field">
       <%= f.label :password_confirmation, class: "label" %>
       <p class="control has-icons-left">
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input form-control" %>
         <span class="icon is-left">
           <i class="fas fa-lock"></i>
         </span>
@@ -51,7 +51,7 @@
     </div>
         
     <div class="actions">
-      <%= f.submit "Sign up", class: "button is-success" %>
+      <%= f.submit "Sign up", class: " btn btn-primary" %>
     </div>
   <% end %>
       

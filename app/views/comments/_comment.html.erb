@@ -1,0 +1,6 @@
+<div class="comment__item">
+  <%= simple_format(comment.comment) %>
+  <%= comment.name %>
+  <%= comment.created_at.to_s(:datetime_jp) %>
+  <%= link_to "削除", comment, method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-primary" %>
+</div>

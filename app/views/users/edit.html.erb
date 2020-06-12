@@ -1,3 +1,6 @@
+<%= render 'shared/error_messages' %>
+
+
 <section class="section">
   <div class="container">
     <div class="user__detail">
@@ -5,15 +8,15 @@
     <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "users__image" %>
     <div class="user__name">
       <%= f.label :name, "名前" %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
     <div class="user__email">
       <%= f.label :email, "メールアドレス" %>
-      <%= f.text_field :email %>
+      <%= f.text_field :email, class: 'form-control' %>
     </div>
     <div class="user__profile_text">
       <%= f.label :profile_text, "プロフィール" %>
-      <%= f.text_field :profile_text %>
+      <%= f.text_area :profile_text, class: 'form-control', rows: 10 %>
     </div>
     <div class="user__profile__image">
       <%= f.label :profile_image, "プロフィール画像" %>

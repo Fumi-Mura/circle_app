@@ -1,0 +1,25 @@
+<h1>Blogs#show</h1>
+<p>Find me in app/views/blogs/show.html.erb</p>
+ブログ詳細
+
+<%= attachment_image_tag @blog, :image, fallback: "default_blog_image.jpg", class: "blog__image" %>
+<%= @blog.title %>
+<%= simple_format @blog.content %>
+<% if @blog.user.id == current_user.id %>
+  <%= link_to "編集", edit_blog_path(@blog), class: "btn btn-primary" %>
+  <%= link_to "削除", blog_path(@blog), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to user_path(@blog.user) do %>
+  <%= @blog.user.name %>
+<% end %>
+さんが作成しました
+作成日 : <%= @blog.created_at.to_s(:datetime_jp) %>
+最終更新 : <%= @blog.updated_at.to_s(:datetime_jp) %>
+
+<div class="comment__list">
+  <div class="commnet__title">コメント</div>
+  <%= render @blog.comments %>
+</div>
+
+<%= render partial: 'comments/form', locals: {comment: @comment} %>

@@ -1,0 +1,29 @@
+<h1>Blogs#index</h1>
+<p>Find me in app/views/blogs/index.html.erb</p>
+ブログの一覧画面
+
+<section class="section">
+  <div class="container">
+    <div class="blog__list">
+        <% @blogs.each do |blog| %>
+        <div class="blog__item">
+          <%= link_to blog_path(blog) do %>
+            <%= attachment_image_tag blog, :image, fallback: "default_blog_image.jpg", class: "blog__image" %>
+          <% end %>
+          <%= link_to user_path(blog.user_id) do %>
+            <%= attachment_image_tag blog.user, :profile_image, fallback: "default_image.jpg", class: "blog__image" %>
+            <%= blog.user.name %>
+          <% end %>
+          <div class="circle__discription">
+            <div class="circle__discription__left">
+              <%= link_to blog.title, blog_path(blog), class: "blog__title" %>
+              <%= link_to blog.content, class: "blog__content" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= paginate @blogs %>

@@ -1,13 +1,15 @@
 class CirclesController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+  before_action :set_target_circle, only: %i[show edit update destroy]
+  
   def index
-    @circle = Circle.all
+    @circle = Circle.page(params[:page]).per(20)
     @circles = params[:category_id].present? ? Category.find(params[:category_id]).circles : Circle.all
     @q = Circle.ransack(params[:q])
     @circles = @q.result(distinct: true)
   end
   
   def show
-    @circle = Circle.find(params[:id])
   end
 
   def new
@@ -17,23 +19,42 @@ class CirclesController < ApplicationController
   def create
     @circle = Circle.new(circle_params)
     @circle.user_id = current_user.id
-    @circle.save
-    redirect_to circle_path(@circle)
+    if @circle.save
+      redirect_to circle_path(@circle), notice: "#{@circle.name}を作成しました"
+    else
+      flash[:circle] = @circle
+      flash[:error_messages] = @circle.errors.full_messages
+      redirect_back fallback_location: @circle
+    end
   end
 
   def edit
-    @circle = Circle.find(params[:id])
+    if @circle.user != current_user
+      redirect_to circles_path, alert: '不正なアクセスです'
+    end
   end
   
   def update
-    @circle = Circle.find(params[:id])
-    @circle.update(circle_params)
-    redirect_to circle_path(@circle)
+    if @circle.update(circle_params)
+      redirect_to circle_path(@circle), notice: "#{@circle.name}の情報を更新しました"
+    else
+      flash[:circle] = @circle
+      flash[:error_messages] = @circle.errors.full_messages
+      redirect_back fallback_location: @circle
+    end
   end
+  
+  def destroy
+  end
+  
   
   private 
   def circle_params
     params.require(:circle).permit(:image, :name, :content, kind_ids: [], place_ids: [])
+  end
+  
+  def set_target_circle
+    @circle = Circle.find(params[:id])
   end
   
 end

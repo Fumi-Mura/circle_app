@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+      circle:
+        name: サークル名
+        content: 活動内容
+        type: カテゴリ
+        place: 活動場所
+      blog:
+        title: タイトル
+        content: 投稿内容
+      comment:
+        name: 名前
+        comment: コメント
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: '...'
+      
