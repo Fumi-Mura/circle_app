@@ -2,10 +2,28 @@
 <p>Find me in app/views/circles/index.html.erb</p>
 サークル一覧
 
+<%= form_tag circles_path, method: :get, class: 'search' do %>
+  <%= select_tag :category_id, options_from_collection_for_select(
+    @kinds, :id, :kind, params[:category_id] ),
+    { prompt: 'カテゴリで絞り込み検索',
+      onchange: 'submit(this.form);'
+    }
+%>
+<% end %>
+<%= form_tag circles_path, method: :get, class: 'search' do %>
+  <%= select_tag :category_id, options_from_collection_for_select(
+    @places, :id, :place, params[:category_id] ),
+    { prompt: '活動場所で絞り込み検索',
+      onchange: 'submit(this.form);'
+    }
+%>
+<% end %>
+
+
 <section class="section">
   <div class="container">
     <div class="circle__list">
-        <% @circle.each do |circle| %>
+        <% @circles.each do |circle| %>
         <div class="circle__item">
           <%= link_to circle_path(circle) do %>
             <%= attachment_image_tag circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
@@ -26,19 +44,4 @@
 </section>
 
 
-<%= form_tag circles_path, method: :get, class: 'search' do %>
-  <%= select_tag :category_id, options_from_collection_for_select(
-    Category.all, :id, :kind, params[:category_id] ),
-    { prompt: 'カテゴリで絞り込み検索', onchange: 'submit(this.form);'}
-  %>
-<% end %>
-
-<%= search_form_for @q do |f| %>
-  <%= f.label :kind, "Keyword" %>
-  <%= f.search_field :name_cont %>
-
-  <%= f.submit "検索" %>
-<% end %>
-    
-
-<%= paginate @circle %>
+<%= paginate @circles %>

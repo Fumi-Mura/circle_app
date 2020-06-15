@@ -10,9 +10,9 @@
 #
 
 one:
-  category: MyString
+  kind: MyString
   place: MyString
 
 two:
-  category: MyString
+  kind: MyString
   place: MyString

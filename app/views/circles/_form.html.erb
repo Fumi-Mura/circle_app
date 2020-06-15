@@ -1,0 +1,42 @@
+<section class="section">
+  <div class="container">
+    <%= form_for @circle do |f| %>
+      <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circles__image" %>
+      <div class="circle__profile__image">
+        <%= f.label :image, "写真" %>
+        <%= f.attachment_field :image %>
+      </div>
+      <div class="circle__name">
+        <%= f.label :name, "サークルの名前" %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="circle__content">
+        <%= f.label :content, "活動内容" %>
+        <%= f.text_area :content, class: 'form-control', rows: 10 %>
+      </div>
+      <div class="form-group">
+        カテゴリ
+        <%= f.collection_check_boxes(:category_ids, @kinds, :id, :kind) do |ki| %>
+        <div class="form-check">
+           <%= ki.label class: 'form-check-label' do %>
+             <%= ki.check_box class: 'form-check_input' %>
+             <%= ki.text %>
+           <% end %>
+         </div>
+       <% end %>
+      </div>
+      <div class="form-group">
+        活動場所
+        <%= f.collection_check_boxes(:category_ids, @places, :id, :place) do |pl| %>
+        <div class="form-check">
+           <%= pl.label class: 'form-check-label' do %>
+             <%= pl.check_box class: 'form-check_input' %>
+             <%= pl.text %>
+           <% end %>
+         </div>
+       <% end %>
+      </div>
+      <%= f.submit class: "btn btn-primary"%>
+    <% end %>
+  </div>
+</section>

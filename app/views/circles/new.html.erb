@@ -4,34 +4,4 @@
 
 <%= render 'shared/error_messages' %>
 
-<%= form_for @circle do |f| %>
-  <%= f.attachment_field :image %>
-  <div class="circle__name">
-    <%= f.label :name, "サークルの名前" %>
-    <%= f.text_field :name, class: 'form-control' %>
-  </div>
-
-  <div class="circle__content">
-    <%= f.label :content, "活動内容" %>
-    <%= f.text_area :content, class: 'form-control', rows: 10 %>
-  </div>
-  
-  <div class="circle__category">
-    <%= f.label :category, "カテゴリ" %>
-    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :kind) do |category| %>
-     <div>
-       <%= category.label do %>
-         <%= category.check_box %>
-         <%= category.text %>
-       <% end %>
-     </div>
-   <% end %>
-  </div>
-  
-  <div class="circle__place">
-    <%= f.label :content, "活動場所" %>
-    <%= f.select :content, [["北海道", "北海道"], ["東京都", "東京都"], ["大阪府", "大阪府"], ["愛知県", "愛知県"], ["福岡県", "福岡県"], ["その他", "その他"]], include_blank: "選択して下さい" %>
-  </div>
-  
-  <%= f.submit %>
-<% end %>
+<%= render partial: 'form', locals: { circle: @circle } %>

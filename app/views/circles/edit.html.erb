@@ -4,33 +4,4 @@
 
 <%= render 'shared/error_messages' %>
 
-<section class="section">
-  <div class="container">
-    <div class="circle__detail">
-    <%= form_for @circle do |f| %>
-      <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circles__image" %>
-      <div class="circle__profile__image">
-        <%= f.label :image, "写真" %>
-        <%= f.attachment_field :image %>
-      </div>
-      <div class="circle__name">
-        <%= f.label :name, "サークルの名前" %>
-        <%= f.text_field :name, class: 'form-control' %>
-      </div>
-      <div class="circle__content">
-        <%= f.label :content, "活動内容" %>
-        <%= f.text_area :content, class: 'form-control', rows: 10 %>
-      </div>
-      <div class="circle__kind">
-        <%= f.label :content, "カテゴリ" %>
-        <%= f.text_field :content %>
-      </div>
-      <div class="circle__place">
-        <%= f.label :content, "活動場所" %>
-        <%= f.text_field :content %>
-      </div>
-      <%= f.submit "更新", class: "btn btn-primary" %>
-    <% end %>
-    </div>
-  </div>
-</section>
+<%= render partial: 'form', locals: { circle: @circle } %>

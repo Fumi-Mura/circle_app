@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200612011218) do
+ActiveRecord::Schema.define(version: 20200612085125) do
 
   create_table "blogs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
@@ -30,10 +30,12 @@ ActiveRecord::Schema.define(version: 20200612011218) do
   end
 
   create_table "circle_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "circle_id"
-    t.integer "category_id"
+    t.bigint "circle_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_circle_categories_on_category_id"
+    t.index ["circle_id"], name: "index_circle_categories_on_circle_id"
   end
 
   create_table "circles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -73,5 +75,7 @@ ActiveRecord::Schema.define(version: 20200612011218) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "circle_categories", "categories"
+  add_foreign_key "circle_categories", "circles"
   add_foreign_key "comments", "blogs"
 end

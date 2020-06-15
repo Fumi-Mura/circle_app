@@ -9,6 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Category < ApplicationRecord
-  has_many :circle_categories
+  has_many :circle_categories, dependent: :destroy
   has_many :circles, through: :circle_categories
 end

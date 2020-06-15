@@ -2,6 +2,12 @@
 <p>Find me in app/views/circles/show.html.erb</p>
 サークル詳細
 
+<% @circle.categories.each do |category| %>
+  <span class="badge badge-primary"><%= category.kind %></span>
+  <span class="badge badge-primary"><%= category.place %></span>
+<% end %>
+
+
 <section class="section">
   <div class="container">
     <div class="circle__detail">
@@ -16,14 +22,7 @@
       <div class="circle__content">
         <%= simple_format @circle.content %>
       </div>
-      <div class="circle__kind">
-        <%= @circle.category_ids %>
-      </div>
-      <div class="circle__place">
-        <%= @circle.category_ids %>
-      </div>
       <% if @circle.user.id == current_user.id %>
-      </div>
         <%= link_to "編集", edit_circle_path(@circle), class: "btn btn-primary" %>
       <% end %>
     </div>

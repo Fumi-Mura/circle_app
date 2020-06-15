@@ -3,10 +3,10 @@ class CirclesController < ApplicationController
   before_action :set_target_circle, only: %i[show edit update destroy]
   
   def index
-    @circle = Circle.page(params[:page]).per(20)
     @circles = params[:category_id].present? ? Category.find(params[:category_id]).circles : Circle.all
-    @q = Circle.ransack(params[:q])
-    @circles = @q.result(distinct: true)
+    @circles = @circles.page(params[:page]).per(20)
+    @kinds = Category.all[0..7]
+    @places = Category.all[8..55]
   end
   
   def show
@@ -14,6 +14,8 @@ class CirclesController < ApplicationController
 
   def new
     @circle = Circle.new
+    @kinds = Category.all[0..7]
+    @places = Category.all[8..55]
   end
   
   def create
@@ -50,7 +52,7 @@ class CirclesController < ApplicationController
   
   private 
   def circle_params
-    params.require(:circle).permit(:image, :name, :content, kind_ids: [], place_ids: [])
+    params.require(:circle).permit(:image, :name, :content, category_ids: [])
   end
   
   def set_target_circle
