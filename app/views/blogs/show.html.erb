@@ -22,4 +22,15 @@
   <%= render @blog.comments %>
 </div>
 
+<% if current_user.already_liked?(@blog) %>
+  <%= link_to blog_like_path(@blog,@blog.id), method: :delete do %>
+    <i class="fas fa-heart"></i>
+  <% end %>
+<% else %>
+  <%= link_to blog_likes_path(@blog), method: :post do %>
+    <i class="far fa-heart"></i>
+  <% end %>
+<% end %>
+<%= @blog.likes.count %>
+
 <%= render partial: 'comments/form', locals: {comment: @comment} %>

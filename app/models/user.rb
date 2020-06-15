@@ -38,4 +38,10 @@ class User < ApplicationRecord
   
   has_many :circles, dependent: :destroy
   has_many :blogs, dependent: :destroy
+  
+  has_many :likes, dependent: :destroy
+  
+  def already_liked?(blog)
+    self.likes.exists?(blog_id: blog.id)
+  end
 end

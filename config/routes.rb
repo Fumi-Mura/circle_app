@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :home
   resources :users
   resources :circles
-  resources :blogs
+  resources :blogs do
+    resources :likes, only: %i[create destroy]
+  end
   resources :comments, only: %i[create destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
