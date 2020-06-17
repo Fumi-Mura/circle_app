@@ -34,6 +34,8 @@ class CirclesController < ApplicationController
     if @circle.user != current_user
       redirect_to circles_path, alert: '不正なアクセスです'
     end
+    @kinds = Category.all[0..7]
+    @places = Category.all[8..55]
   end
   
   def update

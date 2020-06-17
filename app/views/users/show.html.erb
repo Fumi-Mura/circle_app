@@ -9,11 +9,17 @@
         <%= @user.profile_text%>
       </div>
       <% if @user.id == current_user.id %>
-      <div class="user__email">
-        <%= @user.email %>
-      </div>
+        <div class="user__email">
+          <%= @user.email %>
+        </div>
         <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary"  %>
       <% end %>
     </div>
   </div>
 </section>
+
+<section class="stats">
+  <%= render 'shared/stats' %>
+</section>
+
+<%= render 'follow_form' %>

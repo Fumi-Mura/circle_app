@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_target_user, only: %i[show edit update destroy]
+  before_action :set_target_user, only: %i[show edit update destroy following followers]
+  before_action :correct_user,   only: [:edit, :update]
+  before_action :admin_user,     only: :destroy
   
   def index
     @users = User.page(params[:page]).per(10)
@@ -25,7 +27,22 @@ class UsersController < ApplicationController
     end
   end
   
+  def following
+    @title = "Following"
+    @users = @user.following.page(params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @users = @user.followers.page(params[:page])
+    render 'show_follow'
+  end
   
+  def current_user?(user)
+    user && user == current_user
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :profile_text, :profile_image)
@@ -33,5 +50,14 @@ class UsersController < ApplicationController
   
   def set_target_user
     @user = User.find(params[:id])
+  end
+  
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+  end
+  
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
   end
 end

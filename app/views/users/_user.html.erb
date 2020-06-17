@@ -1,0 +1,6 @@
+<li>
+  <%= link_to user.name, user %>
+    | <%= link_to "delete", user, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+                                  <%= attachment_image_tag user, :profile_image, fallback: "default_image.jpg", class: "users__image" %>
+</li>

@@ -80,6 +80,14 @@ if Rails.env == 'development'
     )
     user.save!
   end
+  
+  # リレーションシップ
+users = User.all
+user  = users.first
+following = users[2..30]
+followers = users[3..20]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
 
 #   30.times do |i|
 #     no = i + 1
