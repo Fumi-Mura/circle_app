@@ -80,8 +80,7 @@ if Rails.env == 'development'
     )
     user.save!
   end
-  
-  # リレーションシップ
+
 users = User.all
 user  = users.first
 following = users[2..30]

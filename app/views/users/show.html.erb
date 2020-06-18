@@ -23,3 +23,20 @@
 </section>
 
 <%= render 'follow_form' %>
+
+<% if user_signed_in? %>
+  <% unless @user.id == current_user.id %>
+    <% if @isRoom == true %>
+      <%= link_to room_path(@roomId) do %>
+        <button id="m_submit"><i class="fas fa-envelope"></i></button>
+      <% end %>
+    <% else %>
+      <%= form_for @room, url: rooms_path do |f| %>
+        <%= fields_for @entry do |e| %>
+          <%= e.hidden_field :user_id, :value=> @user.id %>
+        <% end %>
+        <button type="submit" id="m_submit"><i class="fas fa-envelope"></i></button>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,21 @@
+<p class="<%= message.id %>" style= "color: red; margin-top: 0;">
+  <%= attachment_image_tag message.user, :profile_image, fallback: "default_image.jpg", class:"profile-img-circle", size: "40x40" %>
+  <%= message.user.name %>
+</p>
+<p class="<%= message.id %>">
+  <span class="balloon1-top">
+  <h7 class="m_content"><%= message.content %></h7><br>
+  <h7 style="color: red;"><%= message.created_at.strftime("%Y/%m/%d %H:%M") %></h7>
+  </span>
+</p><br>
+
+<script>
+  var message = <%= message.user.id %>;
+  var m_user = document.getElementById('current_user');
+  var current_user = m_user.getAttribute('data-id')
+  if(message == current_user){
+    $('p.' + <%= message.id %>).css('text-align', 'right');
+  }else{
+    $('p.' + <%= message.id %>).css('text-align', 'left');
+  }
+</script>
