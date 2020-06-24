@@ -14,40 +14,40 @@
  
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "device";
 @import "users";
 @import "circles";
 @import "blogs";
+@import "comments";
+@import "rooms";
 
 
-html, body, h1, h2, h3, h4, h5, h6, p, tbody, tr, th, td, a, img {
+html, body, h1, h2, h3, h4, h5, h6, p, table, tbody, tr, th, td, a, img {
   margin: 0;
   padding: 0;
 }
 a {
   text-decoration: none;
   color: #565656;
+  &:hover {
+    text-decoration: none;
+  }
 }
 img {
   width: 100%;
   height: auto;
+  object-fit: cover;
+}
+ul, ol, li {
+  text-decoration: none;
+  list-style-type: none;
 }
 
 // header
-// .notification {
-//   background-color: silver;
-//   height: 50px;
-//   text-align: center;
-//   .notice {
-//     color: blue;
-//     line-height: 50px;
-//   }
-//   .alert {
-//     color: red;
-//   }
-// }
 .header {
   background-color: skyblue;
   height: 80px;
+  margin-bottom: 100px;
   &__right {
     color: red;
   }
@@ -58,20 +58,5 @@ img {
   }
   &__logo {
     color: black;
-  }
-}
-
-// sign_up, login
-.has-icons-left {
-  position: relative;
-  .input {
-    width: 50%;
-    padding-left: 30px;
-  }
-  .is-left {
-    position: absolute;
-    top: 3px;
-    left: 10px;
-    color: gray;
   }
 }

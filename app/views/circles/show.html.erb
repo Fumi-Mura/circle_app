@@ -1,23 +1,25 @@
-<h1>Circles#show</h1>
-<p>Find me in app/views/circles/show.html.erb</p>
-サークル詳細
-
-<% @circle.categories.each do |category| %>
-  <span class="badge badge-primary"><%= category.kind %></span>
-  <span class="badge badge-primary"><%= category.place %></span>
-<% end %>
-
-
-<section class="section">
+<section class="circle">
   <div class="container">
     <div class="circle__detail">
-      <%= link_to user_path(@circle.user) do %>
-        <%= @circle.user.name %>
-      <% end %>
-      さんがこのサークルを作成しました
-      <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
-      <div class="circle__name">
-        <%= @circle.name %>
+      <div class="circle__make__user">
+        <%= link_to user_path(@circle.user) do %>
+          <%= @circle.user.name %>
+        <% end %>
+        さんがこのサークルを作成しました
+      </div>
+      <div class="circle__info">
+        <div class="circle__name">
+          <%= @circle.name %>
+        </div>
+        <div class="circle__category">
+          <% @circle.categories.each do |category| %>
+            <span class="badge badge-pill badge-info"><%= category.kind %></span>
+            <span class="badge badge-pill badge-place"><%= category.place %></span>
+          <% end %>
+        </div>
+      </div>
+      <div id="circle__profile__image">
+        <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
       </div>
       <div class="circle__content">
         <%= simple_format @circle.content %>
@@ -29,4 +31,64 @@
   </div>
 </section>
 
+<% if false %>
+<section class="blog">
+  <div class="container">
+    <%= link_to blog_path do %>
+    <div class="circle__blog">
+      <div class="circle__blog__left">
+        <div class="circle__blog__image">
+          <%= attachment_image_tag @blog, :image, fallback: "default_blog_image.jpg" %>
+        </div>
+        <%= render 'shared/likes' %>
+      </div>
+      <div class="circle__blog__right">
+        <div class="blog__title">
+          <span>【</span><%= @blog.title %><span>】</span>
+        </div>
+        <div class="circle__blog__content">
+          <%= simple_format truncate(@blog.content, length:300) %>
+        </div>
+        <div class="circle__blog__date">
+            作成日 : <%= @blog.created_at.to_s(:datetime_jp) %> 
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</section>
+<% end %>
 
+
+<%
+user_arr = []
+@circles.each do |circle|
+ user = User.find_by(id: circle.user_id)
+ user_arr.push(user.id)
+end
+
+@blogs = Blog.where(user_id: user_arr)
+%>
+
+<% @blogs.each do |blog| %>
+  <%= link_to blog_path(blog) do %>
+    <div class="circle__blog">
+      <div class="circle__blog__left">
+        <div class="circle__blog__image">
+          <%= attachment_image_tag blog, :image, fallback: "default_blog_image.jpg" %>
+        </div>
+      </div>
+      <div class="circle__blog__right">
+        <div class="blog__title">
+          <span>【</span><%= blog.title %><span>】</span>
+        </div>
+        <div class="circle__blog__content">
+          <%= simple_format truncate(blog.content, length:300) %>
+        </div>
+        <div class="circle__blog__date">
+            作成日 : <%= blog.created_at.to_s(:datetime_jp) %> 
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

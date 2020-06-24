@@ -1,42 +1,37 @@
 <section class="section">
   <div class="container">
     <div class="user__detail">
-      <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "users__image" %>
-      <div class="user__name">
-        <%= @user.name %>
-      </div>
-      <div class="user__profile_text">
-        <%= @user.profile_text%>
-      </div>
-      <% if @user.id == current_user.id %>
-        <div class="user__email">
-          <%= @user.email %>
+      <div class="user__left">
+        <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image" %>
+        <section class="stats">
+          <%= render 'shared/stats' %>
+        </section>
+        <div class="user__left__bottom">
+          <div class="follow__form">
+            <%= render 'follow_form' %>
+          </div>
+          <div class="send__message">
+            <%= render 'shared/send_message' %>
+          </div>
         </div>
-        <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary"  %>
-      <% end %>
+      </div>
+      <div class="user__right">
+        <div class="user__name">
+          <i class="fas fa-user user__icon"></i>
+          <%= @user.name %>
+        </div>
+        <div class="user__profile__text">
+          <i class="far fa-address-card user__icon"></i>
+          <%= @user.profile_text %>
+        </div>
+        <% if @user.id == current_user.id %>
+          <div class="user__email">
+            <i class="fas fa-envelope user__icon"></i>
+            <%= @user.email %>
+          </div>
+          <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary"  %>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>
-
-<section class="stats">
-  <%= render 'shared/stats' %>
-</section>
-
-<%= render 'follow_form' %>
-
-<% if user_signed_in? %>
-  <% unless @user.id == current_user.id %>
-    <% if @isRoom == true %>
-      <%= link_to room_path(@roomId) do %>
-        <button id="m_submit"><i class="fas fa-envelope"></i></button>
-      <% end %>
-    <% else %>
-      <%= form_for @room, url: rooms_path do |f| %>
-        <%= fields_for @entry do |e| %>
-          <%= e.hidden_field :user_id, :value=> @user.id %>
-        <% end %>
-        <button type="submit" id="m_submit"><i class="fas fa-envelope"></i></button>
-      <% end %>
-    <% end %>
-  <% end %>
-<% end %>

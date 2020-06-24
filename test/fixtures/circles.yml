@@ -7,6 +7,7 @@
 #  name       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  blog_id    :integer
 #  image_id   :string(255)
 #  user_id    :integer
 #

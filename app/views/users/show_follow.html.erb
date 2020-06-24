@@ -1,18 +1,22 @@
-<% provide(:title, @title) %>
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
+      <%= link_to user_path(@user) do %>
+      <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image" %>
       <h1><%= @user.name %></h1>
-      <span><%= link_to "view my profile", @user %></span>
+      <% end %>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
       <% if @users.any? %>
       <% end %>
     </section>
+    <%= render 'follow_form' %>
   </aside>
   <div class="col-md-8">
-    <h3><%= @title %></h3>
+    <div class="follow_title">
+      <h3><%= @title %></h3>
+    </div>
     <% if @users.any? %>
       <%= render @users %>
       <%= paginate @users %>
@@ -20,4 +24,3 @@
   </div>
 </div>
 
-<%= render 'follow_form' %>

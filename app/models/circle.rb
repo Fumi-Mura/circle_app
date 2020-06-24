@@ -7,6 +7,7 @@
 #  name       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  blog_id    :integer
 #  image_id   :string(255)
 #  user_id    :integer
 #
@@ -22,8 +23,6 @@ class Circle < ApplicationRecord
   
   has_many :circle_categories, dependent: :destroy
   has_many :categories, through: :circle_categories
-  
   has_many :blogs, dependent: :destroy
-  
   belongs_to :user
 end

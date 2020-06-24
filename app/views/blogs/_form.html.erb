@@ -1,17 +1,19 @@
-
 <%= render 'shared/error_messages' %>
 
 <%= form_for blog do |f| %>
-  <%= f.label :image, "写真" %>
-  <%= f.attachment_field :image %>
-  <%= attachment_image_tag @blog, :image, fallback: "default_blog_image.jpg", class: "blog__image" %>
   <div class="blog__title">
     <%= f.label :title, "ブログのタイトル" %>
-    <%= f.text_field :title, class: 'form-control' %>
+    <%= f.text_field :title, :placeholder => "タイトルを入力してください(※50文字以内)", class: 'form-control' %>
   </div>
-  <div class="blog__content">
+ <div id="blog__post__image">
+    <%= attachment_image_tag @blog, :image, fallback: "default_blog_image.jpg", class: "blog__image" %>
+    <i class="fas fa-camera blog__image__camera"></i>
+ </div>
+    <%= f.attachment_field :image %>
+  
+  <div class="blog__content__form">
     <%= f.label :content, "ブログの内容" %>
-    <%= f.text_area :content, class: 'form-control', rows: 10 %>
+    <%= f.text_area :content, :placeholder => "投稿内容を入力してください(※1000文字以内)", class: 'form-control', rows: 10 %>
   </div>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

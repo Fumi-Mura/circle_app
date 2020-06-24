@@ -1,6 +1,7 @@
-<li>
-  <%= link_to user.name, user %>
-    | <%= link_to "delete", user, method: :delete,
-                                  data: { confirm: "You sure?" } %>
-                                  <%= attachment_image_tag user, :profile_image, fallback: "default_image.jpg", class: "users__image" %>
+<li class="following__user">
+    <%= link_to user.name, user, class: "following__name" %>
+    <%= attachment_image_tag user, :profile_image, fallback: "default_image.jpg", class: "users__image following__image" %>
+    <div class="following__profile__text">
+      <%= truncate(user.profile_text, length: 50) %>
+    </div>
 </li>

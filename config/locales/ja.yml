@@ -7,6 +7,10 @@ ja:
         password: パスワード
         password_confirmation: パスワード確認
         unauthenticated: アカウント登録もしくはログインしてください。
+      user:
+        name: 名前
+        email: メールアドレス
+        profile_text: 自己紹介文
       circle:
         name: サークル名
         content: 活動内容

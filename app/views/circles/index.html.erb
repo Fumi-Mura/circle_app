@@ -1,7 +1,3 @@
-<h1>Circles#index</h1>
-<p>Find me in app/views/circles/index.html.erb</p>
-サークル一覧
-
 <%= form_tag circles_path, method: :get, class: 'search' do %>
   <%= select_tag :category_id, options_from_collection_for_select(
     @kinds, :id, :kind, params[:category_id] ),
@@ -19,29 +15,30 @@
 %>
 <% end %>
 
-
 <section class="section">
   <div class="container">
     <div class="circle__list">
         <% @circles.each do |circle| %>
         <div class="circle__item">
-          <%= link_to circle_path(circle) do %>
-            <%= attachment_image_tag circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
-          <% end %>
-          <div class="circle__discription">
-            <div class="circle__discription__left">
-              <%= link_to circle.name, user_path(circle), class: "circle__name" %>
-              <%= link_to circle.category_ids, class: "circle__category" %>
+          <div class="circle__top">
+            <%= link_to circle_path(circle) do %>
+              <%= attachment_image_tag circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
+            <% end %>
+            <div class="circle__category circle__index__category">
+              <% circle.categories.each do |category| %>
+                <span class="badge badge-pill badge-info"><%= category.kind %></span>
+                <span class="badge badge-pill badge-place"><%= category.place %></span>
+              <% end %>
             </div>
-            <div class="circle__discription__right">
-              <%= link_to circle.content, class: "circle__content" %>
-            </div>
+          </div>
+          <div class="circle__bottom">
+            <%= link_to circle.name, circle_path(circle), class: "circle__bottom__name" %>
+            <%= link_to truncate(circle.content, length:200),circle_path(circle), class: "circle__bottom__content" %>
           </div>
         </div>
       <% end %>
     </div>
   </div>
 </section>
-
 
 <%= paginate @circles %>

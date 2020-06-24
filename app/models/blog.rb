@@ -18,11 +18,15 @@ class Blog < ApplicationRecord
     validates :title
     validates :content
   end
-  validates :title, length: {maximum: 100}
+  validates :title, length: {maximum: 50}
   validates :content, length: {maximum: 1000}
   
   belongs_to :user
+  belongs_to :circle
   has_many :comments, dependent: :destroy
-  
   has_many :likes, dependent: :destroy
+  
+  def liked_by?(user)
+    likes.where(user_id: user.id).exists?
+  end
 end

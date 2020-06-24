@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
     if user_signed_in?
       @currentUserEntry = Entry.where(user_id: current_user.id)
       @userEntry = Entry.where(user_id: @user.id)
@@ -47,13 +46,13 @@ class UsersController < ApplicationController
   end
   
   def following
-    @title = "Following"
+    @title = "フォロー中"
     @users = @user.following.page(params[:page])
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = "フォロワー"
     @users = @user.followers.page(params[:page])
     render 'show_follow'
   end

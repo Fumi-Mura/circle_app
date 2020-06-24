@@ -1,18 +1,18 @@
 <section class="section">
   <div class="container">
     <%= form_for @circle do |f| %>
-      <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circles__image" %>
-      <div class="circle__profile__image">
-        <%= f.label :image, "写真" %>
+      <div class="circle__name__form">
+        <%= f.label :name, "サークルの名前" %> <span class="circle__name__info">(※30文字以内)</span>
+        <%= f.text_field :name, :placeholder => "サークル名", class: 'form-control circle__name' %>
+      </div>
+      <div id="circle__profile__image">
+        <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
+        <i class="fas fa-camera circle__image__camera"></i>
+      </div>
         <%= f.attachment_field :image %>
-      </div>
-      <div class="circle__name">
-        <%= f.label :name, "サークルの名前" %>
-        <%= f.text_field :name, class: 'form-control' %>
-      </div>
-      <div class="circle__content">
-        <%= f.label :content, "活動内容" %>
-        <%= f.text_area :content, class: 'form-control', rows: 10 %>
+      <div class="circle__content__form">
+        <%= f.label :content, "活動内容" %><span class="circle__content__info">(※1000文字以内)</span>
+        <%= f.text_area :content, :placeholder => "活動内容を記述してください。", class: 'form-control circle__content', rows: 10 %>
       </div>
       <div class="form-group">
         カテゴリ
@@ -36,7 +36,7 @@
          </div>
        <% end %>
       </div>
-      <%= f.submit class: "btn btn-primary"%>
+      <%= f.submit class: "btn btn-outline-primary"%>
     <% end %>
   </div>
 </section>

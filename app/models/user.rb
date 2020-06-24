@@ -49,7 +49,8 @@ class User < ApplicationRecord
     validates :name
     validates :email
   end
-  validates :name, presence:true, length:{maximum:30}
+  validates :name, length:{maximum:30}
+  validates :profile_text, length:{maximum:200}
   
   def already_liked?(blog)
     self.likes.exists?(blog_id: blog.id)

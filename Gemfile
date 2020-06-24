@@ -34,8 +34,8 @@ gem 'bootstrap', '~> 4.1.1'
 gem "bootstrap-sass", "~>3.3.6"
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "refile", require: "refile/rails", github: 'manfe/refile'
-gem "refile-mini_magick"
+gem "refile", github: 'refile/refile', require: "refile/rails"
+gem "refile-mini_magick", github: 'refile/refile-mini_magick'
 gem 'ransack'
 gem 'kaminari'
 gem 'rails-i18n'
@@ -47,6 +47,9 @@ group :development, :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'rails-flog', require: 'flog'
+  gem 'rspec-rails', '~>3.8'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
 end
 
 group :development do
