@@ -1,6 +1,7 @@
 // sign_up, login
 $ruler: 16px;
 $color-red: #AE1100;
+$color-brue: #60677B;
 $color-bg: #EBECF0;
 $color-shadow: #BABECC;
 $color-white: #FFF;
@@ -28,7 +29,7 @@ $color-white: #FFF;
   width: 100%;
 }
 .button {
-  margin: 50px 0;
+  margin: 30px 0;
 }
 .neumorphism__concave {
   box-shadow:  inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
@@ -68,4 +69,14 @@ $color-white: #FFF;
     left: 15px;
     color: gray;
   }
+}
+
+.guest__signin {
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.brue {
+  color: $color-brue
 }

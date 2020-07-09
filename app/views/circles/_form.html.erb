@@ -1,3 +1,5 @@
+<%= render 'shared/error_messages' %>
+
 <section class="section">
   <div class="container">
     <%= form_for @circle do |f| %>
@@ -27,10 +29,13 @@
       </div>
       <div class="form-group">
         活動場所
+        <% if false %>
+          <%= f.collection_select :category_ids, @places, :id, :place, :include_blank => '指定なし' %>
+        <% end %>
         <%= f.collection_check_boxes(:category_ids, @places, :id, :place) do |pl| %>
         <div class="form-check">
            <%= pl.label class: 'form-check-label' do %>
-             <%= pl.check_box class: 'form-check_input' %>
+             <%= pl.check_box class: 'form-check_input place__number' %>
              <%= pl.text %>
            <% end %>
          </div>
@@ -40,3 +45,16 @@
     <% end %>
   </div>
 </section>
+
+<!--<script type="text/javascript">-->
+<!--(function($){-->
+<!--$('input[class="place__number"]').change(function() {-->
+<!--var len = $('input[class="place__number"]:checked').length;-->
+<!--if (len >= 3) {-->
+<!--$('input[class="place__number"]').not(':checked').attr('disabled', 'disabled');-->
+<!--} else {-->
+<!--$('input[class="place__number"]').not(':checked').removeAttr('disabled');-->
+<!--}-->
+<!--});-->
+<!--});-->
+<!--</script>-->

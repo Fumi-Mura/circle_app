@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-
+  devise_for :users, controllers: {
+   registrations: 'users/registrations'
+  }
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#new_guest'
+  end
+    
   root "home#index"
   resources :home
   resources :users do
@@ -10,6 +15,7 @@ Rails.application.routes.draw do
     end
   end
   resources :circles
+  get 'search', to: 'circles#search'
   resources :blogs do
     resources :likes, only: %i[create destroy]
   end

@@ -45,6 +45,11 @@ class UsersController < ApplicationController
     end
   end
   
+  def destroy
+    user.destroy
+    redirect_to new_user_registration_path, notice: "ユーザーを削除しました"
+  end
+  
   def following
     @title = "フォロー中"
     @users = @user.following.page(params[:page])

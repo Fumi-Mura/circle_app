@@ -4,4 +4,8 @@ module SessionsHelper
     user == current_user
   end
   
+  def current_circle?(circle)
+    circle == current_circle
+  end
+  
 end

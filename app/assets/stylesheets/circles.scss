@@ -38,6 +38,10 @@
   display: block;
 }
 
+.faa-passing-reverse {
+  margin: 0 10px 0 0;
+}
+
 // サークル詳細
 .circle__detail {
   margin: 0 0 100px 0;
@@ -142,4 +146,11 @@
   color: gray;
   font-size: 14px;
   text-align: right;
+}
+
+.circle__blog__like__comment {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 55px 0 0;
+  font-size: 20px;
 }

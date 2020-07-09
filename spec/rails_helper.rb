@@ -22,6 +22,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
+require 'devise'
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
@@ -63,6 +64,17 @@ RSpec.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.include Devise::Test::IntegrationHelpers, type: :request #sign_inヘルパーの使用
-  config.include FactoryBot::Syntax::Methods #FactoryBotをincludeする
+  config.include Devise::Test::IntegrationHelpers, type: :request #sign_in/sign_outヘルパーの使用
+  config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include FactoryBot::Syntax::Methods #FactoryBot(FactoryBot省略)の使用
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.before(:each) do |example| #system specの設定 (js使用時はテスト名に ,js: trueと追記する)
+    if example.metadata[:type] == :system
+      if example.metadata[:js]
+        driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
+      else
+        driven_by :rack_test
+      end
+    end
+  end
 end

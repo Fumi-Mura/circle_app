@@ -3,17 +3,19 @@ class CirclesController < ApplicationController
   before_action :set_target_circle, only: %i[show edit update destroy]
   
   def index
-    @circles = params[:category_id].present? ? Category.find(params[:category_id]).circles : Circle.all
-    @circles = @circles.page(params[:page]).per(10)
+    @categories = Category.all
     @kinds = Category.all[0..7]
     @places = Category.all[8..55]
+    @q = Circle.ransack(params[:q])
+    @circles = @q.result.includes(:categories).page(params[:page]).per(10).order(created_at: :desc)
   end
   
   def show
     @circles = Circle.all
     @user = User.find(params[:id])
-    @blogs = Blog.all
-    binding.pry
+    @users = User.all
+    @blogs = Blog.all.order(created_at: :desc)
+    @blog = Blog.new(circle_id: @circle.id)
     if user_signed_in?
       @currentUserEntry = Entry.where(user_id: current_user.id)
       @userEntry = Entry.where(user_id: @user.id)
@@ -36,6 +38,7 @@ class CirclesController < ApplicationController
 
   def new
     @circle = Circle.new
+    @categories = Category.all
     @kinds = Category.all[0..7]
     @places = Category.all[8..55]
   end
@@ -54,7 +57,7 @@ class CirclesController < ApplicationController
 
   def edit
     if @circle.user != current_user
-      redirect_to circles_path, alert: '不正なアクセスです'
+      redirect_to circle_path, alert: '不正なアクセスです'
     end
     @kinds = Category.all[0..7]
     @places = Category.all[8..55]
@@ -71,10 +74,25 @@ class CirclesController < ApplicationController
   end
   
   def destroy
+    if @circle.user != current_user
+      redirect_to circle_path, alert: "不正なアクセスです"
+    else
+      @circle.destroy
+      redirect_to circles_path, notice: "#{@circle.name}サークルを削除しました"
+    end
   end
   
+  def search
+    @q = Circle.search(search_params)
+    @circles = @q.result.includes(:categories).page(params[:page]).per(10)
+  end
+
+  private
+  def search_params
+    params.require(:q).permit(:name_cont)
+    params.require(:q).permit(:categories_id_eq)
+  end
   
-  private 
   def circle_params
     params.require(:circle).permit(:image, :name, :content, category_ids: [])
   end

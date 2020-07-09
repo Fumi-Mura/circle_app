@@ -75,12 +75,12 @@ if Rails.env == 'development'
     user = User.create!(
       name: "user_#{no}",
       email: "email_#{no}@example.com",
-      password: "#{no}password#{no}",
-      password_confirmation: "#{no}password#{no}"
+      password: "password#{no}",
+      password_confirmation: "password#{no}"
     )
     user.save!
   end
-
+    
 users = User.all
 user  = users.first
 following = users[2..30]

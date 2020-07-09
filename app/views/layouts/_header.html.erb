@@ -10,18 +10,33 @@
       </div>
     <% end %>
     
-  <section class="header">  
+  <header class="header">  
     <div class="header__nav">
       <%= link_to "ワンプレ", root_path, class: "header__logo" %>
       <div class="header__right">
-        <%= link_to "サークルを創る", new_circle_path %>
+        <div class="make__circle">
+          <i class="fas fa-users"></i>
+          <%= link_to "サークルを創る", new_circle_path %>
+        </div>
         <% if user_signed_in? %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          <%= link_to "マイページ", current_user %>
+          <div class="header__logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </div>
+          <div class="header__mypage">
+            <i class="fas fa-user"></i>
+            <%= link_to "マイページ", current_user %>
+          </div>
         <% else %>
-          <%= link_to "新規登録", new_user_registration_path %>
-          <%= link_to "ログイン", new_user_session_path %>
+          <div class="header__signup">
+            <i class="fas fa-user-plus"></i>
+            <%= link_to "新規登録", new_user_registration_path %>
+          </div>
+          <div class="header__login">
+            <i class="fas fa-sign-in-alt"></i>
+            <%= link_to "ログイン", new_user_session_path %>
+          </div>
         <% end %>
       </div>
     </div>
-  </section>
+  </header>

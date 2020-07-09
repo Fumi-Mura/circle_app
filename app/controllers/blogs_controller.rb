@@ -12,10 +12,13 @@ class BlogsController < ApplicationController
 
   def new
     @blog = Blog.new
+    @circles = Circle.all
   end
   
   def create
+    # @circle = Circle.find(params[:id])
     @blog = Blog.new(blog_params)
+    # @blog.circle_id = Circle.where(params[:id])
     @blog.user_id = current_user.id
     if @blog.save
       redirect_to blog_path(@blog), notice: "#{@blog.title}を投稿しました"
@@ -28,7 +31,7 @@ class BlogsController < ApplicationController
 
   def edit
     if @blog.user != current_user
-      redirect_to blogs_path, alert: "不正なアクセスです"
+      redirect_to blog_path, alert: "不正なアクセスです"
     end
   end
   
@@ -41,10 +44,19 @@ class BlogsController < ApplicationController
       redirect_back fallback_location: @blog
     end
   end
+  
+  def destroy
+    if @blog.user != current_user
+      redirect_to blog_path, alert: "不正なアクセスです"
+    else
+      @blog.destroy
+      redirect_to @blog.circle, notice: "ブログを削除しました"
+    end
+  end
  
   private
   def blog_params
-      params.require(:blog).permit(:title, :content, :image)
+      params.require(:blog).permit(:title, :content, :image, :circle_id)
   end
   
   def set_target_blog

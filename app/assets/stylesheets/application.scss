@@ -13,6 +13,7 @@
  */
  
  // Custom bootstrap variables must be set or imported *before* bootstrap.
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap'); //google fonts
 @import "bootstrap";
 @import "device";
 @import "users";
@@ -45,11 +46,10 @@ ul, ol, li {
 
 // header
 .header {
-  background-color: skyblue;
+  background-color: #7DC8B6;
   height: 80px;
   margin-bottom: 100px;
   &__right {
-    color: red;
   }
   &__nav {
     display: flex;
@@ -58,5 +58,27 @@ ul, ol, li {
   }
   &__logo {
     color: black;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Rounded Mplus 1c";
+  }
+}
+  .header__right {
+    display: flex;
+    justify-content: space-between;
+  }
+.make__circle, .header__logout, .header__mypage, .header__signup, .header__login {
+  width: 140px;
+  text-align: right;
+}
+
+// footer
+.footer {
+  margin-top: 100px;
+  background-color: #E1E3E4;
+  text-align: center;
+  height: 50px;
+  .copyright {
+    line-height: 50px;
   }
 }

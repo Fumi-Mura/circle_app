@@ -56,19 +56,25 @@ class User < ApplicationRecord
     self.likes.exists?(blog_id: blog.id)
   end
   
-  # ユーザーをフォローする
   def follow(other_user)
-    following << other_user
+    return if self == other_user
+    unless following?(other_user)
+      following << other_user
+    end
   end
 
-  # ユーザーをフォロー解除する
   def unfollow(other_user)
-    active_relationships.find_by(followed_id: other_user.id).destroy
+    active_relationships.find_by(followed_id: other_user.id).destroy! if following?(other_user)
   end
 
-  # 現在のユーザーがフォローしてたらtrueを返す
   def following?(other_user)
     following.include?(other_user)
+  end
+  
+  def self.guest
+    find_or_create_by!(name: "ゲストユーザー", email: 'guestuser@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
   end
   
 end
