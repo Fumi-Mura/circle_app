@@ -16,12 +16,23 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap'); //google fonts
 @import "bootstrap";
 @import "device";
+@import "home";
 @import "users";
 @import "circles";
 @import "blogs";
 @import "comments";
 @import "rooms";
 
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  color: #565656;
+}
 
 html, body, h1, h2, h3, h4, h5, h6, p, table, tbody, tr, th, td, a, img {
   margin: 0;
@@ -32,12 +43,15 @@ a {
   color: #565656;
   &:hover {
     text-decoration: none;
+    opacity: 0.8;
+    transition: 1s;
   }
 }
 img {
   width: 100%;
   height: auto;
   object-fit: cover;
+  vertical-align: bottom;
 }
 ul, ol, li {
   text-decoration: none;
@@ -67,9 +81,9 @@ ul, ol, li {
     display: flex;
     justify-content: space-between;
   }
-.make__circle, .header__logout, .header__mypage, .header__signup, .header__login {
-  width: 140px;
+.search__circle, .make__circle, .header__logout, .header__mypage, .header__signup, .header__login {
   text-align: right;
+  margin: 0 30px;
 }
 
 // footer

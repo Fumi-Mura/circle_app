@@ -14,6 +14,10 @@
     <div class="header__nav">
       <%= link_to "ワンプレ", root_path, class: "header__logo" %>
       <div class="header__right">
+        <div class="search__circle">
+          <i class="fas fa-search"></i>
+          <%= link_to "サークルを探す", circles_path %>
+        </div>
         <div class="make__circle">
           <i class="fas fa-users"></i>
           <%= link_to "サークルを創る", new_circle_path %>

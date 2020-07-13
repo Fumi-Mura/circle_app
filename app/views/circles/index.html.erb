@@ -1,56 +1,39 @@
-<%= search_form_for(@q, url:search_path) do |f|%>
-  <%= f.label :name, "キーワードで検索する" %>
-  <%= f.search_field :name_cont %><br>
-  <%= f.label :category_id_eq, 'カテゴリ' %>
-  <%= f.collection_select :categories_id_eq, @kinds, :id, :kind, :include_blank => '指定なし' %>
-  <%= f.label :category_id_eq, '活動場所' %>
-  <%= f.collection_select :categories_id_eq, @places, :id, :place, :include_blank => '指定なし' %>
-  <%= f.submit "検索", class: "btn btn-primary" %>
-<% end %>
-
-
-<% if false %>
-<%= form_tag circles_path, method: :get, class: 'search' do %>
-  <%= select_tag :category_id, options_from_collection_for_select(
-    @kinds, :id, :kind, params[:category_id] ),
-    { prompt: 'カテゴリで絞り込み検索',
-      onchange: 'submit(this.form);'
-    }
-%>
-<% end %>
-<%= form_tag circles_path, method: :get, class: 'search' do %>
-  <%= select_tag :category_id, options_from_collection_for_select(
-    @places, :id, :place, params[:category_id] ),
-    { prompt: '活動場所で絞り込み検索',
-      onchange: 'submit(this.form);'
-    }
-%>
-<% end %>
-<% end %>
+<div class="circle__search">
+  <%= search_form_for(@q, url:search_path) do |f|%>
+    <div class="circle__search__keyword">
+      <%= f.search_field :name_cont, placeholder: "キーワードで検索" %><br>
+    </div>
+    <div class="circle__search__category">
+      <%= f.collection_select :categories_id_eq, @kinds, :id, :kind, :include_blank => 'カテゴリを選ぶ' %>
+    </div>
+    <div class="circle__search__place">
+      <%= f.collection_select :categories_id_eq, @places, :id, :place, :include_blank => '活動場所を選ぶ' %>
+    </div>  
+    <i class="fas fa-search"><%= f.submit "検索", class: "btn btn-outline-secondary search__btn" %></i>
+  <% end %>
+</div>
 
 <section class="section">
-  <div class="container">
-    <div class="circle__list">
-        <% @circles.each do |circle| %>
-        <div class="circle__item">
-          <div class="circle__top">
-            <%= link_to circle_path(circle) do %>
-              <%= attachment_image_tag circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
+  <div class="circle__list">
+      <% @circles.each do |circle| %>
+      <div class="circle__item">
+        <div class="circle__top">
+          <%= link_to circle_path(circle) do %>
+            <%= attachment_image_tag circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
+          <% end %>
+          <div class="circle__category circle__index__category">
+            <% circle.categories.each do |category| %>
+              <span class="badge badge-pill badge-info"><%= category.kind %></span>
+              <span class="badge badge-pill badge-place"><%= category.place %></span>
             <% end %>
-            <div class="circle__category circle__index__category">
-              <% circle.categories.each do |category| %>
-                <span class="badge badge-pill badge-info"><%= category.kind %></span>
-                <span class="badge badge-pill badge-place"><%= category.place %></span>
-              <% end %>
-            </div>
-          </div>
-          <div class="circle__bottom">
-            <%= link_to circle.name, circle_path(circle), class: "circle__bottom__name" %>
-            <%= link_to truncate(circle.content, length:200),circle_path(circle), class: "circle__bottom__content" %>
           </div>
         </div>
-      <% end %>
-    </div>
+        <div class="circle__bottom">
+          <%= link_to circle.name, circle_path(circle), class: "circle__bottom__name" %>
+          <%= link_to truncate(circle.content, length:200),circle_path(circle), class: "circle__bottom__content" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </section>
 

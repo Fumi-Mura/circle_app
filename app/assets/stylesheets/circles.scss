@@ -1,7 +1,25 @@
-// Place all the styles related to the circles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
+.circle_search {
+  display: flex;
+    #q_name_cont {
+      width: 200px;
+      padding: 5px 0px 5px 15px;
+      border-width: 1px;
+      border-radius: 3px;
+      margin: 0px 70px;
+    }
+    #q_categories_id_eq {
+      width: 160px;
+      padding: 0px 10px;
+      margin: 0px 30px;
+      height: 36px;
+    }
+    .search__btn {
+      padding: 2px 10px;
+      border: none;
+      height: 36px;
+    }
+}
+    
 .circle__list {
   display: flex;
   flex-wrap: wrap;
