@@ -30,7 +30,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap', '~> 4.1.1'
 gem "bootstrap-sass", "~>3.3.6"
 gem "jquery-rails"
 gem "jquery-ui-rails"
