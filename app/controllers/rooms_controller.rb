@@ -3,19 +3,19 @@ class RoomsController < ApplicationController
 
   def index
     @user = current_user
-    @currentEntries = current_user.entries
+    @currentEntries = current_user.entries.includes([:room])
     myRoomIds = []
     @currentEntries.each do |entry|
       myRoomIds << entry.room.id
     end
-    @anotherEntries = Entry.where(room_id: myRoomIds).where.not(user_id: @user.id).order(created_at: :desc)
+    @anotherEntries = Entry.where(room_id: myRoomIds).where.not(user_id: @user.id).order(created_at: :desc).includes([:room, :user])
   end
   
   def show
     @room = Room.find(params[:id])
     if Entry.where(:user_id => current_user.id, :room_id => @room.id).present?
-      @messages = @room.messages
-      @entries = @room.entries
+      @messages = @room.messages.includes([:user])
+      @entries = @room.entries.includes([:user])
     else
       redirect_back(fallback_location: root_path)
     end
