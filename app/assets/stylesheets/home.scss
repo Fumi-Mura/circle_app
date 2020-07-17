@@ -4,7 +4,7 @@
   background-size: cover;
   background-position: center;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 80px);
   position: absolute;
   top: 80px;
   left: 0;
@@ -16,7 +16,7 @@
     z-index: 2;
     content: "";
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 80px);
     background-color: rgba(0, 0, 0, 0.7);
   }
 }
@@ -29,10 +29,30 @@
   z-index: 3;
   color: #ccc;
   display: block;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   text-align: center;
+  span {
+    margin: 50px 0;
+    display: block;
+    line-height: 3rem;
+    letter-spacing: 0.4rem;
+  }
 }
 
 .home__top__space {
-  margin: 1100px 0;
+  margin: 1000px 0;
+}
+
+@media screen and (max-width: 480px) {
+  .top__text {
+    font-size: 18px;
+    span {
+      letter-spacing: 0.09rem;
+    }
+  }
+  
+  .home__top__space {
+    margin: 800px 0;
+  }
+
 }
