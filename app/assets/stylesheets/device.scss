@@ -13,36 +13,43 @@ $color-white: #FFF;
   text-align: center;
   color: #707070;
 }
-.sign_up, .login {
+
+.sign_up,
+.login {
   width: 60%;
   margin: 50px auto 100px;
 }
-.button, .input {
+
+.button,
+.input {
   border: 0;
   outline: 0;
   font-size: $ruler;
   border-radius: $ruler*20;
   padding: $ruler;
-  background-color:$color-bg;
+  background-color: $color-bg;
   text-shadow: 1px 1px 0 $color-white;
   width: 100%;
 }
+
 .button {
   margin: 30px 0;
 }
+
 .neumorphism__concave {
-  box-shadow:  inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+  box-shadow: inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
   transition: all 0.2s ease-in-out;
   appearance: none;
   -webkit-appearance: none;
   &:focus {
-    box-shadow:  inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+    box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
   }
 }
+
 .neumorphism__convex {
-  color:#61677C;
+  color: #61677C;
   font-weight: bold;
-  box-shadow: -5px -5px 10px $color-white,  5px 5px 10px $color-shadow;
+  box-shadow: -5px -5px 10px $color-white, 5px 5px 10px $color-shadow;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-weight: 600;
@@ -53,9 +60,11 @@ $color-white: #FFF;
     box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
   }
 }
+
 .red {
-  color:$color-red;
+  color: $color-red;
 }
+
 .has-icons-left {
   position: relative;
   .input {
@@ -76,6 +85,20 @@ $color-white: #FFF;
   text-align: center;
   margin-bottom: 50px;
 }
+
 .brue {
   color: $color-brue
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 25px;
+    margin: 50px 0 0 0;
+  }
+  
+  .sign_up,
+  .login {
+    width: 100%;
+  }
+  
 }

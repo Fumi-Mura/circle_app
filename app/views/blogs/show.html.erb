@@ -1,43 +1,41 @@
 <section class="section">
-  <div class="container">
-    <div class="blog__title">
-      <span>【</span><%= @blog.title %><span>】</span>
+  <div class="blog__title">
+    <span>【</span><%= @blog.title %><span>】</span>
+  </div>
+  <div id="blog__image">
+    <%= attachment_image_tag @blog, :image, fallback: "default_blog_image.jpg", class: "blog__image" %>
+  </div>
+  <div class="blog__info">
+    <%= link_to user_path(@blog.user) do %>
+      <%= @blog.user.name %>
+    <% end %>
+    さんがこのブログを作成しました
+    <div class="blog__info__date">
+      作成日 : <%= @blog.created_at.to_s(:datetime_jp) %> 
+       更新日 : <%= @blog.updated_at.to_s(:datetime_jp) %>
     </div>
-    <div id="blog__image">
-      <%= attachment_image_tag @blog, :image, fallback: "default_blog_image.jpg", class: "blog__image" %>
+  </div>
+  <div class="blog__content">
+    <%= simple_format @blog.content %>
+  </div>
+  <div class="blog__like__comment">
+    <%= render 'shared/likes' %>
+    <div class="blog__comment">
+      <i class="far fa-comment"></i>
+      <%= @blog.comments.count %>
     </div>
-    <div class="blog__info">
-      <%= link_to user_path(@blog.user) do %>
-        <%= @blog.user.name %>
-      <% end %>
-      さんがこのブログを作成しました
-      <div class="blog__info__date">
-        作成日 : <%= @blog.created_at.to_s(:datetime_jp) %> 
-         更新日 : <%= @blog.updated_at.to_s(:datetime_jp) %>
-      </div>
-    </div>
-    <div class="blog__content">
-      <%= simple_format @blog.content %>
-    </div>
-    <div class="blog__like__comment">
-      <%= render 'shared/likes' %>
-      <div class="blog__comment">
-        <i class="far fa-comment"></i>
-        <%= @blog.comments.count %>
-      </div>
-    </div>
-    <div class="blog__edit">
-      <% if @blog.user.id == current_user.id %>
-        <%= link_to "編集", edit_blog_path(@blog), class: "btn btn-primary" %>
-        <%= link_to "削除", blog_path(@blog), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-danger" %>
-      <% end %>
-    </div>
-    <div class="comment">
-      <div class="comment__list">
-        <div class="comment__title">コメント一覧</div>
+  </div>
+  <div class="blog__edit">
+    <% if @blog.user.id == current_user.id %>
+      <%= link_to "編集", edit_blog_path(@blog), class: "btn btn-primary" %>
+      <%= link_to "削除", blog_path(@blog), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+  <div class="comment">
+    <div class="comment__list">
+      <div class="comment__title">コメント一覧</div>
         <%= render @blog.comments %>
-      </div>
-      <%= render partial: 'comments/form', locals: {comment: @comment} %>
     </div>
+    <%= render partial: 'comments/form', locals: {comment: @comment} %>
   </div>
 </section>

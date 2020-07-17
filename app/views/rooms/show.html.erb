@@ -1,27 +1,28 @@
-<% @entries.each do |e| %>
-  <% current_user == e.user ? @class = "current_user" : @class = ""  %>
-  <% if e.user != current_user %>
-    <h5 class="to__user__box text-left <%= @class %>" id="<%= @class %>" data-id="<%= e.user.id %>">
-      <div class="to__user__image">
-        <%= attachment_image_tag e.user, :profile_image, format: 'jpg', fallback: "default_image.jpg",　class: "to__user__image" %>
-      </div>
-      <div class="to__user__name">
-        <%= link_to "#{e.user.name}", user_path(e.user_id), class: "to__user__name" %>さんとの会話
-      </div>
-    </h5>
-  <% else %>
-    <h5 class="text-left <%= @class %>" id="<%= @class %>" data-id="<%= e.user.id %>">
-    </h5>
+<section class="section">
+  <% @entries.each do |e| %>
+    <% current_user == e.user ? @class = "current_user" : @class = ""  %>
+    <% if e.user != current_user %>
+      <h5 class="to__user__box text-left <%= @class %>" id="<%= @class %>" data-id="<%= e.user.id %>">
+        <div class="to__user__image">
+          <%= attachment_image_tag e.user, :profile_image, format: 'jpg', fallback: "default_image.jpg",　class: "to__user__image" %>
+        </div>
+        <div class="to__user__name">
+          <%= link_to "#{e.user.name}", user_path(e.user_id), class: "to__user__name" %>さんとの会話
+        </div>
+      </h5>
+    <% else %>
+      <h5 class="text-left <%= @class %>" id="<%= @class %>" data-id="<%= e.user.id %>">
+      </h5>
+    <% end %>
   <% end %>
-<% end %>
-<div id="messages" data-room_id="<%= @room.id %>">
-  <%= render @messages %>
-</div>
-<form class="submit__message">
-  <label id="target">新しいメッセージを作成<span class="message__info">(エンターで送信)</span></label><br>
-  <input type="text" id="chat-input" data-behavior="room_speaker" class="form-control" placeholder="メッサージを入力してください">
-</form>
-
+  <div id="messages" data-room_id="<%= @room.id %>">
+    <%= render @messages %>
+  </div>
+  <form class="submit__message">
+    <label id="target">新しいメッセージを作成<span class="message__info">(エンターで送信)</span></label><br>
+    <input type="text" id="chat-input" data-behavior="room_speaker" class="form-control" placeholder="メッサージを入力してください">
+  </form>
+</section>
 
 <script>
   var element = document.getElementById('target');

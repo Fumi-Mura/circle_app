@@ -1,18 +1,3 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- */
- 
- // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap'); //google fonts
 @import "bootstrap";
 @import "device";
@@ -32,28 +17,49 @@
 
 body {
   color: #565656;
+  margin: 0 auto;
 }
 
-html, body, h1, h2, h3, h4, h5, h6, p, table, tbody, tr, th, td, a, img {
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+table,
+tbody,
+tr,
+th,
+td,
+a,
+img {
   margin: 0;
   padding: 0;
 }
+
 a {
   text-decoration: none;
   color: #565656;
   &:hover {
     text-decoration: none;
     opacity: 0.8;
-    transition: 1s;
+    transition: .5s;
   }
 }
+
 img {
   width: 100%;
   height: auto;
   object-fit: cover;
   vertical-align: bottom;
 }
-ul, ol, li {
+
+ul,
+ol,
+li {
   text-decoration: none;
   list-style-type: none;
 }
@@ -63,8 +69,6 @@ ul, ol, li {
   background-color: #7DC8B6;
   height: 80px;
   margin-bottom: 100px;
-  &__right {
-  }
   &__nav {
     display: flex;
     justify-content: space-between;
@@ -76,14 +80,109 @@ ul, ol, li {
     font-weight: 500;
     font-family: "Rounded Mplus 1c";
   }
-}
   .header__right {
     display: flex;
     justify-content: space-between;
+    .search__circle,
+    .make__circle,
+    .header__logout,
+    .header__mypage,
+    .header__signup,
+    .header__login {
+      text-align: right;
+      margin: 0 30px;
+    }
+  } // ハンバーガー
+  .hamberger-button {
+    cursor: pointer;
+    display: none;
+    height: 28px;
+    position: fixed;
+    right: 40px;
+    top: 30px;
+    transform: translateX(0);
+    transition: all .5s;
+    width: 36px;
+    z-index: 9999;
+    span {
+      background-color: #141414;
+      display: inline-block;
+      height: 4px;
+      left: 0;
+      position: absolute;
+      transition: all .5s;
+      width: 100%;
+      &:nth-of-type(1) {
+        top: 0;
+      }
+      &:nth-of-type(2) {
+        top: 12px;
+        transition: all .5s;
+      }
+      &:nth-of-type(3) {
+        bottom: 0;
+      }
+    }
+  } // ボタンの動き
+  .active {
+    transition: all .5s;
+    span {
+      background-color: #141414;
+      transition: all .5s;
+      &:nth-of-type(1) {
+        transform: translateY(12px) rotate(-135deg);
+      }
+      &:nth-of-type(2) {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      &:nth-of-type(3) {
+        transform: translateY(-12px) rotate(135deg);
+      }
+    }
   }
-.search__circle, .make__circle, .header__logout, .header__mypage, .header__signup, .header__login {
-  text-align: right;
-  margin: 0 30px;
+
+  .hamberger-menu {
+    background-color: gray;
+    display: none;
+    width: 100%;
+    height: 300px;
+    padding-top: 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateY(-300px);
+    transition: all .5s;
+    z-index: 10;
+    ul {
+      padding: 0px;
+    }
+    li {
+      text-align: center;
+    }
+  } // メニューの開閉
+  .hamberger-menu-open {
+    transform: translateY(0px);
+  }
+
+  .overlay {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.7);
+    display: block;
+    height: 0;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    transition: opacity .5s;
+    width: 0;
+    z-index: 2;
+  } // オーバーレイの開閉
+  .overlay-open {
+    height: 100%;
+    opacity: 1;
+    width: 100%;
+  }
 }
 
 // footer
@@ -94,5 +193,48 @@ ul, ol, li {
   height: 50px;
   .copyright {
     line-height: 50px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  // header
+  .header {
+    margin-bottom: 50px;
+    &__nav {
+      display: block;
+    }
+    .header__right {
+      display: none;
+    }
+    .hamberger-button {
+      display: inline-block;
+    }
+    .hamberger-menu {
+      display: block;
+    }
+    .hamberger-menu a {
+      color: #ccc;
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+    }
+    .hamberger-menu a:hover {
+      background-color: #fff;
+      color: gray;
+      transition: all 0.5s;
+    }
+    .hamberger-menu-right {
+      font-size: 2rem;
+      right: 3%;
+    }
+    top: -8%;
+    .hamberger-menu-left {
+      font-size: 2rem;
+      left: 3%;
+    }
+    top: -6%;
+    .hamberger-menu-left-rec {
+      top: 10%;
+    }
   }
 }

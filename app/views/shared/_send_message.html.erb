@@ -9,7 +9,7 @@
         <%= fields_for @entry do |e| %>
           <%= e.hidden_field :user_id, :value=> @user.id %>
         <% end %>
-        <button type="submit" id="m_submit" class="send__message__button btn btn-warning"><i class="fas fa-envelope"></i>メッセージ</button>
+        <button type="submit" id="m_submit" class="btn btn-warning"><i class="fas fa-envelope"></i>メッセージ</button>
       <% end %>
     <% end %>
   <% end %>

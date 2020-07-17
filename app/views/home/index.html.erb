@@ -1,5 +1,48 @@
-<section class="home">
-  <span class="top__text">Home#index</span>
+<section class="section">
+  <div class="home">
+    <span class="top__text">あなたの居場所はここにある<br>新しい出会いで次の価値を創ろう</span>
+    </div>
 </section>
 
-<span class="top__text">Home#index</span>
+<div class="home__top__space"></div>
+
+<div class="circle__search">
+  <%= search_form_for(@q, url:search_path) do |f|%>
+    <div class="circle__search__keyword">
+      <%= f.search_field :name_cont, placeholder: "キーワードで検索" %><br>
+    </div>
+    <div class="circle__search__category">
+      <%= f.collection_select :categories_id_eq, @kinds, :id, :kind, :include_blank => 'カテゴリを選ぶ' %>
+    </div>
+    <div class="circle__search__place">
+      <%= f.collection_select :categories_id_eq, @places, :id, :place, :include_blank => '活動場所を選ぶ' %>
+    </div>  
+    <i class="fas fa-search"><%= f.submit "検索", class: "btn btn-outline-secondary search__btn" %></i>
+  <% end %>
+</div>
+
+<section class="section">
+  <div class="circle__list">
+    <% @circles.each do |circle| %>
+      <div class="circle__item">
+        <div class="circle__top">
+          <%= link_to circle_path(circle) do %>
+            <%= attachment_image_tag circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
+          <% end %>
+          <div class="circle__category circle__index__category">
+            <% circle.categories.each do |category| %>
+              <span class="badge badge-pill badge-info"><%= category.kind %></span>
+              <span class="badge badge-pill badge-place"><%= category.place %></span>
+            <% end %>
+          </div>
+        </div>
+        <div class="circle__bottom">
+          <%= link_to circle.name, circle_path(circle), class: "circle__bottom__name" %>
+          <%= link_to truncate(circle.content, length:200),circle_path(circle), class: "circle__bottom__content" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<%= paginate @circles %>

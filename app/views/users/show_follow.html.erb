@@ -1,25 +1,27 @@
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <%= link_to user_path(@user) do %>
-      <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image" %>
-      <h1><%= @user.name %></h1>
-      <% end %>
-    </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
-      <% if @users.any? %>
-      <% end %>
-    </section>
-    <%= render 'follow_form' %>
-  </aside>
-  <div class="col-md-8">
-    <div class="follow_title">
-      <h3><%= @title %></h3>
+<section class="section">
+  <div class="follow__page">
+    <div class="follow__page__left">
+      <section class="user_info">
+        <%= link_to user_path(@user) do %>
+          <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image" %>
+        <h1 style="margin: 20px 0px"><%= @user.name %></h1>
+        <% end %>
+      </section>
+      <section class="stats" style="margin: 20px 0">
+        <%= render 'shared/stats' %>
+        <% if @users.any? %>
+        <% end %>
+      </section>
+      <%= render 'follow_form' %>
     </div>
-    <% if @users.any? %>
-      <%= render @users %>
-      <%= paginate @users %>
-    <% end %>
+    <div class="follow__page__right">
+      <div class="follow_title">
+        <h3><%= @title %></h3>
+      </div>
+      <% if @users.any? %>
+        <%= render @users %>
+        <%= paginate @users %>
+      <% end %>
+    </div>
   </div>
-</div>
+</section>

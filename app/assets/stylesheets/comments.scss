@@ -1,17 +1,17 @@
 .comment__list {
   margin: 30px 0;
 }
+
 .comment__item {
   margin: 0 0 20px 0;
-}
-.comment__info {
-  display: flex;
-  justify-content: space-between;
-  .comment__name {
-    line-height: 40px;
+  .comment__info {
+    display: flex;
+    justify-content: space-between;
+    .comment__name {
+      line-height: 40px;
+    }
+    .comment__time {
+      color: gray;
+    }
   }
-  .comment__time {
-    color: gray;
-  }
 }
-  

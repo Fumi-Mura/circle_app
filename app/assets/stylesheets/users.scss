@@ -1,83 +1,63 @@
+// user詳細
 .user__detail {
   display: flex;
   margin: 100px 0 0 0;
   justify-content: space-between;
-}
-.user__left {
+  .user__left {
     width: 40%;
+    .stats {
+      margin: 30px 0 20px 0;
+      text-align: center;
+      font-size: 18px;
+    }
+    .user__left__bottom {
+      display: flex;
+      justify-content: space-around;
+    }
   }
-  .stats {
-    margin: 30px 0 20px 0;
-    text-align: center;
-    font-size: 18px;
-  }
-  .user__left__bottom {
-    display: flex;
-    justify-content: space-around;
-  }
-  .send__message__button {
-    border: none;
-    padding: 6px 12px;
-    width: 122px;
-    height: 38px;
-  }
- .user__right {
+  .user__right {
     width: 50%;
+    .user__name,
+    .user__profile__text,
+    .user__email {
+      border-bottom: 1px solid silver;
+      margin: 0 0 30px 0;
+      position: relative;
+      padding: 0 0 5px 40px;
+    }
+    .user__profile {
+      position: relative;
+    }
+    .user__profile__text {
+      height: 200px;
+      border: 1px solid silver;
+      border-radius: 5px;
+      width: 100%;
+      padding: 5px 5px 5px 40px;
+    }
+    .user__icon {
+      color: gray;
+      position: absolute;
+      top: 3px;
+      left: 5px;
+      font-size: 20px;
+    }
   }
-  .user__name, .user__profile__text, .user__email {
-    border-bottom: 1px solid silver;
-    margin: 0 0 30px 0;
-    position: relative;
-    padding: 0 0 5px 40px;
-  }
-  .user__profile {
-    position: relative;
-  }
-  .user__profile__text {
-    height: 200px;
-    border: 1px solid silver;
-    border-radius: 5px;
-    width: 100%;
-    padding: 5px 5px 5px 40px;
-  }
-  .user__icon {
-  color: gray;
-  position: absolute;
-  top: 3px;
-  left: 5px;
-  font-size: 20px;
-  }
-
-.users__list {
-  display: flex;
-  margin: 50px 0 0 0 ;
-}
-.users__item {
-  width: 33%;
-  margin: 0 10px 30px;
-  box-shadow: 5px 5px 10px #bfbfbf, -5px -5px 10px #ffffff;
 }
 
-.users__image {
-  display: block;
-  border-radius: 50%;
-  margin: 0 auto;
-}
-.users__name {
-  display: block;
-  text-align: center;
-  font-size: 20px;
-}
-
-
-.user__edit {
-  border: none;
-  width: 100%;
-  position: relative;
-}
+// user編集
 #user__image {
   position: relative;
+  .user__image__camera {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(220, 220, 220, 0.7);
+    font-size: 40px;
+  }
 }
+
 .user__image {
   cursor: pointer;
   width: 300px;
@@ -86,16 +66,15 @@
   border-radius: 50%;
   margin: 0 auto;
 }
+
 #user_profile_image {
   display: none;
 }
-.user__image__camera {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgba(220, 220, 220, 0.7);
-  font-size: 40px;
+
+.edit__user__name {
+  border: none;
+  width: 100%;
+  position: relative;
 }
 
 .edit__user__email {
@@ -104,28 +83,114 @@
   margin: 0 0 0 10px;
 }
 
-// フォロー、フォロワーページ
-.follow_title {
-  text-align: center;
-  margin: 0 0 50px 0;
-}
-.following__user {
+// user一覧
+.users__list {
   display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-}
-.following__name {
-  width: 20%;
-  margin: 20px auto;
-  text-align: center;
-  font-size: 20px;
-}
-.following__image {
-  width: 100px;
-  height: 100px;
-}
-.following__profile__text {
-  color: gray;
-  width: 50%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .users__item {
+    width: 21%;
+    margin: 0 0 50px 0;
+    padding: 10px;
+    box-shadow: 5px 5px 10px #bfbfbf, -5px -5px 10px #ffffff;
+    .users__image {
+      height: 90%;
+      border-radius: 50%;
+    }
+    .users__name {
+      display: block;
+      text-align: center;
+      font-size: 20px;
+    }
+  }
 }
 
+// フォロー、フォロワー
+.follow__page {
+  display: flex;
+  justify-content: space-between;
+  .follow__page__left {
+    width: 40%;
+    text-align: center;
+  }
+  .follow__page__right {
+    width: 55%;
+    .follow_title {
+      text-align: center;
+      margin: 0 0 50px 0;
+    }
+    .following__user {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px 0;
+      .following__name {
+        width: 20%;
+        font-size: 20px;
+      }
+      .following__image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+      .following__profile__text {
+        color: gray;
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  // user詳細
+  .user__detail {
+    display: block;
+    margin: 0 auto;
+    .user__left {
+      width: 100%;
+      margin-bottom: 50px;
+    }
+    .user__right {
+      width: 100%;
+      .user__profile {
+        position: relative;
+      }
+      .user__profile__text {
+        height: 340px;
+      }
+      .btn-primary {
+        width: 138px;
+        margin: 0 auto;
+        display: block;
+      }
+    }
+  }
+  .user__image {
+    width: 100%;
+    display: block;
+  }
+  // user一覧
+  .users__list {
+    display: block;
+    .users__item {
+      width: 100%;
+      .users__image {
+        height: 250px;
+        width: 250px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+    // フォロー、フォロワー
+  .follow__page {
+    display: block;
+    .follow__page__left {
+      width: 100%;
+      margin: 0 0 50px 0;
+    }
+    .follow__page__right {
+      width: 100%;
+    }
+  }
+}

@@ -2,8 +2,9 @@
   background-image: url("../../assets/paper-3213924__480.png");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
-  height: 100%;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
   top: 80px;
   left: 0;
@@ -14,18 +15,24 @@
     left: 0;
     z-index: 2;
     content: "";
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
   }
 }
-  .top__text {
-  　position: absolute;
-  　top: 50%;
-  　left: 50%;
-  　transform: translate(-50%, -50%);
-  　z-index: 3;
-  　color: #eee;
-  　display: block;
-  　font-size: 3rem;
-  }
+
+.top__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  color: #ccc;
+  display: block;
+  font-size: 2.6rem;
+  text-align: center;
+}
+
+.home__top__space {
+  margin: 1100px 0;
+}

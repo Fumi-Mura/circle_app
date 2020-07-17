@@ -7,14 +7,14 @@
 #   Character.create!(name: 'Luke', movie: movies.first)
 
 Category.create!([
-    { kind: 'スポーツ' },
-    { kind: '勉強' },
-    { kind: 'イベント' },
-    { kind: '旅' },
-    { kind: '見る、聞く' },
-    { kind: '話す' },
-    { kind: '食べる' },
-    { kind: '創る' }
+    { kind: '身体を動かす' },
+    { kind: '勉強する' },
+    { kind: 'イベントに行く' },
+    { kind: '旅をする' },
+    { kind: '見たい・聞きたい' },
+    { kind: 'テーマで話す' },
+    { kind: 'これが食べたい' },
+    { kind: '新しく創る' }
   ])
 
 Category.create!([
@@ -100,4 +100,3 @@ followers.each { |follower| follower.follow(user) }
 #   end
 
 end
-

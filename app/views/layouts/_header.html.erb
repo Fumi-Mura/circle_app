@@ -1,46 +1,97 @@
-  
-    <% if flash[:notice] %>
-      <div class="notification is-info">
-        <p class="notice"><%= notice %></p>
-      </div>
-    <% end %>
-    <% if flash[:alert] %>
-      <div class="notification is-danger">
-        <p class="alert"><%= alert %></p>
-      </div>
-    <% end %>
+<% if flash[:notice] %>
+  <div class="notification is-info">
+    <p class="notice"><%= notice %></p>
+  </div>
+<% end %>
+<% if flash[:alert] %>
+  <div class="notification is-danger">
+    <p class="alert"><%= alert %></p>
+  </div>
+<% end %>
     
-  <header class="header">  
-    <div class="header__nav">
-      <%= link_to "ワンプレ", root_path, class: "header__logo" %>
-      <div class="header__right">
-        <div class="search__circle">
-          <i class="fas fa-search"></i>
-          <%= link_to "サークルを探す", circles_path %>
-        </div>
-        <div class="make__circle">
-          <i class="fas fa-users"></i>
-          <%= link_to "サークルを創る", new_circle_path %>
-        </div>
-        <% if user_signed_in? %>
-          <div class="header__logout">
-            <i class="fas fa-sign-out-alt"></i>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          </div>
-          <div class="header__mypage">
-            <i class="fas fa-user"></i>
-            <%= link_to "マイページ", current_user %>
-          </div>
-        <% else %>
-          <div class="header__signup">
-            <i class="fas fa-user-plus"></i>
-            <%= link_to "新規登録", new_user_registration_path %>
-          </div>
-          <div class="header__login">
-            <i class="fas fa-sign-in-alt"></i>
-            <%= link_to "ログイン", new_user_session_path %>
-          </div>
-        <% end %>
-      </div>
+<header class="header">
+  <div class="header__nav">
+    <!-- ハンバーガー -->
+    <div class="hamberger-button">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </header>
+    <div class="hamberger-menu">
+      <ul>
+        <li><%= link_to "トップページ", root_path %></li>
+        <li><%= link_to "サークルを探す", circles_path %></li>
+        <li><%= link_to "サークルを創る", new_circle_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to "マイページ", current_user %></li>
+        <% else %>
+          <li><%= link_to "新規登録", new_user_registration_path %></li>
+          <li><%= link_to "ログイン", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="overlay"></div>
+    <%= link_to "ワンプレ", root_path, class: "header__logo" %>
+    <div class="header__right">
+      <div class="search__circle">
+        <i class="fas fa-search"></i>
+        <%= link_to "サークルを探す", circles_path %>
+      </div>
+      <div class="make__circle">
+        <i class="fas fa-users"></i>
+        <%= link_to "サークルを創る", new_circle_path %>
+      </div>
+      <% if user_signed_in? %>
+        <div class="header__logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        </div>
+        <div class="header__mypage">
+          <i class="fas fa-user"></i>
+          <%= link_to "マイページ", current_user %>
+        </div>
+      <% else %>
+        <div class="header__signup">
+          <i class="fas fa-user-plus"></i>
+          <%= link_to "新規登録", new_user_registration_path %>
+        </div>
+        <div class="header__login">
+          <i class="fas fa-sign-in-alt"></i>
+          <%= link_to "ログイン", new_user_session_path %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</header>
+
+<script>
+  // ハンバーガーメニュー
+  $(function () {
+    $('.hamberger-button').on('click', function () {
+      if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+        $('.hamberger-menu').removeClass('hamberger-menu-open');
+        $('.overlay').removeClass('overlay-open');
+      } else {
+        $(this).addClass('active');
+        $('.hamberger-menu').addClass('hamberger-menu-open');
+        $('.overlay').addClass('overlay-open');
+      }
+    });
+    $('.overlay').on('click', function () {
+      if ($(this).hasClass('overlay-open')) {
+        $(this).removeClass('overlay-open');
+        $('.hamberger-button').removeClass('active');
+        $('.hamberger-menu').removeClass('hamberger-menu-open');
+      }
+    });
+    $('.hamberger-menu ul li a').on('click', function () {
+      if ($('.overlay').hasClass('overlay-open')) {
+        $('.overlay').removeClass('overlay-open');
+        $('.hamberger-button').removeClass('active');
+        $('.hamberger-menu').removeClass('hamberger-menu-open');
+      }
+    });
+  });
+</script>

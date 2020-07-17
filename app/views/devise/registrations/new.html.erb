@@ -1,58 +1,56 @@
-<div class="container">
+<section class="title">
   <h1 class="title">
     新規登録
   </h1>  
-</div>
+</section>
 
 <%= render "devise/shared/error_messages", resource: resource %>
 
 <section class="sign_up">
-  <div class="container">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <div class="form-group">
-        <%= f.label :name, class: "label" %>
-        <p class="has-icons-left">
-        <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "名前", class: "input neumorphism__concave" %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, class: "label" %>
+      <p class="has-icons-left">
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", :placeholder => "名前", class: "input neumorphism__concave" %>
+      <span class="is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      </p>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, class: "label" %>
+      <p class=" has-icons-left">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "メールアドレス", class: "input neumorphism__concave" %>
+      <span class="is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+      </p>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, class: "label" %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <p class="has-icons-left">
+      <%= f.password_field :password, autocomplete: "new-password", :placeholder => "パスワード", class: "input neumorphism__concave" %>
         <span class="is-left">
-          <i class="fas fa-user"></i>
+          <i class="fas fa-lock"></i>
         </span>
-        </p>
-      </div>
-      <div class="form-group">
-        <%= f.label :email, class: "label" %>
-        <p class=" has-icons-left">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "メールアドレス", class: "input neumorphism__concave" %>
+      </p>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, class: "label" %>
+      <p class="has-icons-left">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "パスワード確認用", class: "input neumorphism__concave" %>
         <span class="is-left">
-          <i class="fas fa-envelope"></i>
+          <i class="fas fa-lock"></i>
         </span>
-        </p>
-      </div>
-      <div class="form-group">
-        <%= f.label :password, class: "label" %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %>
-        <p class="has-icons-left">
-        <%= f.password_field :password, autocomplete: "new-password", :placeholder => "パスワード", class: "input neumorphism__concave" %>
-          <span class="is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-        </p>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation, class: "label" %>
-        <p class="has-icons-left">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", :placeholder => "パスワード確認用", class: "input neumorphism__concave" %>
-          <span class="is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-        </p>
-      </div>
-      <div class="actions">
-        <%= f.submit "新規登録", class: "button neumorphism__convex red" %>
-      </div>
-    <% end %>
-    <%= render "/shared/guest_login" %>
-    <%= render "devise/shared/links" %>
-  </div>
+      </p>
+    </div>
+    <div class="actions">
+      <%= f.submit "新規登録", class: "button neumorphism__convex red" %>
+    </div>
+  <% end %>
+  <%= render "/shared/guest_login" %>
+  <%= render "devise/shared/links" %>
 </section>

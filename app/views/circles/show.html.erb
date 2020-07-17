@@ -1,34 +1,32 @@
 <section class="circle">
-  <div class="container">
-    <div class="circle__detail">
-      <div class="circle__make__user">
-        <%= link_to user_path(@circle.user) do %>
-          <%= @circle.user.name %>
-        <% end %>
-        さんがこのサークルを作成しました
-      </div>
-      <div class="circle__info">
-        <div class="circle__name">
-          <%= @circle.name %>
-        </div>
-        <div class="circle__category">
-          <% @circle.categories.each do |category| %>
-            <span class="badge badge-pill badge-info"><%= category.kind %></span>
-            <span class="badge badge-pill badge-place"><%= category.place %></span>
-          <% end %>
-        </div>
-      </div>
-      <div id="circle__profile__image">
-        <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
-      </div>
-      <div class="circle__content">
-        <%= simple_format @circle.content %>
-      </div>
-      <% if @circle.user.id == current_user.id %>
-        <%= link_to "編集", edit_circle_path(@circle), class: "btn btn-primary" %>
-        <%= link_to "削除", circle_path(@circle), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-danger" %>
+  <div class="circle__detail">
+    <div class="circle__make__user">
+      <%= link_to user_path(@circle.user) do %>
+        <%= @circle.user.name %>
       <% end %>
+      さんがこのサークルを作成しました
     </div>
+    <div class="circle__info">
+      <div class="circle__name">
+        <%= @circle.name %>
+      </div>
+      <div class="circle__category">
+        <% @circle.categories.each do |category| %>
+          <span class="badge badge-pill badge-info"><%= category.kind %></span>
+          <span class="badge badge-pill badge-place"><%= category.place %></span>
+        <% end %>
+      </div>
+    </div>
+    <div id="circle__profile__image">
+      <%= attachment_image_tag @circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
+    </div>
+    <div class="circle__content">
+      <%= simple_format @circle.content %>
+    </div>
+    <% if @circle.user.id == current_user.id %>
+      <%= link_to "編集", edit_circle_path(@circle), class: "btn btn-primary" %>
+      <%= link_to "削除", circle_path(@circle), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-danger" %>
+    <% end %>
   </div>
 </section>
 
@@ -40,7 +38,6 @@
   <% if @circle.id == blog.circle_id %>
     <%= link_to blog_path(blog) do %>
       <section class="blog">
-        <div class="container">
           <div class="circle__blog">
             <div class="circle__blog__left">
               <div class="circle__blog__image">
@@ -77,7 +74,6 @@
               </div>
             </div>
           </div>
-        </div>
       </section>
     <% end %>
   <% end %>

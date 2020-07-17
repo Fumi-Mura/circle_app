@@ -1,15 +1,13 @@
 <section class="section">
-  <div class="container">
-    <div class="users__list">
-        <% @users.each do |user| %>
-        <div class="users__item">
-          <%= link_to user_path(user) do %>
-            <%= attachment_image_tag user, :profile_image, fallback: "default_image.jpg", class: "users__image" %>
-          <% end %>
-          <%= link_to user.name, user_path(user), class: "users__name" %>
-          </div>
+  <div class="users__list">
+    <% @users.each do |user| %>
+      <div class="users__item">
+        <%= link_to user_path(user) do %>
+          <%= attachment_image_tag user, :profile_image, fallback: "default_image.jpg", class: "users__image" %>
         <% end %>
-    </div>
+        <%= link_to truncate(user.name, length: 10), user_path(user), class: "users__name" %>
+      </div>
+    <% end %>
   </div>
 </section>
 

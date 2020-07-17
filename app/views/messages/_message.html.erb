@@ -11,7 +11,7 @@
     </p>
   </div>
   <p class="<%= message.id %>">
-    <span class="room__user__time"><%= message.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+    <span class="room__user__time"><%= message.created_at.to_s(:datetime_jp) %></span>
   </p>
 </div>
 

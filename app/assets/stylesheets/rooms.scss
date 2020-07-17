@@ -1,72 +1,4 @@
-.to__user__box {
-  position: sticky;
-  top: 10%;
-  left: 50%;
-  transform: translate(-20%, -70%);
-  display: flex;
-}
-.to__user__image img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-}
-.to__user__name {
-  color: gray;
-  font-size: 16px;
-  line-height: 55px;
-  margin: 0 0 0 20px;
-  a {
-    position: relative;
-    display: inline-block;
-    transition: .3s;
-    &::after {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      content: '';
-      width: 0;
-      height: 2px;
-      background-color: #31aae2;
-      transition: .3s;
-      transform: translateX(-50%);
-    }
-    &:hover::after{
-    width: 100%;
-    }
-  }
-}
-.room__user__box {
-  margin: 0 0 30px 0;
-}
-.room__user__name {
-  color: gray;
-  font-size: 16px;
-}
-.room__user__image {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-}
-.room__user__content {
-  font-size: 16px;
-  color: #565656;
-  margin: 25px 30px 0;
-}
-
-.room__user__time {
-  color: silver;
-  font-size: 14px;
-}
-
-.submit__message {
-  margin: 0 0 100px 0;
-}
-
-.message__info {
-  color: gray;
-  font-size: 14px;
-}
-
+// message一覧
 .index__message {
   display: flex;
   border: 1px solid silver;
@@ -88,6 +20,121 @@
     color: gray;
     &:hover {
       color: black;
+    }
+  }
+}
+
+// message詳細
+.to__user__box {
+  position: sticky;
+  top: 10%;
+  left: 50%;
+  transform: translate(-20%, -70%);
+  display: flex;
+  .to__user__image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  .to__user__name {
+    color: gray;
+    font-size: 16px;
+    line-height: 55px;
+    margin: 0 0 0 20px;
+    a {
+      position: relative;
+      display: inline-block;
+      transition: .3s;
+      &::after {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        content: '';
+        width: 0;
+        height: 2px;
+        background-color: #31aae2;
+        transition: .3s;
+        transform: translateX(-50%);
+      }
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.room__user__box {
+  margin: 0 0 30px 0;
+  .room__user__name {
+    color: gray;
+    font-size: 16px;
+  }
+  .room__user__content {
+    font-size: 16px;
+    color: #565656;
+    margin: 25px 30px 0;
+  }
+  .room__user__time {
+    color: silver;
+    font-size: 14px;
+  }
+}
+
+.room__user__image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.submit__message {
+  margin: 0 0 100px 0;
+  .message__info {
+    color: gray;
+    font-size: 14px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  // message一覧
+  .index__message {
+    border-radius: 5px;
+    padding: 5px 10px;
+  } // message詳細
+  .to__user__box {
+    transform: translate(0%, -70%);
+    .to__user__image img {
+      width: 50px;
+      height: 50px;
+    }
+    .to__user__name {
+      font-size: 14px;
+      line-height: 30px;
+      margin: 0 0 0 10px;
+    }
+  }
+
+  .room__user__box {
+    .room__user__name {
+      font-size: 14px;
+    }
+    .room__user__content {
+      font-size: 14px;
+      margin: 15px 15px 0;
+    }
+    .room__user__time {
+      font-size: 12px;
+    }
+  }
+
+  .room__user__image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .submit__message {
+    .message__info {
+      font-size: 12px;
     }
   }
 }

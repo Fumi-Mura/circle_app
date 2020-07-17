@@ -1,37 +1,40 @@
 <section class="section">
-  <div class="container">
-    <div class="user__detail">
-      <div class="user__left">
-        <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image" %>
-        <section class="stats">
-          <%= render 'shared/stats' %>
-        </section>
-        <div class="user__left__bottom">
-          <div class="follow__form">
-            <%= render 'follow_form' %>
-          </div>
-          <div class="send__message">
-            <%= render 'shared/send_message' %>
-          </div>
-        </div>
-      </div>
-      <div class="user__right">
-        <div class="user__name">
-          <i class="fas fa-user user__icon"></i>
-          <%= @user.name %>
-        </div>
-        <div class="user__profile__text">
-          <i class="far fa-address-card user__icon"></i>
-          <%= @user.profile_text %>
+  <div class="user__detail">
+    <div class="user__left">
+      <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image" %>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
+      <div class="user__left__bottom">
+        <div class="follow__form">
+          <%= render 'follow_form' %>
         </div>
         <% if @user.id == current_user.id %>
-          <div class="user__email">
-            <i class="fas fa-envelope user__icon"></i>
-            <%= @user.email %>
+          <div class="to__send__message">
+            <%= link_to "メッセージ一覧", rooms_path, class: "btn btn-outline-dark" %>
           </div>
-          <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary"  %>
         <% end %>
+        <div class="send__message">
+          <%= render 'shared/send_message' %>
+        </div>
       </div>
+    </div>
+    <div class="user__right">
+      <div class="user__name">
+        <i class="fas fa-user user__icon"></i>
+        <%= @user.name %>
+      </div>
+      <div class="user__profile__text">
+        <i class="far fa-address-card user__icon"></i>
+        <%= @user.profile_text %>
+      </div>
+      <% if @user.id == current_user.id %>
+        <div class="user__email">
+          <i class="fas fa-envelope user__icon"></i>
+          <%= @user.email %>
+        </div>
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </section>

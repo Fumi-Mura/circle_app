@@ -1,34 +1,35 @@
-<h2>メッセージ一覧</h2>
-
-<% @anotherEntries.each do |e| %>
-<div class="table table-striped">
-  <ul class="index__message">
-    <li class="index__message__">
-      <%= link_to room_path(e.room.id) do %>
-        <%= attachment_image_tag e.user, :profile_image, format: 'jpg', fallback: "default_image.jpg", class: "room__user__image" %>
-      <% end %>
-    </li>
-    <li class="index__message__name">
-      <span class="index__message__image">
-        <%= link_to room_path(e.room.id) do %>
-          <%= e.user.name %>さんから新規メッセージです
-        <% end %>
-      </span>
-    </li>
-    <li class="index__message__content">
-      <% if false %>
-        <% m = Message.find_by(id: e.room.message_ids.last).content %>
-        <%= truncate(m, length: 10) %>
-      <% end %>
-    </li>
-    <li class="index__message__time">
-      <p><%= e.updated_at.strftime("%Y/%m/%d %H:%M") %></p>
-    </li>
-    <li class="index__message__button">
-      <%= link_to room_path(e.room.id), method: :delete, data: {confirm: "トークルームを削除してもよろしいですか？"} do %>
-        <i class="fas fa-trash"></i>
-      <% end %>
-    </li>
-  </ul>
-</div>
-<% end %>
+<section class="section">
+  <h2>メッセージ一覧</h2>
+  <% @anotherEntries.each do |e| %>
+    <div class="table table-striped">
+      <ul class="index__message">
+        <li class="index__message__image">
+          <%= link_to room_path(e.room.id) do %>
+            <%= attachment_image_tag e.user, :profile_image, format: 'jpg', fallback: "default_image.jpg", class: "room__user__image" %>
+          <% end %>
+        </li>
+        <li class="index__message__name">
+          <span class="index__message__image">
+            <%= link_to room_path(e.room.id) do %>
+              <%= e.user.name %>さんからメッセージです
+            <% end %>
+          </span>
+        </li>
+        <li class="index__message__content">
+          <% if false %>
+            <% m = Message.find_by(id: e.room.message_ids.last).content %>
+            <%= truncate(m, length: 10) %>
+          <% end %>
+        </li>
+        <li class="index__message__time">
+          <p><%= e.updated_at.to_s(:datetime_jp) %></p>
+        </li>
+        <li class="index__message__button">
+          <%= link_to room_path(e.room.id), method: :delete, data: {confirm: "トークルームを削除してもよろしいですか？"} do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</section>
