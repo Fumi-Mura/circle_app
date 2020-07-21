@@ -42,9 +42,8 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
-  
   # actioncableの使用による追加
-  config.action_cable.allowed_request_origins = [ 'http://ones-place.work', /http:\/\/ones-place.*/ ]
+  # config.action_cable.allowed_request_origins = [ 'http://ones-place.work', /http:\/\/ones-place.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
