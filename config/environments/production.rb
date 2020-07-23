@@ -45,9 +45,6 @@ Rails.application.configure do
   
   # actioncableの使用による追加
   # config.action_cable.allowed_request_origins = [ 'http://ones-place.work', /http:\/\/ones-place.*/ ]
-  ActionCable.server.config.disable_request_forgery_protection = true
-  config.web_console.whitelisted_ips = '0.0.0.0/0'
-  
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # https化
