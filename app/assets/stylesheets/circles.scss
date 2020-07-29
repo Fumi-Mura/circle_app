@@ -103,7 +103,8 @@
 
 // circle作成、編集
 .circle__name__info,
-.circle__content__info {
+.circle__content__info,
+.circle__category__info {
   color: gray;
   font-size: 14px;
 }
@@ -128,7 +129,9 @@
 #circle_image {
   display: none;
 }
-
+.circle__content__form {
+  margin: 0 0 50px 0;
+}
 .form-check-input,
 .form-check-label {
   cursor: pointer;

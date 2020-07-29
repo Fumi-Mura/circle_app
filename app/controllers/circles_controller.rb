@@ -1,11 +1,10 @@
 class CirclesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_target_circle, only: %i[show edit update destroy]
+  before_action :set_categories, only: %i[index new edit]
   
   def index
     @categories = Category.all
-    @kinds = Category.all[0..7]
-    @places = Category.all[8..55]
     @q = Circle.ransack(params[:q])
     @circles = @q.result.includes(:categories).page(params[:page]).per(10).order(created_at: :desc)
   end
@@ -39,8 +38,6 @@ class CirclesController < ApplicationController
   def new
     @circle = Circle.new
     @categories = Category.all
-    @kinds = Category.all[0..7]
-    @places = Category.all[8..55]
   end
   
   def create
@@ -59,8 +56,6 @@ class CirclesController < ApplicationController
     if @circle.user != current_user
       redirect_to circle_path, alert: '不正なアクセスです'
     end
-    @kinds = Category.all[0..7]
-    @places = Category.all[8..55]
   end
   
   def update
@@ -89,8 +84,7 @@ class CirclesController < ApplicationController
 
   private
   def search_params
-    params.require(:q).permit(:name_cont)
-    params.require(:q).permit(:categories_id_eq)
+    params.require(:q).permit(:name_cont, :categories_id_eq)
   end
   
   def circle_params
@@ -99,6 +93,11 @@ class CirclesController < ApplicationController
   
   def set_target_circle
     @circle = Circle.find(params[:id])
+  end
+  
+  def set_categories
+    @kinds = Category.all[0..7]
+    @places = Category.all[8..55]
   end
   
 end
