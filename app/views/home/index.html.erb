@@ -6,46 +6,44 @@
     </div>
   </div>
 </section>
-
 <div class="home__top__space"></div>
 
-<div class="circle__search">
-  <%= search_form_for(@q, url:search_path) do |f|%>
-    <div class="circle__search__keyword">
-      <%= f.search_field :name_cont, placeholder: "キーワードで検索" %><br>
-    </div>
-    <div class="circle__search__category">
-      <%= f.collection_select :categories_id_eq, @kinds, :id, :kind, :include_blank => 'カテゴリを選ぶ' %>
-    </div>
-    <div class="circle__search__place">
-      <%= f.collection_select :categories_id_eq, @places, :id, :place, :include_blank => '活動場所を選ぶ' %>
-    </div>  
-    <i class="fas fa-search"><%= f.submit "検索", class: "btn btn-outline-secondary search__btn" %></i>
-  <% end %>
-</div>
-
-<section class="section">
-  <div class="circle__list">
-    <% @circles.each do |circle| %>
-      <div class="circle__item">
-        <div class="circle__top">
-          <%= link_to circle_path(circle) do %>
-            <%= attachment_image_tag circle, :image, fallback: "default_circle_image.jpg", class: "circle__image" %>
-          <% end %>
-          <div class="circle__category circle__index__category">
-            <% circle.categories.each do |category| %>
-              <span class="badge badge-pill badge-info"><%= category.kind %></span>
-              <span class="badge badge-pill badge-place"><%= category.place %></span>
-            <% end %>
+<p class="blog__ranking">
+  人気の投稿
+</p>
+<% @blog_ranks.each do |blog| %>
+    <%= link_to blog_path(blog) do %>
+      <section class="blog">
+          <div class="circle__blog">
+            <div class="circle__blog__left">
+              <div class="circle__blog__image">
+                <%= attachment_image_tag blog, :image, fallback: "default_blog_image.jpg" %>
+                <div class="circle__blog__like__comment">
+                  <div class="circle__blog__like">
+                      <%= link_to blog_likes_path(blog), method: :post do %>
+                        <i class="far fa-heart"></i>
+                      <% end %>
+                    <%= blog.likes.count %>
+                  </div>
+                  <div class="blog__comment circle__blog__comment">
+                    <i class="far fa-comment"></i>
+                    <%= blog.comments.count %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="circle__blog__right">
+              <div class="blog__title">
+                <span>【</span><%= blog.title %><span>】</span>
+              </div>
+              <div class="circle__blog__content">
+                <%= simple_format truncate(blog.content, length:300) %>
+              </div>
+              <div class="circle__blog__date">
+                作成日 : <%= blog.created_at.to_s(:datetime_jp) %> 
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="circle__bottom">
-          <%= link_to circle.name, circle_path(circle), class: "circle__bottom__name" %>
-          <%= link_to truncate(circle.content, length:200),circle_path(circle), class: "circle__bottom__content" %>
-        </div>
-      </div>
+      </section>
     <% end %>
-  </div>
-</section>
-
-<%= paginate @circles %>
+<% end %>
