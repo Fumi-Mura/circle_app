@@ -3,7 +3,7 @@ class BlogsController < ApplicationController
   before_action :set_target_blog, only: %i[show edit update destroy]
   
   def index
-    @blogs = Blog.page(params[:page]).per(10)
+    @blogs = Blog.page(params[:page]).per(10).includes(:user)
   end
 
   def show
@@ -16,9 +16,7 @@ class BlogsController < ApplicationController
   end
   
   def create
-    # @circle = Circle.find(params[:id])
     @blog = Blog.new(blog_params)
-    # @blog.circle_id = Circle.where(params[:id])
     @blog.user_id = current_user.id
     if @blog.save
       redirect_to blog_path(@blog), notice: "#{@blog.title}を投稿しました"

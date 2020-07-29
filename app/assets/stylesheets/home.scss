@@ -43,6 +43,12 @@
   margin: 1000px 0;
 }
 
+.blog__ranking {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 0 50px 0;
+}
+
 @media screen and (max-width: 480px) {
   .top__text {
     font-size: 18px;
@@ -50,9 +56,7 @@
       letter-spacing: 0.09rem;
     }
   }
-  
   .home__top__space {
-    margin: 800px 0;
+    margin: 900px 0px;
   }
-
 }
