@@ -1,0 +1,11 @@
+<div class="share__button">
+  <p class="share__button__text">snsにシェアできます</p>
+  <%= link_to "https://twitter.com/share?url=#{ request.url }/&hashtags=ワンプレ", title: 'Twitter', target: '_blank' do %>
+    <i class="fab fa-twitter fa-fw twitter"></i>
+  <% end %>
+  <a href="https://www.facebook.com/share.php?url=<% request.url %>" rel="nofollow" target="_blank">
+    <i class="fab fa-facebook-f fa-fw facebook"></i>
+  </a>
+  <div class="line-it-button" data-lang="ja" data-type="share-c" data-ver="3" data-url="<% request.url %>" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
+  <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+</div>

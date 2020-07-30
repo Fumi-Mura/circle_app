@@ -63,5 +63,7 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = true
   end
-
+  
+  # ファイルの更新即時反映
+  config.reload_classes_only_on_change = false
 end

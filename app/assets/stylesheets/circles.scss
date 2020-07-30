@@ -90,7 +90,6 @@
 }
 
 .badge {
-  width: 70px;
   height: 25px;
   line-height: 20px;
   margin: 0 5px;
@@ -103,7 +102,8 @@
 
 // circle作成、編集
 .circle__name__info,
-.circle__content__info {
+.circle__content__info,
+.circle__category__info {
   color: gray;
   font-size: 14px;
 }
@@ -128,7 +128,9 @@
 #circle_image {
   display: none;
 }
-
+.circle__content__form {
+  margin: 0 0 50px 0;
+}
 .form-check-input,
 .form-check-label {
   cursor: pointer;
@@ -240,7 +242,7 @@
     .circle__blog__right {
       width: 100%;
       .circle__blog__content {
-        height: 170px;
+        height: 200px;
       }
     }
   }
