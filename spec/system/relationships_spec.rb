@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Relationships', type: :system do
   let!(:tarou) { create(:user, name: 'tarou', email: 'tarou@test.com') }
   let!(:hanako) { create(:user, name: 'hanako') }
-  
+
   it 'ユーザーをフォロー/フォロー解除する', js: true do
     # tarouがログインする
     visit new_user_session_path
-    expect(current_path).to eq new_user_session_path	
+    expect(current_path).to eq new_user_session_path
     expect(page).to have_content '次回から自動的にログイン'
     fill_in 'メールアドレス', with: 'tarou@test.com'
     fill_in 'パスワード', with: 'password'
@@ -41,7 +41,7 @@ RSpec.describe 'Relationships', type: :system do
       expect(page).to_not have_content '1 フォロー'
     end.to change(tarou.following, :count).by(-1) &
           change(hanako.followers, :count).by(-1)
-    
+
     # マイページ(tarou)に移動し、hanakoが削除されているか確認
     visit user_path(tarou)
     click_link 'フォロー中'

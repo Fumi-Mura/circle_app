@@ -42,7 +42,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
-  
+
   # actioncableの使用による追加
   config.action_cable.allowed_request_origins = [ 'http://ones-place.work', /http:\/\/ones-place.*/ ]
 
@@ -91,7 +91,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  
+
   # herokuの設定
   config.assets.compile = true
   config.assets.initialize_on_precompile=false

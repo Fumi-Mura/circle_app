@@ -8,7 +8,7 @@
     </div>
     <div class="circle__search__place">
       <%= f.collection_select :categories_id_eq, @places, :id, :place, :include_blank => '活動場所を選ぶ' %>
-    </div>  
+    </div>
     <i class="fas fa-search"><%= f.submit "検索", class: "btn btn-outline-secondary search__btn" %></i>
   <% end %>
 </div>

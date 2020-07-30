@@ -47,14 +47,14 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  
+
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.web_console.whitelisted_ips = '118.2.210.172' #rails sエラー
   config.web_console.whitelisted_ips = '0.0.0.0/0'
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.alert = true

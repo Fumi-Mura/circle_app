@@ -6,7 +6,7 @@ module LoginMacros
     click_button 'ログイン'
     expect(page).to have_content 'ログインしました。'
   end
-  
+
   def logout(user)
     visit new_user_session_path
     fill_in 'user[email]', with: user.email

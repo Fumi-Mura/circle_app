@@ -1,0 +1,39 @@
+version: '3'
+
+volumes:
+  db-data:
+
+services:
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+    ports:
+      - '3000:3000'
+    volumes:
+      - '.:/circle_app'
+    tty: true
+    stdin_open: true
+    links:
+      - db
+    depends_on:
+      - db
+      - chrome
+    #system spec用のchromeインストール
+  #   environment:
+  #   - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
+  # selenium_chrome:
+  #   image: selenium/standalone-chrome-debug
+  #   logging:
+  #     driver: none
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+    - 4444:4444
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - 'db-data:/var/lib/mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
