@@ -53,4 +53,4 @@ production:
   <<: *default
   database: circle_app_production
   username: root
-  password: 
+  password:

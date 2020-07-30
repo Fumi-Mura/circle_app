@@ -2,11 +2,7 @@ class CirclesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_target_circle, only: %i[show edit update destroy]
   before_action :set_categories, only: %i[index new edit]
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> fa70db29cb0442b60928765b5d4e14bb50b0aa36
   def index
     @categories = Category.all
     @q = Circle.ransack(params[:q])
@@ -98,18 +94,9 @@ class CirclesController < ApplicationController
   def set_target_circle
     @circle = Circle.find(params[:id])
   end
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> fa70db29cb0442b60928765b5d4e14bb50b0aa36
   def set_categories
     @kinds = Category.all[0..7]
     @places = Category.all[8..55]
   end
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> fa70db29cb0442b60928765b5d4e14bb50b0aa36
 end
