@@ -16,27 +16,27 @@
       <%= f.text_area :content, :placeholder => "活動内容を記述してください。", class: 'form-control circle__content', rows: 10 %>
     </div>
     <div class="form-group">
-      カテゴリ<span class="circle__category__info">(※2個まで登録できます)</span>
+      カテゴリ
       <%= f.collection_check_boxes(:category_ids, @kinds, :id, :kind) do |ki| %>
-      <div class="form-check kind__number">
-       <%= ki.label class: 'form-check-label' do %>
-         <%= ki.check_box class: 'form-check-input' %>
-         <%= ki.text %>
-       <% end %>
-     </div>
-   <% end %>
-  </div>
-  <div class="form-group">
-    活動場所<span class="circle__category__info">(※2個まで登録できます)</span>
-    <%= f.collection_check_boxes(:category_ids, @places, :id, :place) do |pl| %>
-  <div class="form-check place__number">
-    <%= pl.label class: 'form-check-label' do %>
-     <%= pl.check_box class: 'form-check-input' %>
-     <%= pl.text %>
-    <% end %>
-     </div>
-    <% end %>
-  </div>
+        <div class="form-check">
+          <%= ki.label class: 'form-check-label' do %>
+            <%= ki.check_box class: 'form-check-input' %>
+            <%= ki.text %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="form-group">
+      活動場所
+      <%= f.collection_check_boxes(:category_ids, @places, :id, :place) do |pl| %>
+        <div class="form-check">
+          <%= pl.label class: 'form-check-label' do %>
+            <%= pl.check_box class: 'form-check-input place__number' %>
+            <%= pl.text %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
     <%= f.submit class: "btn btn-outline-primary"%>
   <% end %>
 </section>
