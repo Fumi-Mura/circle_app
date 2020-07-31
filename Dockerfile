@@ -4,8 +4,7 @@ RUN   apt-get install -y \
       build-essential \
       node.js \
       imagemagick \
-      libpq-dev \
-      mariadb-client
+      libpq-dev
 
 WORKDIR /circle_app
 COPY Gemfile Gemfile.lock /circle_app/
