@@ -58,10 +58,10 @@ test:
 # ec2
 production:
   <<: *default
-  database: <%= ENV['DB_DATABASE'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  host: <%= ENV['DB_HOST'] %>
+  database: ones-place-web
+  username: root
+  password: password
+  host: ones-place-web.cxg9dr7dvrsu.ap-northeast-1.rds.amazonaws.com
 
 # migrationエラーの対応(cloud9からの移行)
 socket: /tmp/mysql.sock
