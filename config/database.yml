@@ -62,3 +62,6 @@ production:
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
   host: <%= ENV['DB_HOST'] %>
+
+# migrationエラーの対応(cloud9からの移行)
+socket: /tmp/mysql.sock
