@@ -19,18 +19,10 @@ services:
     depends_on:
       - db
       - chrome
-    #system spec用のchromeインストール
-  #   environment:
-  #   - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
-  # selenium_chrome:
-  #   image: selenium/standalone-chrome-debug
-  #   logging:
-  #     driver: none
   chrome:
     image: selenium/standalone-chrome:latest
     ports:
     - 4444:4444
-
   db:
     image: mysql:5.7
     volumes:

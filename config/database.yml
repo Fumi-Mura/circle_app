@@ -49,8 +49,16 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+# production:
+#   <<: *default
+#   database: circle_app_production
+#   username: root
+#   password:
+
+# ec2
 production:
   <<: *default
-  database: circle_app_production
-  username: root
-  password:
+  database: <%= ENV['DB_DATABASE'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
