@@ -5,7 +5,7 @@ RUN   apt-get install -y \
       node.js \
       imagemagick \
       libpq-dev \
-      mysql-client
+      mariadb-client
 
 WORKDIR /circle_app
 COPY Gemfile Gemfile.lock /circle_app/
