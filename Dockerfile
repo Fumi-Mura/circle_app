@@ -3,7 +3,9 @@ RUN   apt-get update -qq
 RUN   apt-get install -y \
       build-essential \
       node.js \
-      imagemagick
+      imagemagick \
+      libpq-dev \
+      mysql-client
 
 WORKDIR /circle_app
 COPY Gemfile Gemfile.lock /circle_app/
