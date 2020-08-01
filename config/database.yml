@@ -64,4 +64,4 @@ production:
   host: ones-place-web.cxg9dr7dvrsu.ap-northeast-1.rds.amazonaws.com
 
 # migrationエラーの対応(cloud9からの移行)
-socket: /tmp/mysql.sock
+socket: /var/lib/mysql/mysql.sock
