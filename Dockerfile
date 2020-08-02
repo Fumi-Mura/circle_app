@@ -4,7 +4,8 @@ RUN   apt-get install -y \
       build-essential \
       node.js \
       imagemagick \
-      libpq-dev
+      libpq-dev \
+      yarn
 
 WORKDIR /circle_app
 COPY Gemfile Gemfile.lock /circle_app/
