@@ -1,7 +1,7 @@
 class CirclesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_target_circle, only: %i[show edit update destroy]
-  before_action :set_categories, only: %i[index new edit]
+  before_action :set_categories, only: %i[index new edit create update]
 
   def index
     @categories = Category.all
