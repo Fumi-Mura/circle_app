@@ -1,30 +1,30 @@
 <%= render 'shared/error_messages' %>
 
 <section class="section">
-  <div class="user__detail">
-    <div class="user__left">
-      <%= form_for @user do |f| %>
-      <div id="user__image">
-        <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image" %>
-        <i class="fas fa-camera user__image__camera"></i>
+  <%= form_for @user do |f| %>
+    <div class="user__detail">
+      <div class="user__left">
+        <div id="user__image">
+          <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image" %>
+          <i class="fas fa-camera user__image__camera"></i>
+        </div>
+          <%= f.attachment_field :profile_image %>
       </div>
-        <%= f.attachment_field :profile_image %>
+      <div class="user__right">
+        <div class="user__name">
+          <%= f.text_field :name, class: "edit__user__name" %>
+          <i class="fas fa-user user__icon"></i>
+        </div>
+        <div class="user__profile">
+          <%= f.text_area :profile_text, :placeholder => "自己紹介文を入力してください(200文字以内)", class: "user__profile__text" %>
+          <i class="far fa-address-card user__icon"></i>
+        </div>
+        <div class="user__email">
+          <%= @user.email %> <span class="edit__user__email">(※メールアドレスは変更できません)</span>
+          <i class="fas fa-envelope user__icon"></i>
+        </div>
+          <%= f.submit "更新", class: "btn btn-primary" %>
+      </div>
     </div>
-    <div class="user__right">
-      <div class="user__name">
-        <%= f.text_field :name, class: "edit__user__name" %>
-        <i class="fas fa-user user__icon"></i>
-      </div>
-      <div class="user__profile">
-        <%= f.text_area :profile_text, :placeholder => "自己紹介文を入力してください(200文字以内)", class: "user__profile__text" %>
-        <i class="far fa-address-card user__icon"></i>
-      </div>
-      <div class="user__email">
-        <%= @user.email %> <span class="edit__user__email">(※メールアドレスは変更できません)</span>
-        <i class="fas fa-envelope user__icon"></i>
-      </div>
-        <%= f.submit "更新", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 </section>

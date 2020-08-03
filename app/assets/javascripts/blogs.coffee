@@ -14,15 +14,15 @@ $ ->
     reader = new FileReader
     $preview = $('.blog__image')
     t = this
-    
+
     if file.type.indexOf('image') < 0
       return false
-      
+
     reader.onload = do (file) ->
       (e) ->
         $preview.empty()
         $preview.attr("src",e.target.result)
-          
+
         return
     reader.readAsDataURL file
     return

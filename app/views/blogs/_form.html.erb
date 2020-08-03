@@ -9,7 +9,7 @@
         <%= attachment_image_tag @blog, :image, fallback: "default_blog_image.jpg", class: "blog__image" %>
         <i class="fas fa-camera blog__image__camera"></i>
       </div>
-        <%= f.submit '新規投稿', class: "btn btn-outline-primary blog__form__btn" %>
+        <%= f.submit '投稿する', class: "btn btn-outline-primary blog__form__btn" %>
         <%= f.attachment_field :image %>
     </div>
     <div class="blog__form__right">
