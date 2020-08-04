@@ -1,7 +1,8 @@
 class CirclesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_target_circle, only: %i[show edit update destroy]
-  before_action :set_categories, only: %i[index new edit create update]
+  before_action :set_categories, only: %i[index show new edit create update]
+  before_action :set_places, only: %i[index new show edit search]
 
   def index
     @categories = Category.all
@@ -11,6 +12,7 @@ class CirclesController < ApplicationController
 
   def show
     @circles = Circle.all
+    @circle = Circle.find(params[:id])
     @user = User.find(params[:id])
     @users = User.all
     @blogs = Blog.all.order(created_at: :desc)
@@ -77,6 +79,11 @@ class CirclesController < ApplicationController
     end
   end
 
+  def set_places
+    # @places = PLACES
+    @places = %w[快晴 晴れ 薄曇り 曇り 小雨 雨 豪雨 雷 みぞれ 雪 大雪 あられ ひょう 霧 霧雨 砂あらし]
+  end
+
   def search
     @q = Circle.search(search_params)
     @circles = @q.result.includes(:categories).page(params[:page]).per(10)
@@ -84,11 +91,11 @@ class CirclesController < ApplicationController
 
   private
   def search_params
-    params.require(:q).permit(:name_cont, :categories_id_eq)
+    params.require(:q).permit(:name_cont, :place_cont, :categories_id_eq)
   end
 
   def circle_params
-    params.require(:circle).permit(:image, :name, :content, category_ids: [])
+    params.require(:circle).permit(:image, :name, :content, :place, category_ids: [])
   end
 
   def set_target_circle
@@ -96,7 +103,6 @@ class CirclesController < ApplicationController
   end
 
   def set_categories
-    @kinds = Category.all[0..7]
-    @places = Category.all[8..55]
+    @kinds = Category.all
   end
 end

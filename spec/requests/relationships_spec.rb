@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Relationships', type: :request do
   let!(:user) { create(:user) }
   let!(:user_2) { create(:user) }
-  
+
   # describe '#create' do
   #   context 'ログインしている時' do
   #     before { sign_in user }

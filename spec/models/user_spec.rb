@@ -65,7 +65,7 @@ RSpec.describe "UserAuthentications", type: :request do
         end.to_not change(User, :count)
       end
     end
-    
+
     context 'メールアドレスが大文字で入力された時' do
       it '大文字から小文字に変換すること' do
         user.email = "TeSt@ExAmPlE.CoM"
@@ -73,64 +73,64 @@ RSpec.describe "UserAuthentications", type: :request do
         expect(user.email.downcase).to eq user.reload.email
       end
     end
-    
+
     context 'パスワードの入力が6桁の時' do
       it 'パスワードの入力が正しいこと' do
         user = build(:user, password: "a" * 6, password_confirmation: "a" * 6)
         expect(user.valid?).to eq true
       end
     end
-    
+
     context 'パスワードの入力が5桁の時' do
       it 'パスワードの入力が正しくないこと' do
         user = build(:user, password: "a" * 6, password_confirmation: "a" * 5)
         expect(user.valid?).to eq false
       end
     end
-    
+
     context 'パスワードが空白の時' do
       it 'パスワードの入力が正しいこと' do
         user = build(:user, password: "" * 6, password_confirmation: "" * 6)
         expect(user.valid?).to eq false
       end
     end
-    
+
   end
 end
 
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
-  
+
   describe 'バリデーション' do
     context 'okの場合' do
       it 'nameとemail,password,password_confirmationが設定されていればOK' do
         expect(user.valid?).to eq true
       end
     end
-    
+
     context 'NGの場合' do
       it 'nameが空だとNG' do
         user.name = ''
         expect(user.valid?).to eq false
       end
-      
+
       it 'emailが空だとNG' do
         user.email = ''
         expect(user.valid?).to eq false
       end
-      
+
       it 'nameが31文字以上だとNG' do
         user.name = "a" * 31
         expect(user.valid?).to eq false
       end
-      
+
       it 'profile_textが201文字以上だとNG' do
         user.profile_text = "a" * 201
         expect(user.valid?).to eq false
       end
     end
   end
-  
+
   describe 'フォロー機能' do
     let(:other_user) { create(:user) }
     before { user.save }

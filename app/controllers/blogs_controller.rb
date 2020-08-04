@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_target_blog, only: %i[show edit update destroy]
-  
+
   def index
     @blogs = Blog.page(params[:page]).per(10).includes(:user)
   end
@@ -14,7 +14,7 @@ class BlogsController < ApplicationController
     @blog = Blog.new
     @circles = Circle.all
   end
-  
+
   def create
     @blog = Blog.new(blog_params)
     @blog.user_id = current_user.id
@@ -32,7 +32,7 @@ class BlogsController < ApplicationController
       redirect_to blog_path, alert: "不正なアクセスです"
     end
   end
-  
+
   def update
     if @blog.update(blog_params)
       redirect_to blog_path(@blog), notice: "#{@blog.title}を更新しました"
@@ -42,7 +42,7 @@ class BlogsController < ApplicationController
       redirect_back fallback_location: @blog
     end
   end
-  
+
   def destroy
     if @blog.user != current_user
       redirect_to blog_path, alert: "不正なアクセスです"
@@ -51,14 +51,14 @@ class BlogsController < ApplicationController
       redirect_to @blog.circle, notice: "ブログを削除しました"
     end
   end
- 
+
   private
   def blog_params
       params.require(:blog).permit(:title, :content, :image, :circle_id)
   end
-  
+
   def set_target_blog
     @blog = Blog.find(params[:id])
   end
-  
+
 end

@@ -5,21 +5,21 @@ RSpec.describe 'Circles', type: :request do
   let!(:user_2) { create(:user) }
   let(:circle) { create(:circle, user: user) }
   let!(:circle_2) { create(:circle, content: "circle_2") }
-  
+
   # describe '#index' do
   #   before { get circles_path }
   #   it '正常なレスポンスが返ってくること' do
   #     expect(response).to have_http_status(200)
   #   end
   # end
-  
+
   describe "#show" do
     before { get circle_path(circle) }
     it '正常なレスポンスが返ってくること' do
       expect(response).to have_http_status(302)
     end
   end
-  
+
   describe '#new' do
     it '正常なレスポンスが返ってくること' do
       get new_circle_path
@@ -27,7 +27,7 @@ RSpec.describe 'Circles', type: :request do
       expect(response).to have_http_status 302
     end
   end
-  
+
   describe 'create' do
     context 'ログインしている場合' do
       before { sign_in user }
@@ -131,5 +131,5 @@ RSpec.describe 'Circles', type: :request do
       end
     end
   end
-  
+
 end

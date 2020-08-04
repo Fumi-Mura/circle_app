@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20200714183253) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "kind"
-    t.string "place"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,6 +41,7 @@ ActiveRecord::Schema.define(version: 20200714183253) do
     t.integer "user_id"
     t.string "name"
     t.text "content"
+    t.string "place"
     t.string "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

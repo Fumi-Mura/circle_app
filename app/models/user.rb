@@ -27,9 +27,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+        :recoverable, :rememberable, :validatable
   attachment :profile_image
-  
+
   has_many :circles, dependent: :destroy
   has_many :blogs, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -44,18 +44,18 @@ class User < ApplicationRecord
   has_many :entries
   has_many :messages
   has_many :rooms, through: :entries
-  
+
   with_options presence: true do
     validates :name
     validates :email
   end
   validates :name, length:{maximum:30}
   validates :profile_text, length:{maximum:200}
-  
+
   def already_liked?(blog)
     self.likes.exists?(blog_id: blog.id)
   end
-  
+
   def follow(other_user)
     return if self == other_user
     unless following?(other_user)
@@ -70,11 +70,11 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
-  
+
   def self.guest
     find_or_create_by!(name: "ゲストユーザー", email: 'guestuser@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
     end
   end
-  
+
 end

@@ -26,17 +26,7 @@
         </div>
       <% end %>
     </div>
-    <div class="form-group">
-      活動場所<span class="circle__category__info">(※活動場所は2個まで登録できます)</span>
-      <%= f.collection_check_boxes(:category_ids, @places, :id, :place) do |pl| %>
-        <div class="form-check place__number">
-          <%= pl.label class: 'form-check-label' do %>
-            <%= pl.check_box class: 'form-check-input' %>
-            <%= pl.text %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    活動場所<%= f.select :place, options_for_select(@places, circle[:place]), { prompt: '選択してください' }, { class: 'form-control' } %>
     <%= f.submit class: "btn btn-outline-primary"%>
   <% end %>
 </section>

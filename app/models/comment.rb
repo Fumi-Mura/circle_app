@@ -18,9 +18,9 @@
 #  fk_rails_...  (blog_id => blogs.id)
 #
 class Comment < ApplicationRecord
-  
+
   validates :name, presence: true, length: {maximum: 30}
   validates :comment, presence: true, length: {maximum: 100}
-  
+
   belongs_to :blog
 end

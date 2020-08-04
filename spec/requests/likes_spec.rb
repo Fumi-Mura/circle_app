@@ -5,7 +5,7 @@ RSpec.describe 'Likes', type: :request do
   let!(:user_2) { create(:user) }
   let!(:circle) { create(:circle, user: user) }
   let!(:blog) { create(:blog, user: user, circle: circle)}
-  
+
   describe '#create' do
     context 'ログインしている場合' do
         before { sign_in user }
@@ -22,7 +22,7 @@ RSpec.describe 'Likes', type: :request do
         end
       end
   end
-  
+
   describe '#destroy' do
     let!(:like) { create(:like, user: user,  blog: blog) }
       context 'ログインしている時' do
@@ -48,5 +48,5 @@ RSpec.describe 'Likes', type: :request do
         end
       end
     end
-  
+
 end

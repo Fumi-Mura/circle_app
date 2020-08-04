@@ -37,24 +37,24 @@ RSpec.describe Comment, type: :model do
         comment.name = ''
         expect(comment.valid?).to eq false
       end
-      
+
       it 'contentが空だとNG' do
         comment.comment = ''
         expect(comment.valid?).to eq false
       end
-      
+
       it 'nameが31文字以上だとNG' do
         comment.name = "a" * 31
         expect(comment.valid?).to eq false
       end
-      
+
       it 'contentが101文字以上だとNG' do
         comment.comment = "a" * 101
         expect(comment.valid?).to eq false
       end
     end
   end
-  
+
   describe 'dependent: :destroy' do
     before do
       @user = create(:user)
@@ -65,11 +65,11 @@ RSpec.describe Comment, type: :model do
     it 'userが削除されたらそのuserが投稿したcommentも削除されること' do
       expect{ @user.destroy }.to change{ Comment.count }.by(-1)
     end
-    
+
     it 'circleが削除されたらそのサークルのblogに投稿されたcommentも削除されること' do
       expect{ @circle.destroy }.to change{ Comment.count }.by(-1)
     end
-    
+
     it 'blogが削除されたらuserが投稿したcommentも削除されること' do
       expect{ @blog.destroy }.to change{ Comment.count }.by(-1)
     end
