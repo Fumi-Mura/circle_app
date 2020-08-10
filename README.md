@@ -26,7 +26,7 @@ Nginx, Unicorn<br>
 Git<br>
 
 ## ER図
-![image](https://user-images.githubusercontent.com/63145482/89445989-dbbac600-d78e-11ea-9202-7f3d24f5248a.png)<br>
+![image](https://user-images.githubusercontent.com/63145482/89771312-1039d380-db3b-11ea-96ac-03ce0633a97f.png)
 
 ## サービス構成図
 ![image](https://user-images.githubusercontent.com/63145482/89441710-87ace300-d788-11ea-8d8a-051349c6385e.png)<br>
