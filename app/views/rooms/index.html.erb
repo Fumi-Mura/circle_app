@@ -11,15 +11,13 @@
         <li class="index__message__name">
           <span class="index__message__image">
             <%= link_to room_path(e.room.id) do %>
-              <%= e.user.name %>さんからメッセージです
+              <%= e.user.name %>さんとの会話
             <% end %>
           </span>
         </li>
         <li class="index__message__content">
-          <% if false %>
-            <% m = Message.find_by(id: e.room.message_ids.last).content %>
-            <%= truncate(m, length: 10) %>
-          <% end %>
+          <% m = Message.find_by(id: e.room.message_ids.last).content %>
+          <%= truncate(m, length: 10) %>
         </li>
         <li class="index__message__time">
           <p><%= e.updated_at.to_s(:datetime_jp) %></p>

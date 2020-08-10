@@ -2,10 +2,8 @@
 .circle_search {
   display: flex;
   #q_name_cont {
-    width: 200px;
-    padding: 5px 0px 5px 15px;
-    border-width: 1px;
-    border-radius: 3px;
+    width: 220px;
+    padding: 5px 10px;
     margin: 0px 70px;
   }
   #q_categories_id_eq {
@@ -13,6 +11,11 @@
     padding: 0px 10px;
     margin: 0px 30px;
     height: 36px;
+    border: 1px solid silver;
+    border-radius: 3px;
+  }
+  .circle__search__place {
+    margin-right: 50px;
   }
   .search__btn {
     padding: 2px 10px;
@@ -98,6 +101,7 @@
 .badge-place {
   background-color: #0DB86F;
   color: white;
+  margin-top: 7px;
 }
 
 // circle作成、編集
