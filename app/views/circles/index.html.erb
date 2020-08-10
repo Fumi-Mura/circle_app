@@ -4,10 +4,10 @@
       <%= f.search_field :name_cont, placeholder: "キーワードで検索" %><br>
     </div>
     <div class="circle__search__category">
-      <%= f.collection_select :categories_id_eq, @kinds, :id, :kind, :include_blank => 'カテゴリを選ぶ' %>
+      <%= f.collection_select :categories_id_eq, Category.all, :id, :kind, :include_blank => 'カテゴリを選ぶ', class: 'form-control' %>
     </div>
     <div class="circle__search__place">
-      <%= f.collection_select :categories_id_eq, @places, :id, :place, :include_blank => '活動場所を選ぶ' %>
+      <%= f.select :place_cont, @places, { include_blank: '活動場所を選ぶ'}, { class: 'form-control' } %>
     </div>
     <i class="fas fa-search"><%= f.submit "検索", class: "btn btn-outline-secondary search__btn" %></i>
   <% end %>
@@ -24,8 +24,8 @@
           <div class="circle__category circle__index__category">
             <% circle.categories.each do |category| %>
               <span class="badge badge-pill badge-info"><%= category.kind %></span>
-              <span class="badge badge-pill badge-place"><%= category.place %></span>
             <% end %>
+            <span class="badge badge-pill badge-place"><%= circle.place %></span>
           </div>
         </div>
         <div class="circle__bottom">

@@ -4,6 +4,7 @@ class CreateCircles < ActiveRecord::Migration[5.1]
       t.integer :user_id
       t.string :name
       t.text :content
+      t.string :place
       t.string :image_id
 
       t.timestamps

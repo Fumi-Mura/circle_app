@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  
+
   def create
     comment = Comment.new(comment_params)
     if comment.save
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     comment.destroy
     redirect_to comment.blog, notice: "コメントを削除しました"
   end
-  
+
   private
     def comment_params
       params.require(:comment).permit(:blog_id, :name, :comment)

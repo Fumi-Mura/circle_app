@@ -6,14 +6,14 @@ RSpec.describe 'Blogs', type: :request do
   let!(:circle) { create(:circle, user: user) }
   let(:blog) { create(:blog, user: user, circle: circle)}
   let!(:blog_2) { create(:blog, content: "blog_2") }
-  
+
   describe "#show" do
     before { get blog_path(blog) }
     it '正常なレスポンスが返ってくること' do
       expect(response).to have_http_status(302)
     end
   end
-  
+
   describe 'create' do
     context 'ログインしている場合' do
       before { sign_in user }
@@ -30,7 +30,7 @@ RSpec.describe 'Blogs', type: :request do
       end
     end
   end
-    
+
   describe 'edit' do
     context '本人の場合' do
       before do
@@ -58,7 +58,7 @@ RSpec.describe 'Blogs', type: :request do
       end
     end
   end
-  
+
   describe '#update' do
     # context 'ログインしている時' do
     #   before do
@@ -87,7 +87,7 @@ RSpec.describe 'Blogs', type: :request do
       end
     end
   end
-  
+
   describe '#destroy' do
     context '本人の場合' do
       before { sign_in user }
