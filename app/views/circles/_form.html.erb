@@ -27,7 +27,7 @@
       <% end %>
     </div>
     活動場所<%= f.select :place, options_for_select(@places, circle[:place]), { prompt: '選択してください' }, { class: 'form-control' } %>
-    <%= f.submit class: "btn btn-outline-primary"%>
+    <%= f.submit class: "btn btn-outline-primary circle__subit__button"%>
   <% end %>
 </section>
 

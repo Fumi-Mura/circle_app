@@ -4,7 +4,7 @@
       <%= f.search_field :name_cont, placeholder: "キーワードで検索", class: 'form-control' %><br>
     </div>
     <div class="circle__search__category">
-      <%= f.collection_select :categories_id_eq, Category.all, :id, :kind, class: "form-control" %>
+      <%= f.collection_select :categories_id_eq, Category.all, :id, :kind,:include_blank => 'カテゴリを選ぶ', class: "form-control" %>
     </div>
     <div class="circle__search__place">
       <%= f.select :place_cont, @places, { include_blank: '活動場所を選ぶ'}, { class: 'form-control' } %>
