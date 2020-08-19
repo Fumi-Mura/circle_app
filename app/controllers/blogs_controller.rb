@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_target_blog, only: %i[show edit update destroy]
+  before_action :set_target_blog, only: %i(show edit update destroy)
 
   def index
     @blogs = Blog.page(params[:page]).per(10).includes(:user)
@@ -53,12 +53,12 @@ class BlogsController < ApplicationController
   end
 
   private
+
   def blog_params
-      params.require(:blog).permit(:title, :content, :image, :circle_id)
+    params.require(:blog).permit(:title, :content, :image, :circle_id)
   end
 
   def set_target_blog
     @blog = Blog.find(params[:id])
   end
-
 end

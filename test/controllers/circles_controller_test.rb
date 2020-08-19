@@ -20,5 +20,4 @@ class CirclesControllerTest < ActionDispatch::IntegrationTest
     get circles_edit_url
     assert_response :success
   end
-
 end

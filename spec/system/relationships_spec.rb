@@ -21,7 +21,7 @@ RSpec.describe 'Relationships', type: :system do
     expect do
       click_button 'フォローする'
       expect(page).to have_content '1 フォロワー'
-      expect(page).to_not have_content '0 フォロワー'
+      expect(page).not_to have_content '0 フォロワー'
     end.to change(tarou.following, :count).by(1) &
           change(hanako.followers, :count).by(1)
 
@@ -38,7 +38,7 @@ RSpec.describe 'Relationships', type: :system do
     expect do
       click_button 'フォロー外す'
       expect(page).to have_content '0 フォロー'
-      expect(page).to_not have_content '1 フォロー'
+      expect(page).not_to have_content '1 フォロー'
     end.to change(tarou.following, :count).by(-1) &
           change(hanako.followers, :count).by(-1)
 
@@ -46,6 +46,6 @@ RSpec.describe 'Relationships', type: :system do
     visit user_path(tarou)
     click_link 'フォロー中'
     expect(current_path).to eq "/users/#{tarou.id}/following"
-    expect(page).to_not have_content 'hanako'
+    expect(page).not_to have_content 'hanako'
   end
 end

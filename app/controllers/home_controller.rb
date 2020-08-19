@@ -7,5 +7,4 @@ class HomeController < ApplicationController
     @q = Circle.search(search_params)
     @circles = @q.result.includes(:categories).page(params[:page]).per(10)
   end
-
 end

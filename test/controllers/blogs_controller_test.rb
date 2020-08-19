@@ -20,5 +20,4 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
     get blogs_edit_url
     assert_response :success
   end
-
 end

@@ -62,16 +62,17 @@ RSpec.describe Comment, type: :model do
       @blog = create(:blog, user: @user, circle: @circle)
       @comment = create(:comment, blog: @blog)
     end
+
     it 'userが削除されたらそのuserが投稿したcommentも削除されること' do
-      expect{ @user.destroy }.to change{ Comment.count }.by(-1)
+      expect { @user.destroy }.to change(Comment, :count).by(-1)
     end
 
     it 'circleが削除されたらそのサークルのblogに投稿されたcommentも削除されること' do
-      expect{ @circle.destroy }.to change{ Comment.count }.by(-1)
+      expect { @circle.destroy }.to change(Comment, :count).by(-1)
     end
 
     it 'blogが削除されたらuserが投稿したcommentも削除されること' do
-      expect{ @blog.destroy }.to change{ Comment.count }.by(-1)
+      expect { @blog.destroy }.to change(Comment, :count).by(-1)
     end
   end
 end

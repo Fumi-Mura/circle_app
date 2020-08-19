@@ -64,11 +64,11 @@ RSpec.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.include Devise::Test::IntegrationHelpers, type: :request #sign_in/sign_outヘルパーの使用
+  config.include Devise::Test::IntegrationHelpers, type: :request # sign_in/sign_outヘルパーの使用
   config.include Devise::Test::IntegrationHelpers, type: :system
-  config.include FactoryBot::Syntax::Methods #FactoryBot(FactoryBot省略)の使用
+  config.include FactoryBot::Syntax::Methods # FactoryBot(FactoryBot省略)の使用
   config.include Devise::Test::ControllerHelpers, type: :view
-  config.before(:each) do |example| #system specの設定 (js使用時はテスト名に ,js: trueと追記する)
+  config.before(:each) do |example| # system specの設定 (js使用時はテスト名に ,js: trueと追記する)
     if example.metadata[:type] == :system
       if example.metadata[:js]
         driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
@@ -87,8 +87,8 @@ Capybara.register_driver :remote_chrome do |app|
         "no-sandbox",
         "headless",
         "disable-gpu",
-        "window-size=1680,1050"
-      ]
+        "window-size=1680,1050",
+      ],
     }
   )
   Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)

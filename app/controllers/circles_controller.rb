@@ -1,8 +1,8 @@
 class CirclesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_target_circle, only: %i[show edit update destroy]
-  before_action :set_categories, only: %i[index show new edit create update]
-  before_action :set_places, only: %i[index new show edit search]
+  before_action :set_target_circle, only: %i(show edit update destroy)
+  before_action :set_categories, only: %i(index show new edit create update)
+  before_action :set_places, only: %i(index new show edit search)
 
   def index
     @categories = Category.all
@@ -23,7 +23,7 @@ class CirclesController < ApplicationController
       unless @user.id == current_user.id
         @currentUserEntry.each do |cu|
           @userEntry.each do |u|
-            if cu.room_id == u.room_id then
+            if cu.room_id == u.room_id
               @isRoom = true
               @roomId = cu.room_id
             end
@@ -80,9 +80,11 @@ class CirclesController < ApplicationController
   end
 
   def set_places
-    @places = %w[北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 山梨県 長野県
+    @places = %w(
+      北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 山梨県 長野県
       新潟県 富山県 石川県 福井県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県
-      山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県 その他]
+      山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県 その他
+    )
   end
 
   def search
@@ -91,6 +93,7 @@ class CirclesController < ApplicationController
   end
 
   private
+
   def search_params
     params.require(:q).permit(:name_cont, :place_cont, :categories_id_eq)
   end

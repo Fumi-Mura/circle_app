@@ -52,7 +52,7 @@ RSpec.describe Circle, type: :model do
     it 'userが削除されたらuserが作成したcircleも削除されること' do
       @user = create(:user)
       @circle = create(:circle, user: @user)
-      expect{ @user.destroy }.to change{ Circle.count }.by(-1)
+      expect { @user.destroy }.to change(Circle, :count).by(-1)
     end
   end
 end

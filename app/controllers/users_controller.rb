@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_target_user, only: %i[show edit update destroy following followers]
+  before_action :set_target_user, only: %i(show edit update destroy following followers)
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       unless @user.id == current_user.id
         @currentUserEntry.each do |cu|
           @userEntry.each do |u|
-            if cu.room_id == u.room_id then
+            if cu.room_id == u.room_id
               @isRoom = true
               @roomId = cu.room_id
             end
@@ -67,6 +67,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :email, :profile_text, :profile_image)
   end

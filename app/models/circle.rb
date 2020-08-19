@@ -19,8 +19,8 @@ class Circle < ApplicationRecord
     validates :name
     validates :content
   end
-  validates :name, length: {maximum: 30}
-  validates :content, length: {maximum: 1000}
+  validates :name, length: { maximum: 30 }
+  validates :content, length: { maximum: 1000 }
 
   has_many :circle_categories, dependent: :destroy
   has_many :categories, through: :circle_categories

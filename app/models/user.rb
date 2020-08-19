@@ -27,18 +27,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable
   attachment :profile_image
 
   has_many :circles, dependent: :destroy
   has_many :blogs, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :active_relationships, class_name:  "Relationship",
+  has_many :active_relationships, class_name: "Relationship",
                                   foreign_key: "follower_id",
-                                  dependent:   :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
+                                  dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship",
                                    foreign_key: "followed_id",
-                                   dependent:   :destroy
+                                   dependent: :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :entries
@@ -49,11 +49,11 @@ class User < ApplicationRecord
     validates :name
     validates :email
   end
-  validates :name, length:{maximum:30}
-  validates :profile_text, length:{maximum:200}
+  validates :name, length: { maximum: 30 }
+  validates :profile_text, length: { maximum: 200 }
 
   def already_liked?(blog)
-    self.likes.exists?(blog_id: blog.id)
+    likes.exists?(blog_id: blog.id)
   end
 
   def follow(other_user)
@@ -76,5 +76,4 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
     end
   end
-
 end

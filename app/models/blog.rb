@@ -18,8 +18,8 @@ class Blog < ApplicationRecord
     validates :title
     validates :content
   end
-  validates :title, length: {maximum: 50}
-  validates :content, length: {maximum: 1000}
+  validates :title, length: { maximum: 50 }
+  validates :content, length: { maximum: 1000 }
 
   belongs_to :user
   belongs_to :circle

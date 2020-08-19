@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # mount ActionCable.server => '/cable'
 
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
   }
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#new_guest'
@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   resources :circles
   get 'search', to: 'circles#search'
   resources :blogs do
-    resources :likes, only: %i[create destroy]
+    resources :likes, only: %i(create destroy)
   end
-  resources :comments, only: %i[create destroy]
+  resources :comments, only: %i(create destroy)
   resources :relationships, only: [:create, :destroy]
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :destroy, :show, :index]

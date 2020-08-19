@@ -35,6 +35,7 @@ RSpec.describe "UserAuthentications", type: :request do
     before do
       ActionMailer::Base.deliveries.clear
     end
+
     context '入力値が正しい場合' do
       it 'リクエストが成功すること' do
         post user_registration_path, params: { user: user_params }
@@ -62,7 +63,7 @@ RSpec.describe "UserAuthentications", type: :request do
       it 'ユーザー新規登録が失敗すること' do
         expect do
           post user_registration_path, params: { user: invalid_user_params }
-        end.to_not change(User, :count)
+        end.not_to change(User, :count)
       end
     end
 
@@ -94,7 +95,6 @@ RSpec.describe "UserAuthentications", type: :request do
         expect(user.valid?).to eq false
       end
     end
-
   end
 end
 
@@ -133,6 +133,7 @@ RSpec.describe User, type: :model do
 
   describe 'フォロー機能' do
     let(:other_user) { create(:user) }
+
     before { user.save }
 
     describe 'following?(other_user)' do
@@ -149,7 +150,7 @@ RSpec.describe User, type: :model do
     describe 'follow(other_user)' do
       it 'フォローしていない場合、フォローできること' do
         user.unfollow(other_user)
-        expect { user.follow(other_user) }.to change{ user.following.count }.by(1)
+        expect { user.follow(other_user) }.to change { user.following.count }.by(1)
         expect(user.following?(other_user)).to eq true
       end
 
@@ -176,4 +177,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-

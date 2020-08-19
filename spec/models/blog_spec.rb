@@ -24,6 +24,7 @@ RSpec.describe Blog, type: :model do
         expect(blog.valid?).to eq true
       end
     end
+
     context 'NGの場合' do
       it 'titleが空だとNG' do
         blog.title = ''
@@ -53,12 +54,13 @@ RSpec.describe Blog, type: :model do
       @circle = create(:circle, user: @user)
       @blog = create(:blog, user: @user, circle: @circle)
     end
+
     it 'userが削除されたらuserが投稿したblogも削除されること' do
-      expect{ @user.destroy }.to change{ Blog.count }.by(-1)
+      expect { @user.destroy }.to change(Blog, :count).by(-1)
     end
 
     it 'circleが削除されたらそのcircleで投稿されたblogも削除されること' do
-      expect{ @circle.destroy }.to change{ Blog.count }.by(-1)
+      expect { @circle.destroy }.to change(Blog, :count).by(-1)
     end
   end
 end

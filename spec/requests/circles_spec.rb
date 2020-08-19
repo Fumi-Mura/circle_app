@@ -15,6 +15,7 @@ RSpec.describe 'Circles', type: :request do
 
   describe "#show" do
     before { get circle_path(circle) }
+
     it '正常なレスポンスが返ってくること' do
       expect(response).to have_http_status(302)
     end
@@ -31,18 +32,21 @@ RSpec.describe 'Circles', type: :request do
   describe 'create' do
     context 'ログインしている場合' do
       before { sign_in user }
+
       it '正常に作成できること' do
         expect do
           post circles_path, params: { post: circle }
-        end.to change{ user.circles.count }.by(1)
+        end.to change { user.circles.count }.by(1)
       end
       it '正常に作成できること' do
         circle = build(:circle, content: 'テスト用のサークルです', user: user)
         expect { circle.save }.to change { user.circles.count }.by(1)
       end
     end
+
     context 'ログインしていない場合' do
       before { post circles_path, params: { post: circle } }
+
       it 'ログインページにリダイレクトされること' do
         expect(response).to redirect_to new_user_session_path
       end
@@ -61,16 +65,19 @@ RSpec.describe 'Circles', type: :request do
     # end
     context '本人でない場合' do
       before { sign_in user_2 }
+
       it 'サークル詳細へリダイレクトされること' do
         get edit_circle_path(circle)
         expect(response).to redirect_to circle_path
       end
     end
+
     context 'ログインしていない場合' do
       before do
         logout(user)
         get edit_circle_path(circle)
       end
+
       it 'サインイン画面へリダイレクトされること' do
         expect(response).to redirect_to new_user_session_path
       end
@@ -92,14 +99,17 @@ RSpec.describe 'Circles', type: :request do
         sign_in user_2
         patch circle_path(circle), params: { post: circle }
       end
+
       it 'サークル2のcontentが反映されず、ログイン画面へリダイレクトされること' do
         patch circle_path(circle), params: { post: circle_2 }
         expect(circle.reload.content).to eq 'test_circle_content'
         expect(response).to redirect_to new_user_session_path
       end
     end
+
     context 'ログインしていない場合' do
       before { patch circle_path(circle), params: { post: circle } }
+
       it 'ログインページにリダイレクトされること' do
         expect(response).to redirect_to new_user_session_path
       end
@@ -109,27 +119,31 @@ RSpec.describe 'Circles', type: :request do
   describe '#destroy' do
     context '本人の場合' do
       before { sign_in user }
+
       let!(:circle) { create(:circle, user: user) }
+
       it '正常に削除できること' do
         expect do
           delete circle_path(circle)
         end.to change { user.circles.count }.by(-1)
       end
     end
+
     context '未ログイン状態のとき' do
       it 'ログインページにリダイレクトされること' do
         delete circle_path(circle)
         expect(response).to redirect_to new_user_session_path
       end
     end
+
     context '本人でない場合' do
       let!(:circle) { create(:circle, user: user) }
+
       it 'circleを削除できず、詳細ページにリダイレクトされること' do
         sign_in user_2
-        expect { delete circle_path(circle) }.to change { Circle.count }.by(0)
+        expect { delete circle_path(circle) }.to change(Circle, :count).by(0)
         expect(response).to redirect_to circle_path
       end
     end
   end
-
 end
