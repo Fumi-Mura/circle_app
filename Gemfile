@@ -48,14 +48,13 @@ group :development, :test do
   gem 'webdrivers'
   gem 'rails-flog', require: 'flog'
   gem 'rspec-rails', '~>3.8'
-  # gem  "rspec_junit_formatter"
+  gem  "rspec_junit_formatter"
   gem "database_cleaner"
   gem 'rails-controller-testing'
   gem 'factory_bot_rails'
   gem 'bullet'
   gem 'better_errors'
   gem 'binding_of_caller'
-  # gem 'rubocop', require: false
 end
 
 group :development do

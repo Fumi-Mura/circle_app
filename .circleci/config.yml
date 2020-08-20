@@ -15,6 +15,14 @@ jobs:
 
     steps:
       - checkout
+      - run:
+        name: Install System Dependencies
+        command: |
+          sudo apt-get update
+          sudo apt-get install -y libappindicator1 fonts-liberation
+          export CHROME_BIN=/usr/bin/google-chrome
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome*.deb
 
       - restore_cache:
           keys:
@@ -38,29 +46,29 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
-# rubocop setup
-      # - run:
-      #     name: Rubocop
-      #     command: bundle exec rubocop
+# # rubocop setup
+#       - run:
+#           name: Run rubocop-airbnb
+#           command: bundle exec rubocop --require rubocop-airbnb
 
 # rspec setup
-      # - run:
-      #     name: run tests
-      #     command: |
-      #       mkdir /tmp/test-results
-      #       TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-      #         circleci tests split --split-by=timings)"
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
 
-      #       bundle exec rspec \
-      #         --format progress \
-      #         --format RspecJunitFormatter \
-      #         --out /tmp/test-results/rspec.xml \
-      #         --format progress \
-      #         $TEST_FILES
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
 
 # collect reports
-      # - store_test_results:
-      #     path: /tmp/test-results
-      # - store_artifacts:
-      #     path: /tmp/test-results
-      #     destination: test-results
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
