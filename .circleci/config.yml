@@ -7,6 +7,7 @@ jobs:
           - BUNDLER_VERSION: 2.0.2
           - RAILS_ENV: 'test'
       # - image: circleci/mysql:5.7
+      #高速起動
       - image: circleci/mysql:5.7-ram
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
