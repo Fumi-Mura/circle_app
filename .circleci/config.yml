@@ -6,24 +6,12 @@ jobs:
         environment:
           - BUNDLER_VERSION: 2.0.2
           - RAILS_ENV: 'test'
-      # - image: circleci/mysql:5.7
-      - image: circleci/mysql:5.7-ram
+      - image: circleci/mysql:5.7
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-          # - MYSQL_ROOT_HOST: '%'
+          - MYSQL_ROOT_HOST: '%'
 
     working_directory: ~/repo
-
-    steps:
-      - checkout
-      - run:
-          name: Install System Dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -f -y libappindicator1 fonts-liberation
-            export CHROME_BIN=/usr/bin/google-chrome
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome*.deb
 
       - restore_cache:
           keys:
