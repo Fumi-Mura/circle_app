@@ -69,4 +69,7 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
+# add Ignore file
+.DS_Store
+
 # End of https://www.toptal.com/developers/gitignore/api/rails
