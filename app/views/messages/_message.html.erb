@@ -7,7 +7,7 @@
   <div class="message__flex">
     <p class="<%= message.id %>">
       <%= attachment_image_tag message.user, :profile_image, fallback: "default_image.jpg", class:"room__user__image" %>
-      <h7 class="m_content room__user__content"><%= message.content %></h7>
+      <span class="m_content room__user__content"><%= message.content %></span>
     </p>
   </div>
   <p class="<%= message.id %>">

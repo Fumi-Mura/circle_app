@@ -25,79 +25,6 @@
 #
 require 'rails_helper'
 
-# Deviceのテスト
-RSpec.describe "UserAuthentications", type: :request do
-  let(:user) { build(:user) }
-  let(:user_params) { attributes_for(:user) }
-  let(:invalid_user_params) { attributes_for(:user, name: "") }
-
-  describe 'POST #create' do
-    before do
-      ActionMailer::Base.deliveries.clear
-    end
-
-    context '入力値が正しい場合' do
-      it 'リクエストが成功すること' do
-        post user_registration_path, params: { user: user_params }
-        expect(response.status).to eq 302
-      end
-
-      it '新規登録の成功によりユーザーが1人増えること' do
-        expect do
-          post user_registration_path, params: { user: user_params }
-        end.to change(User, :count).by 1
-      end
-
-      it 'リダイレクトされること' do
-        post user_registration_path, params: { user: user_params }
-        expect(response).to redirect_to root_url
-      end
-    end
-
-    context '入力値が不正な場合' do
-      it 'リクエストが成功すること' do
-        post user_registration_path, params: { user: invalid_user_params }
-        expect(response.status).to eq 200
-      end
-
-      it 'ユーザー新規登録が失敗すること' do
-        expect do
-          post user_registration_path, params: { user: invalid_user_params }
-        end.not_to change(User, :count)
-      end
-    end
-
-    context 'メールアドレスが大文字で入力された時' do
-      it '大文字から小文字に変換すること' do
-        user.email = "TeSt@ExAmPlE.CoM"
-        user.save!
-        expect(user.email.downcase).to eq user.reload.email
-      end
-    end
-
-    context 'パスワードの入力が6桁の時' do
-      it 'パスワードの入力が正しいこと' do
-        user = build(:user, password: "a" * 6, password_confirmation: "a" * 6)
-        expect(user.valid?).to eq true
-      end
-    end
-
-    context 'パスワードの入力が5桁の時' do
-      it 'パスワードの入力が正しくないこと' do
-        user = build(:user, password: "a" * 6, password_confirmation: "a" * 5)
-        expect(user.valid?).to eq false
-      end
-    end
-
-    context 'パスワードが空白の時' do
-      it 'パスワードの入力が正しいこと' do
-        user = build(:user, password: "" * 6, password_confirmation: "" * 6)
-        expect(user.valid?).to eq false
-      end
-    end
-  end
-end
-
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
 
@@ -123,7 +50,30 @@ RSpec.describe User, type: :model do
         user.name = "a" * 31
         expect(user.valid?).to eq false
       end
+    end
 
+    context 'パスワードの入力が6桁の時' do
+      it 'パスワードの入力が正しいこと' do
+        user = build(:user, password: "a" * 6, password_confirmation: "a" * 6)
+        expect(user.valid?).to eq true
+      end
+    end
+
+    context 'パスワードの入力が5桁の時' do
+      it 'パスワードの入力が正しくないこと' do
+        user = build(:user, password: "a" * 6, password_confirmation: "a" * 5)
+        expect(user.valid?).to eq false
+      end
+    end
+
+    context 'パスワードが空白の時' do
+      it 'パスワードの入力が正しくないこと' do
+        user = build(:user, password: "" * 6, password_confirmation: "" * 6)
+        expect(user.valid?).to eq false
+      end
+    end
+
+    context 'パスワード入力文字数が多い時' do
       it 'profile_textが201文字以上だとNG' do
         user.profile_text = "a" * 201
         expect(user.valid?).to eq false

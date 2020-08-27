@@ -12,3 +12,4 @@ AllCops:
     - 'lib/tasks/*'
     - 'vendor/**/*'
     - 'path/ruby'
+    - 'app/channels/application_cable/connection.rb'

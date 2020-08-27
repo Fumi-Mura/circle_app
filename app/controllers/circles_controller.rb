@@ -18,18 +18,18 @@ class CirclesController < ApplicationController
     @blogs = Blog.all.order(created_at: :desc)
     @blog = Blog.new(circle_id: @circle.id)
     if user_signed_in?
-      @currentUserEntry = Entry.where(user_id: current_user.id)
-      @userEntry = Entry.where(user_id: @user.id)
+      @current_user_entry = Entry.where(user_id: current_user.id)
+      @user_entry = Entry.where(user_id: @user.id)
       unless @user.id == current_user.id
-        @currentUserEntry.each do |cu|
-          @userEntry.each do |u|
+        @current_user_entry.each do |cu|
+          @user_entry.each do |u|
             if cu.room_id == u.room_id
-              @isRoom = true
-              @roomId = cu.room_id
+              @is_room = true
+              @room_id = cu.room_id
             end
           end
         end
-        unless @isRoom
+        unless @is_room
           @room = Room.new
           @entry = Entry.new
         end

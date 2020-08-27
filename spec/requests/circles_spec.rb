@@ -38,10 +38,10 @@ RSpec.describe 'Circles', type: :request do
           post circles_path, params: { post: circle }
         end.to change { user.circles.count }.by(1)
       end
-      it '正常に作成できること' do
-        circle = build(:circle, content: 'テスト用のサークルです', user: user)
-        expect { circle.save }.to change { user.circles.count }.by(1)
-      end
+      # it '正常に作成できること' do
+      #   circle = build(:circle, content: 'テスト用のサークルです', user: user)
+      #   expect { circle.save }.to change { user.circles.count }.by(1)
+      # end
     end
 
     context 'ログインしていない場合' do
