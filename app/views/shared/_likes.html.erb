@@ -1,12 +1,13 @@
 <div class="like">
   <% if current_user.already_liked?(@blog) %>
-    <%= link_to blog_like_path(@blog,@blog.id), method: :delete do %>
+    <%= link_to blog_like_path(@blog, @blog.id), method: :delete, remote: true do %>
       <i class="fas fa-heart like__color"></i>
+      <%= @blog.likes.count %>
     <% end %>
   <% else %>
     <%= link_to blog_likes_path(@blog), method: :post do %>
       <i class="far fa-heart"></i>
+      <%= @blog.likes.count %>
     <% end %>
   <% end %>
-  <%= @blog.likes.count %>
 </div>

@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   resources :circles
   get 'search', to: 'circles#search'
   resources :blogs do
-    resources :likes, only: %i(create destroy)
+    resources :likes, only: [:create, :destroy]
   end
-  resources :comments, only: %i(create destroy)
+  resources :comments, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :destroy, :show, :index]
