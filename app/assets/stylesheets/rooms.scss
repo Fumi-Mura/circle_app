@@ -80,6 +80,7 @@
   }
 }
 
+
 .room__user__image {
   width: 80px;
   height: 80px;
@@ -87,13 +88,18 @@
 }
 
 .submit__message {
-  margin: 0 0 100px 0;
-  .message__info {
-    color: gray;
-    font-size: 14px;
-  }
+  margin: 50px 0px;
 }
 
+.message_sendbtn {
+  width: 300px;
+  margin: 0 auto;
+  display: block;
+}
+
+.m_content {
+  white-space: pre-wrap;
+}
 
 @media screen and (max-width: 480px) {
   // message一覧
@@ -132,9 +138,7 @@
     height: 50px;
   }
 
-  .submit__message {
-    .message__info {
-      font-size: 12px;
-    }
+  .message_sendbtn {
+    width: 90%;
   }
 }

@@ -15,7 +15,7 @@ RSpec.describe 'messages', type: :system do
 
     # tarouからhanakoにメッセージを送信する
     fill_in 'メッセージを入力してください', with: 'hanakoさん、こんにちは'
-    find('#chat-input').native.send_key(:return)
+    click_button '送 信'
     expect(page).to have_content 'hanakoさん、こんにちは'
     expect(page).to have_content 'tarou'
 
@@ -32,7 +32,7 @@ RSpec.describe 'messages', type: :system do
 
     # hanakoからtarouにメッセージを送信する
     fill_in 'メッセージを入力してください', with: 'tarouさん、こんにちは'
-    find('#chat-input').native.send_key(:return)
+    click_button '送 信'
     expect(page).to have_content 'tarouさん、こんにちは'
 
     # userをhanakoからtarouに切り替える
@@ -52,7 +52,7 @@ RSpec.describe 'messages', type: :system do
     visit user_path(hanako)
     click_button 'メッセージ'
     fill_in 'メッセージを入力してください', with: 'hanakoさん、こんにちは'
-    find('#chat-input').native.send_key(:return)
+    click_button '送 信'
     visit rooms_path(tarou)
     expect(page).to have_content 'hanakoさんとの会話'
   end

@@ -18,10 +18,11 @@
   <div id="messages" data-room_id="<%= @room.id %>">
     <%= render @messages %>
   </div>
-  <form class="submit__message">
-    <label id="target">新しいメッセージを作成<span class="message__info">(エンターで送信)</span></label><br>
-    <input type="text" id="chat-input" data-behavior="room_speaker" class="form-control" placeholder="メッセージを入力してください">
+  <form class="submit__message" onsubmit="return false;">
+    <label id="target">新しいメッセージを作成</label>
+    <textarea type="text" wrap="hard" name="target" class="form-control message_text" placeholder="メッセージを入力してください" data-behavior="room_speaker" rows="10"></textarea>
   </form>
+  <button class="message_sendbtn btn btn-outline-info" data-behavior="room_speaker">送 信</button>
 </section>
 
 <script>

@@ -4,15 +4,15 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       App.cable.subscriptions.remove App.room
     App.room = App.cable.subscriptions.create { channel: "RoomChannel", room: $('#messages').data('room_id') },
       connected: ->
-        
+
       disconnected: ->
-        
+
       received: (data) ->
         $('#messages').append data['message']
       speak: (message) ->
         @perform 'speak', message: message
-    $('#chat-input').on 'keypress', (event) ->
-      if event.keyCode is 13
-        App.room.speak event.target.value
-        event.target.value = ''
-        event.preventDefault();
+
+    $(document).on 'click', '.message_sendbtn', (event) ->
+      App.room.speak $('.message_text').val();
+      $('.message_text').val('');
+      event.preventDefault()
