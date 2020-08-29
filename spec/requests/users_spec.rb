@@ -1,9 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  let(:user) { build(:user) }
+  let!(:user) { create(:user) }
+  let!(:user_2) { create(:user) }
   let(:user_params) { attributes_for(:user) }
   let(:invalid_user_params) { attributes_for(:user, name: "") }
+
+  describe '#index' do
+    before { get users_path }
+
+    it '正常なレスポンスが返ってくること' do
+      expect(response).to have_http_status 200
+    end
+  end
+
+  # describe '#show' do
+  #   before do
+  #     sign_in user
+  #     get user_path
+  #   end
+
+  #   it '正常なレスポンスが返ってくること' do
+  #     expect(response).to have_http_status 200
+  #   end
+  # end
 
   describe 'POST #create' do
     before do
@@ -50,12 +70,36 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
-  describe '#index' do
-    before { get users_path }
+  describe 'edit' do
+    context '本人の場合' do
+      before do
+        sign_in user
+        get edit_user_path(user)
+      end
 
-    it '一覧が表示されること' do
-      expect(response).to have_http_status(200)
+      it '正常なレスポンスが返ってくること' do
+        expect(response).to have_http_status 200
+      end
     end
+
+    context '本人でない場合' do
+      before { sign_in user_2 }
+
+      it 'トップページへリダイレクトされること' do
+        get edit_user_path(user)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    # context 'ログインしていない場合' do
+    #   before do
+    #     get edit_user_path
+    #   end
+
+    #   it 'サインイン画面へリダイレクトされること' do
+    #     expect(response).to redirect_to new_user_session_path
+    #   end
+    # end
   end
 
   # describe '#update' do

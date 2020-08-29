@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'パスワード入力文字数が多い時' do
+    context 'プロフィール入力文字数が多い時' do
       it 'profile_textが201文字以上だとNG' do
         user.profile_text = "a" * 201
         expect(user.valid?).to eq false
@@ -115,11 +115,11 @@ RSpec.describe User, type: :model do
     end
 
     describe 'unfollow(other_user)' do
-      example 'フォローしていない場合、nilを返すこと' do
+      it 'フォローしていない場合、nilを返すこと' do
         expect(user.unfollow(other_user)).to eq nil
       end
 
-      example 'フォローしている場合、フォロー解除できること' do
+      it 'フォローしている場合、フォロー解除できること' do
         user.follow(other_user)
         user.unfollow(other_user)
         expect(user.following?(other_user)).to eq false

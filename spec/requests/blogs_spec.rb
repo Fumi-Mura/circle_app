@@ -7,11 +7,30 @@ RSpec.describe 'Blogs', type: :request do
   let(:blog) { create(:blog, user: user, circle: circle) }
   let!(:blog_2) { create(:blog, content: "blog_2") }
 
+  # describe "#index" do
+  #   before { get blogs_path }
+
+  #   it '正常なレスポンスが返ってくること' do
+  #     expect(response).to have_http_status 200
+  #   end
+  # end
+
   describe "#show" do
     before { get blog_path(blog) }
 
     it '正常なレスポンスが返ってくること' do
-      expect(response).to have_http_status(302)
+      expect(response).to have_http_status 302
+    end
+  end
+
+  describe '#new' do
+    before do
+      sign_in user
+      get new_blog_path
+    end
+
+    it '正常なレスポンスが返ってくること' do
+      expect(response).to have_http_status 200
     end
   end
 
@@ -42,7 +61,7 @@ RSpec.describe 'Blogs', type: :request do
         get edit_blog_path(blog)
       end
 
-      it '200レスポンスを返すこと' do
+      it '正常なレスポンスが返ってくること' do
         expect(response).to have_http_status 200
       end
     end
@@ -74,17 +93,19 @@ RSpec.describe 'Blogs', type: :request do
     #     sign_in user
     #     patch blog_path(blog), params: { post: blog }
     #   end
+
     #   it '投稿へリダイレクトされること' do
-    #     expect(response).to redirect_to blog_path
+    #     expect(response).to redirect_to blog_path(blog)
     #   end
     # end
+
     context '本人でない場合' do
       before do
         sign_in user_2
         patch blog_path(blog), params: { post: blog }
       end
 
-      it 'blog_2のcontentが反映されず、サークル一覧にリダイレクトされること' do
+      it 'blog_2のcontentが反映されず、ログイン画面へリダイレクトされること' do
         patch blog_path(blog), params: { post: blog_2 }
         expect(blog.reload.content).to eq 'test_blog_content'
         expect(response).to redirect_to new_user_session_path
@@ -113,7 +134,7 @@ RSpec.describe 'Blogs', type: :request do
       end
     end
 
-    context '未ログイン状態のとき' do
+    context 'ログインしていない場合' do
       it 'ログインページにリダイレクトされること' do
         delete blog_path(blog)
         expect(response).to redirect_to new_user_session_path

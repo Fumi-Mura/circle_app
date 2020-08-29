@@ -6,26 +6,30 @@ RSpec.describe 'Circles', type: :request do
   let(:circle) { create(:circle, user: user) }
   let!(:circle_2) { create(:circle, content: "circle_2") }
 
-  # describe '#index' do
-  #   before { get circles_path }
-  #   it '正常なレスポンスが返ってくること' do
-  #     expect(response).to have_http_status(200)
-  #   end
-  # end
+  describe '#index' do
+    before { get circles_path }
+
+    it '正常なレスポンスが返ってくること' do
+      expect(response).to have_http_status 200
+    end
+  end
 
   describe "#show" do
     before { get circle_path(circle) }
 
     it '正常なレスポンスが返ってくること' do
-      expect(response).to have_http_status(302)
+      expect(response).to have_http_status 302
     end
   end
 
   describe '#new' do
-    it '正常なレスポンスが返ってくること' do
-      get new_circle_path
+    before do
       sign_in user
-      expect(response).to have_http_status 302
+      get new_circle_path
+    end
+
+    it '正常なレスポンスが返ってくること' do
+      expect(response).to have_http_status 200
     end
   end
 
@@ -38,10 +42,6 @@ RSpec.describe 'Circles', type: :request do
           post circles_path, params: { post: circle }
         end.to change { user.circles.count }.by(1)
       end
-      # it '正常に作成できること' do
-      #   circle = build(:circle, content: 'テスト用のサークルです', user: user)
-      #   expect { circle.save }.to change { user.circles.count }.by(1)
-      # end
     end
 
     context 'ログインしていない場合' do
@@ -54,15 +54,17 @@ RSpec.describe 'Circles', type: :request do
   end
 
   describe 'edit' do
-    # context '本人の場合' do
-    #   before do
-    #     sign_in user
-    #     get edit_circle_path(circle)
-    #   end
-    #   it '200レスポンスを返すこと' do
-    #     expect(response).to have_http_status 200
-    #   end
-    # end
+    context '本人の場合' do
+      before do
+        sign_in user
+        get edit_circle_path(circle)
+      end
+
+      it '正常なレスポンスが返ってくること' do
+        expect(response).to have_http_status 200
+      end
+    end
+
     context '本人でない場合' do
       before { sign_in user_2 }
 
@@ -90,10 +92,12 @@ RSpec.describe 'Circles', type: :request do
     #     sign_in user
     #     patch circle_path(circle), params: { post: circle_2 }
     #   end
+
     #   it '投稿一覧へリダイレクトされること' do
     #     expect(response).to redirect_to circle_path
     #   end
     # end
+
     context '本人でない場合' do
       before do
         sign_in user_2
