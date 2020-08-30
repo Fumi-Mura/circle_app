@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/63145482/89443568-6b5e7580-d78b-11ea-8965-2cd17e47e9eb.png)<br>
 
 ## URL
-### **https://www.ones-palce.com**<br>
+### **https://www.ones-palce.xyz**<br>
 
 ## 概要
 趣味で繋がるコミュニティ作成・参加サービスになります。<br>
