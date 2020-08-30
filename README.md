@@ -7,7 +7,7 @@
 ## 概要
 趣味で繋がるコミュニティ作成・参加サービスになります。<br>
 投稿にいいね機能をもたせることで活動の発信を促し、個人ではなく集団で育てるSNSとしての狙いもあります。<br>
-開発環境と本番環境にDocker、インフラにAWSを利用しています。<br>
+開発環境と本番環境にDocker、インフラにAWSを利用し、CircleCIを用いて自動テストを構築しています。<br>
 
 ## 制作背景
 新しい人・物・事との出会いが好きで、そのためのプラットフォームになればと思い制作しました。<br>
@@ -19,38 +19,78 @@ Javascript(Jquery), HTML5, Sass, Bootstrap<br>
 
 ## 使用技術
 AWS(VPC, EC2, RDS, Route53, ACM, ALB)<br>
-docker, docker-compose<br>
+Docker, docker-compose<br>
+CircleCI<br>
 MySQL<br>
 Rspec<br>
 Nginx, Unicorn<br>
 Git<br>
+rubocop<br>
 
 ## ER図
 ![image](https://user-images.githubusercontent.com/63145482/89771312-1039d380-db3b-11ea-96ac-03ce0633a97f.png)
 
 ## サービス構成図
-![image](https://user-images.githubusercontent.com/63145482/89441710-87ace300-d788-11ea-8d8a-051349c6385e.png)<br>
+![image](https://user-images.githubusercontent.com/63145482/91665950-3946f600-eb34-11ea-815b-b4c6e0a087d3.png)<br>
 
 
 ## 機能一覧
-○ユーザー関係<br>
-・新規登録、ログイン、ログアウト、ゲストユーザー、編集<br>
-・フォロー、アンフォロー、フォロー、フォロワー一覧表示<br>
-・ダイレクトメッセージ、メッセージ一覧表示<br>
-○サークル関係<br>
-・登録、編集、削除<br>
-・タグ付け、検索<br>
-○ブログ関係<br>
-・投稿(作成したcircleに紐づく)、編集、削除<br>
-・コメント、削除<br>
-・いいね、いいね数によるランキング<br>
-・SNSシェア<br>
-○その他機能<br>
-・ページネーション<br>
-・Ajaxによる非同期処理<br>
-・レスポンシブ対応<br>
-○テスト<br>
-・Rspec<br>
+### ○認証機能(device)<br>
+  ・新規登録、ログイン、ログアウト<br>
+    name, email, password必須、ログイン時はemailとpasswordのみでログイン可能<br>
+  ・ゲストログイン機能<br>
+    閲覧用のユーザー<br>
+    削除不可<br>
+  ・管理者ユーザー機能<br>
+    管理用のユーザー<br>
+    ゲストユーザー以外のユーザー及び、全てのサークルとブログを編集・削除可能<br>
+<br>
+
+### ○サークル作成機能<br>
+  ・登録、編集、削除<br>
+  ・タグ付け<br>
+    カテゴリーと活動場所でタグ付け可能<br>
+<br>
+
+### ◯検索機能(ransack)<br>
+  ・サークルに対して検索可能<br>
+    サークル名(フリーワード)、タグつけしたカテゴリー又は、活動場所で検索可能<br>
+<br>
+
+### ○ブログ作成関係<br>
+  ・投稿(作成したcircleに紐づく)、編集、削除<br>
+<br>
+
+### ◯コメント機能<br>
+  ・ブログに対して送信可能<br>
+<br>
+
+### ◯いいね機能<br>
+  ・ブログに対していいね可能<br>
+    いいね数に応じてランキングを表示<br>
+<br>
+
+### ◯フォロー機能<br>
+  ・フォロー・アンフォロー、フォロー・フォロワー一覧表示機能<br>
+<br>
+
+### ◯メッセージ機能<br>
+  ・action cableを用いたメッセージ<br>
+  ・一覧機能<br>
+    メッセージの最初の10文字・送信日時を表示可能<br>
+<br>
+
+### ○その他機能<br>
+  ・ページネーション<br>
+  ・Ajaxによる非同期処理<br>
+  ・レスポンシブ対応<br>
+  ・SNSシェア機能<br>
+    投稿したブログをfacebook, twitter, lineにシェア可能<br>
+<br>
+
+### ○テスト<br>
+  ・Rspec<br>
+<br>
 
 ### 参考、類似にさせていただいたサービス
 「つなげーと」<br>
