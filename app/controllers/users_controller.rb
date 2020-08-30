@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_target_user, only: %i(show edit update destroy following followers)
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update]
 
   def index
     @users = User.page(params[:page]).per(10)
@@ -45,8 +45,19 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to new_user_registration_path, notice: "ユーザーを削除しました"
+    if current_user.admin?
+      if @user.admin == true
+        redirect_to user_path(@user), alert: '管理者ユーザーは削除できません'
+      else
+        @user.destroy
+        redirect_to users_path, notice: "管理者権限で#{@user.name}を削除しました"
+      end
+    elsif @user != current_user
+      redirect_to user_path(@user), alert: '不正なアクセスです'
+    else
+      @user.destroy
+      redirect_to new_user_registration_path, notice: "ユーザーを削除しました"
+    end
   end
 
   def following

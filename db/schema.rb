@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200714183253) do
+ActiveRecord::Schema.define(version: 20200830062010) do
 
   create_table "blogs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
@@ -83,6 +83,16 @@ ActiveRecord::Schema.define(version: 20200714183253) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "reads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "message_id"
+    t.boolean "complete"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_reads_on_message_id"
+    t.index ["user_id"], name: "index_reads_on_user_id"
+  end
+
   create_table "relationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -114,6 +124,7 @@ ActiveRecord::Schema.define(version: 20200714183253) do
     t.string "profile_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -125,4 +136,6 @@ ActiveRecord::Schema.define(version: 20200714183253) do
   add_foreign_key "entries", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "reads", "messages"
+  add_foreign_key "reads", "users"
 end

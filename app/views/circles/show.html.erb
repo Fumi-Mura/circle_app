@@ -23,9 +23,9 @@
     <div class="circle__content">
       <%= simple_format @circle.content %>
     </div>
-    <% if @circle.user.id == current_user.id %>
-      <%= link_to "編集", edit_circle_path(@circle), class: "btn btn-primary" %>
-      <%= link_to "削除", circle_path(@circle), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-danger" %>
+    <% if @circle.user.id == current_user.id || current_user.admin? %>
+      <%= link_to "編集", edit_circle_path(@circle), class: "btn btn-outline-primary" %>
+      <%= link_to "削除", circle_path(@circle), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-outline-danger" %>
     <% end %>
   </div>
 </section>

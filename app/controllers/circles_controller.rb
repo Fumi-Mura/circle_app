@@ -55,7 +55,9 @@ class CirclesController < ApplicationController
   end
 
   def edit
-    if @circle.user != current_user
+    if current_user.admin?
+      flash[:notice] = '管理者権限で実行しています'
+    elsif @circle.user != current_user
       redirect_to circle_path, alert: '不正なアクセスです'
     end
   end
@@ -71,7 +73,10 @@ class CirclesController < ApplicationController
   end
 
   def destroy
-    if @circle.user != current_user
+    if current_user.admin?
+      @circle.destroy
+      redirect_to circles_path, notice: "管理者権限で#{@circle.name}サークルを削除しました"
+    elsif @circle.user != current_user
       redirect_to circle_path, alert: "不正なアクセスです"
     else
       @circle.destroy

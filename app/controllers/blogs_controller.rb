@@ -28,8 +28,10 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    if @blog.user != current_user
-      redirect_to blog_path, alert: "不正なアクセスです"
+    if current_user.admin?
+      flash[:notice] = '管理者権限で実行しています'
+    elsif @blog.user != current_user
+      redirect_to blog_path, alert: '不正なアクセスです'
     end
   end
 
@@ -44,11 +46,14 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    if @blog.user != current_user
+    if current_user.admin?
+      @blog.destroy
+      redirect_to @blog.circle, notice: "管理者権限で#{@blog.title}ブログを削除しました"
+    elsif @blog.user != current_user
       redirect_to blog_path, alert: "不正なアクセスです"
     else
       @blog.destroy
-      redirect_to @blog.circle, notice: "ブログを削除しました"
+      redirect_to @blog.circle, notice: "#{@blog.name}ブログを削除しました"
     end
   end
 

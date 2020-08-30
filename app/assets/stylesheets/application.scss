@@ -280,6 +280,13 @@ li {
       top: 10%;
     }
   }
+  .btn-primary,
+  .btn-outline-danger,
+  .btn-outline-primary {
+    display: block;
+    margin: 20px auto;
+    width: 80%;
+  }
   .share__button {
     text-align: center;
   }

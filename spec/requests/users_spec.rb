@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   let!(:user) { create(:user) }
   let!(:user_2) { create(:user) }
+  let!(:admin) { create(:user, admin: true) }
   let(:user_params) { attributes_for(:user) }
   let(:invalid_user_params) { attributes_for(:user, name: "") }
 
@@ -14,16 +15,16 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
-  # describe '#show' do
-  #   before do
-  #     sign_in user
-  #     get user_path
-  #   end
+  describe '#show' do
+    before do
+      sign_in user
+      get user_path(user)
+    end
 
-  #   it '正常なレスポンスが返ってくること' do
-  #     expect(response).to have_http_status 200
-  #   end
-  # end
+    it '正常なレスポンスが返ってくること' do
+      expect(response).to have_http_status 200
+    end
+  end
 
   describe 'POST #create' do
     before do
@@ -39,7 +40,7 @@ RSpec.describe 'Users', type: :request do
       it '新規登録の成功によりユーザーが1人増えること' do
         expect do
           post user_registration_path, params: { user: user_params }
-        end.to change(User, :count).by 1
+        end.to change(User, :count).by(1)
       end
 
       it 'リダイレクトされること' do
@@ -57,7 +58,7 @@ RSpec.describe 'Users', type: :request do
       it 'ユーザー新規登録が失敗すること' do
         expect do
           post user_registration_path, params: { user: invalid_user_params }
-        end.not_to change(User, :count)
+        end.to change(User, :count).by(0)
       end
     end
 
@@ -82,6 +83,17 @@ RSpec.describe 'Users', type: :request do
       end
     end
 
+    context '管理者ユーザーの場合' do
+      before do
+        sign_in admin
+        get edit_user_path(user)
+      end
+
+      it '正常なレスポンスが返ってくること' do
+        expect(response).to have_http_status 302
+      end
+    end
+
     context '本人でない場合' do
       before { sign_in user_2 }
 
@@ -91,17 +103,54 @@ RSpec.describe 'Users', type: :request do
       end
     end
 
-    # context 'ログインしていない場合' do
-    #   before do
-    #     get edit_user_path
-    #   end
+    context 'ログインしていない場合' do
+      before do
+        get edit_user_path(user)
+      end
 
-    #   it 'サインイン画面へリダイレクトされること' do
-    #     expect(response).to redirect_to new_user_session_path
-    #   end
-    # end
+      it 'サインイン画面へリダイレクトされること' do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
   end
 
   # describe '#update' do
   # end
+
+  describe '#destroy' do
+    context '本人の場合' do
+      before { sign_in user }
+
+      it '正常に削除できること' do
+        expect do
+          delete user_path(user)
+        end.to change(User, :count).by(-1)
+      end
+    end
+
+    context '管理者ユーザーの場合' do
+      before { sign_in admin }
+
+      it '正常に削除できること' do
+        expect do
+          delete user_path(user)
+        end.to change(User, :count).by(-1)
+      end
+    end
+
+    context '未ログイン状態のとき' do
+      it 'ログインページにリダイレクトされること' do
+        delete user_path(user)
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+    context '本人でない場合' do
+      it 'ユーザーを削除できず、詳細ページにリダイレクトされること' do
+        sign_in user_2
+        expect { delete user_path(user) }.to change(User, :count).by(0)
+        expect(response).to redirect_to user_path
+      end
+    end
+  end
 end

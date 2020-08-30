@@ -37,6 +37,10 @@
         <% if @user.email != 'guestuser@example.com' %>
           <%= link_to "削除", user_path(@user), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-outline-danger user_delete_btn" %>
         <% end %>
+      <% elsif current_user.admin? %>
+        <% if @user.id != current_user.id && @user.email != 'guestuser@example.com' %>
+          <%= link_to "削除", user_path(@user), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-outline-danger user_delete_btn" %>
+        <% end %>
       <% end %>
     </div>
   </div>

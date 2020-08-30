@@ -2,15 +2,23 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
 Category.create!([
-    { kind: '身体を動かす' },
-    { kind: '勉強する' },
-    { kind: 'イベントに行く' },
-    { kind: '旅をする' },
-    { kind: '見たい・聞きたい' },
-    { kind: 'テーマで話す' },
-    { kind: 'これが食べたい' },
-    { kind: '新しく創る' }
-  ])
+  { kind: '身体を動かす' },
+  { kind: '勉強する' },
+  { kind: 'イベントに行く' },
+  { kind: '旅をする' },
+  { kind: '見たい・聞きたい' },
+  { kind: 'テーマで話す' },
+  { kind: 'これが食べたい' },
+  { kind: '新しく創る' }
+])
+
+User.create!(
+  name: "管理者ユーザー",
+  email: "admin@example.com",
+  password: "password",
+  password_confirmation: "password",
+  admin: true
+)
 
 if Rails.env == 'development'
   30.times do |i|
@@ -24,11 +32,10 @@ if Rails.env == 'development'
     user.save!
   end
 
-users = User.all
-user  = users.first
-following = users[2..30]
-followers = users[3..20]
-following.each { |followed| user.follow(followed) }
-followers.each { |follower| follower.follow(user) }
-
+  users = User.all
+  user  = users.first
+  following = users[2..30]
+  followers = users[3..20]
+  following.each { |followed| user.follow(followed) }
+  followers.each { |follower| follower.follow(user) }
 end

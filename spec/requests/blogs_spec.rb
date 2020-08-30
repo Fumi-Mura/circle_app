@@ -3,17 +3,21 @@ require 'rails_helper'
 RSpec.describe 'Blogs', type: :request do
   let!(:user) { create(:user) }
   let!(:user_2) { create(:user) }
+  let!(:admin) { create(:user, admin: true) }
   let!(:circle) { create(:circle, user: user) }
   let(:blog) { create(:blog, user: user, circle: circle) }
   let!(:blog_2) { create(:blog, content: "blog_2") }
 
-  # describe "#index" do
-  #   before { get blogs_path }
+  describe "#index" do
+    before do
+      sign_in user
+      get blogs_path
+    end
 
-  #   it '正常なレスポンスが返ってくること' do
-  #     expect(response).to have_http_status 200
-  #   end
-  # end
+    it '正常なレスポンスが返ってくること' do
+      expect(response).to have_http_status 200
+    end
+  end
 
   describe "#show" do
     before { get blog_path(blog) }
@@ -66,6 +70,17 @@ RSpec.describe 'Blogs', type: :request do
       end
     end
 
+    context '管理者ユーザーの場合' do
+      before do
+        sign_in admin
+        get edit_blog_path(blog)
+      end
+
+      it '正常なレスポンスが返ってくること' do
+        expect(response).to have_http_status 200
+      end
+    end
+
     context '本人でない場合' do
       before { sign_in user_2 }
 
@@ -88,6 +103,7 @@ RSpec.describe 'Blogs', type: :request do
   end
 
   describe '#update' do
+    # let!(:blog) { create(:blog, user: user, circle: circle) }
     # context 'ログインしている時' do
     #   before do
     #     sign_in user
@@ -124,6 +140,18 @@ RSpec.describe 'Blogs', type: :request do
   describe '#destroy' do
     context '本人の場合' do
       before { sign_in user }
+
+      let!(:blog) { create(:blog, user: user, circle: circle) }
+
+      it '正常に削除できること' do
+        expect do
+          delete blog_path(blog)
+        end.to change { user.blogs.count }.by(-1)
+      end
+    end
+
+    context '管理者ユーザーの場合' do
+      before { sign_in admin }
 
       let!(:blog) { create(:blog, user: user, circle: circle) }
 

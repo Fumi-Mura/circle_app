@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Circles', type: :request do
   let!(:user) { create(:user) }
   let!(:user_2) { create(:user) }
+  let!(:admin) { create(:user, admin: true) }
   let(:circle) { create(:circle, user: user) }
   let!(:circle_2) { create(:circle, content: "circle_2") }
 
@@ -65,6 +66,17 @@ RSpec.describe 'Circles', type: :request do
       end
     end
 
+    context '管理者ユーザーの場合' do
+      before do
+        sign_in admin
+        get edit_circle_path(circle)
+      end
+
+      it '正常なレスポンスが返ってくること' do
+        expect(response).to have_http_status 200
+      end
+    end
+
     context '本人でない場合' do
       before { sign_in user_2 }
 
@@ -87,14 +99,16 @@ RSpec.describe 'Circles', type: :request do
   end
 
   describe '#update' do
+    # let!(:circle) { create(:circle, user: user) }
+
     # context 'ログインしている時' do
     #   before do
     #     sign_in user
-    #     patch circle_path(circle), params: { post: circle_2 }
+    #     patch circle_path(circle), params: { post: circle }
     #   end
 
-    #   it '投稿一覧へリダイレクトされること' do
-    #     expect(response).to redirect_to circle_path
+    #   it 'サークル詳細へリダイレクトされること' do
+    #     expect(response).to redirect_to circle_path(circle)
     #   end
     # end
 
@@ -123,6 +137,18 @@ RSpec.describe 'Circles', type: :request do
   describe '#destroy' do
     context '本人の場合' do
       before { sign_in user }
+
+      let!(:circle) { create(:circle, user: user) }
+
+      it '正常に削除できること' do
+        expect do
+          delete circle_path(circle)
+        end.to change { user.circles.count }.by(-1)
+      end
+    end
+
+    context '管理者ユーザーの場合' do
+      before { sign_in admin }
 
       let!(:circle) { create(:circle, user: user) }
 
