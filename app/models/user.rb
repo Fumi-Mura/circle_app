@@ -41,9 +41,9 @@ class User < ApplicationRecord
                                    dependent: :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  has_many :entries
-  has_many :messages
-  has_many :rooms, through: :entries
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :rooms, dependent: :destroy, through: :entries
 
   with_options presence: true do
     validates :name

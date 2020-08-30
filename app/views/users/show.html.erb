@@ -33,7 +33,10 @@
           <i class="fas fa-envelope user__icon"></i>
           <%= @user.email %>
         </div>
-        <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary" %>
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-primary user_edit_btn" %>
+        <% if @user.email != 'guestuser@example.com' %>
+          <%= link_to "削除", user_path(@user), method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-outline-danger user_delete_btn" %>
+        <% end %>
       <% end %>
     </div>
   </div>

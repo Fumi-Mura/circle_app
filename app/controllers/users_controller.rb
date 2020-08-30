@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_target_user, only: %i(show edit update destroy following followers)
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
 
   def index
     @users = User.page(params[:page]).per(10)
@@ -46,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user.destroy
+    @user.destroy
     redirect_to new_user_registration_path, notice: "ユーザーを削除しました"
   end
 
@@ -79,9 +78,5 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
-  end
-
-  def admin_user
-    redirect_to(root_url) unless current_user.admin?
   end
 end

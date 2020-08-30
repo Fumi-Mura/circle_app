@@ -42,6 +42,9 @@
       left: 5px;
       font-size: 20px;
     }
+    .user_edit_btn {
+      margin: 0 30px 0 0;
+    }
   }
 }
 
@@ -162,6 +165,11 @@
         width: 138px;
         margin: 0 auto;
         display: block;
+      }
+      .user_edit_btn, .user_delete_btn {
+        margin: 20px auto;
+        display: block;
+        width: 80%
       }
     }
   }
