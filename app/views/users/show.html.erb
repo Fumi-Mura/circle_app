@@ -10,6 +10,8 @@
           <%= render 'follow_form' %>
         </div>
         <% if @user.id == current_user.id %>
+          <%= link_to "お知らせ一覧", notifications_path, class: "btn btn-outline-warning" %>
+          <%= render 'notifications/mark' %>
           <div class="to__send__message">
             <%= link_to "メッセージ一覧", rooms_path, class: "btn btn-outline-dark" %>
           </div>
@@ -45,3 +47,4 @@
     </div>
   </div>
 </section>
+

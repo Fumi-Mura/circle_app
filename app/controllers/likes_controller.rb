@@ -4,6 +4,7 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.create(blog_id: params[:blog_id])
+    @blog.create_notification_like!(current_user)
     respond_to do |format|
       format.html { redirect_to @blog }
       format.js

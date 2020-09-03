@@ -8,6 +8,7 @@ class BlogsController < ApplicationController
 
   def show
     @comment = Comment.new(blog_id: @blog.id)
+    @comments = Comment.all.order(created_at: :asc)
   end
 
   def new

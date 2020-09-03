@@ -4,10 +4,10 @@
 #
 #  id         :bigint           not null, primary key
 #  comment    :text(65535)      not null
-#  name       :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  blog_id    :bigint
+#  user_id    :integer
 #
 # Indexes
 #
@@ -27,24 +27,14 @@ RSpec.describe Comment, type: :model do
 
   describe 'バリデーション' do
     context 'OKの場合' do
-      it 'nameとcontentどちらも値が設定されていればOK' do
+      it 'contentの値が設定されていればOK' do
         expect(comment.valid?).to eq true
       end
     end
 
     context 'NGの場合' do
-      it 'nameが空だとNG' do
-        comment.name = ''
-        expect(comment.valid?).to eq false
-      end
-
       it 'contentが空だとNG' do
         comment.comment = ''
-        expect(comment.valid?).to eq false
-      end
-
-      it 'nameが31文字以上だとNG' do
-        comment.name = "a" * 31
         expect(comment.valid?).to eq false
       end
 

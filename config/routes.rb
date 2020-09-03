@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  # actioncableの使用による追加
-  # mount ActionCable.server => '/cable'
-
   devise_for :users, controllers: {
     registrations: 'users/registrations',
   }
@@ -27,4 +24,5 @@ Rails.application.routes.draw do
   resources :rooms, only: [:create, :destroy, :show, :index]
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :destroy, :show, :index]
+  resources :notifications, only: :index
 end

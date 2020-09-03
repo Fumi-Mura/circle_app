@@ -1,0 +1,32 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<div class="notifications">
+  <%= link_to user_path(visitor) do %>
+      <%= attachment_image_tag @user, :profile_image, fallback: "default_image.jpg", class: "user__image notidication__user__image" %>
+      <%= visitor.name %>さんが
+    <% case notification.action %>
+    <% when 'follow' then %>
+      <%= link_to 'あなた', current_user, style: "font-weight: bold;" %>
+      をフォローしました
+    <% when 'like' then %>
+      <%= link_to 'あなたの投稿', notification.blog, style: "font-weight: bold;" %>
+      にいいねしました
+    <% when 'comment' then %>
+      <% if notification.blog.user_id == visited.id %>
+        <%= link_to "あなたの投稿", notification.blog, style: "font-weight: bold;" %>
+      <% else %>
+        <%= link_to blog_path(notification.blog) do %>
+          <%= attachment_image_tag blog.user, :profile_image, fallback: "default_image.jpg", class: "user__image notidication__user__image" %>
+          <%= notification.blog.user.name + 'さんの投稿' %>
+        <% end %>
+        <%= Comment.find_by(id: notification.comment_id)&.comment %>
+      <% end %>
+      にコメントしました
+    <% end %>
+    <span class="notifications__time">
+      <%= time_ago_in_words(notification.created_at).upcase %>前
+    </span>
+  <% end %>
+</div>
+<hr style="margin-bottom: 30px">

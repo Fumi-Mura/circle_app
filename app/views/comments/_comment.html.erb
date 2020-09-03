@@ -1,12 +1,18 @@
-<div class="comment__item">
-  <div class="comment__info">
-    <div class="comment__name">
-      <%= comment.name %>
+<% if @blog.id == comment.blog_id %>
+  <div class="comment__item">
+    <div class="comment__info">
+      <div class="comment__name">
+        <%= link_to user_path(comment.user) do %>
+          @<%= comment.user.name %>
+        <% end %>
+      </div>
+      <div class="comment__time">
+        <%= comment.created_at.to_s(:datetime_jp) %>
+        <% if comment.user.id == current_user.id %>
+          <%= link_to "削除", comment, method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-outline-danger", style: "display: inline" %>
+        <% end %>
+      </div>
     </div>
-    <div class="comment__time">
-      <%= comment.created_at.to_s(:datetime_jp) %>
-      <%= link_to "削除", comment, method: :delete, data: {confirm: "削除してもよろしいですか？"}, class: "btn btn-outline-danger" %>
-    </div>
+    <%= simple_format(comment.comment) %>
   </div>
-  <%= simple_format(comment.comment) %>
-</div>
+<% end %>
