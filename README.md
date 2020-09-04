@@ -28,7 +28,7 @@ Nginx, Unicorn<br>
 Git<br>
 
 ## ER図
-![image](https://user-images.githubusercontent.com/63145482/89771312-1039d380-db3b-11ea-96ac-03ce0633a97f.png)
+![image](https://user-images.githubusercontent.com/63145482/92090706-b612f200-ee0a-11ea-8ac5-c29818e01929.png)<br>
 
 ## サービス構成図
 ![image](https://user-images.githubusercontent.com/63145482/91665950-3946f600-eb34-11ea-815b-b4c6e0a087d3.png)<br>
@@ -71,6 +71,12 @@ Git<br>
   - action cableを用いたメッセージ
   - 一覧機能
     - メッセージの最初の10文字・送信日時を表示可能
+
+### 通知機能<br>
+  - 通知が来るアクション
+    - 他ユーザーからフォローされた時
+    - ブログにいいねされた時
+    - ブログにコメントがついた時
 
 ### その他機能<br>
   - ページネーション
