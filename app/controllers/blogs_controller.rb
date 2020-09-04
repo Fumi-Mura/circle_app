@@ -54,7 +54,7 @@ class BlogsController < ApplicationController
       redirect_to blog_path, alert: "不正なアクセスです"
     else
       @blog.destroy
-      redirect_to @blog.circle, notice: "#{@blog.name}ブログを削除しました"
+      redirect_to @blog.circle, notice: "#{@blog.title}ブログを削除しました"
     end
   end
 

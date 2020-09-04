@@ -4,7 +4,7 @@
   <%= form_for comment do |f| %>
     <%= f.hidden_field :blog_id %>
     <div class="form-group">
-      <%= f.label :comment, 'コメント送れます' %>
+      <%= f.label :comment, 'コメントが送れます' %>
       <%= f.text_area :comment,:placeholder => "コメント内容を記述してください(※100文字以内)", class: 'form-control' %>
     </div>
     <%= f.submit '送信', class: 'btn btn-primary' %>
