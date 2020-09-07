@@ -189,30 +189,7 @@
   }
 }
 
-
 @media screen and (max-width: 480px) {
-  // circle一覧
-
-  // .circle_search {
-  //   display: flex;
-  //   #q_categories_id_eq {
-  //     width: 160px;
-  //     padding: 0px 10px;
-  //     margin: 0px 30px;
-  //     height: 36px;
-  //     border: 1px solid silver;
-  //     border-radius: 3px;
-  //   }
-  //   .circle__search__place {
-  //     margin-right: 50px;
-  //   }
-  //   .search__btn {
-  //     padding: 2px 10px;
-  //     border: none;
-  //     height: 36px;
-  //   }
-  // }
-
   .circle_search {
     display: block;
     text-align: center;
@@ -246,6 +223,10 @@
         text-align: center;
       }
     }
+    .circle__category,
+    .badge-place{
+      display: inline-block;
+    }
   } // circle作成、編集
   #circle__profile__image {
     margin: 0px auto;
@@ -261,7 +242,7 @@
       .circle__blog__image {
         width: 100%;
         .circle__blog__like__comment {
-          margin: 10px 40px 0 0;
+          margin: 10px 60px 0 0;
         }
       }
     }

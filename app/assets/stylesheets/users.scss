@@ -97,7 +97,8 @@
     padding: 10px;
     box-shadow: 5px 5px 10px #bfbfbf, -5px -5px 10px #ffffff;
     .users__image {
-      height: 90%;
+      width: 210px;
+      height: 210px;
       border-radius: 50%;
     }
     .users__name {
@@ -172,10 +173,6 @@
         width: 80%
       }
     }
-  }
-  .user__image {
-    width: 100%;
-    display: block;
   }
   // user一覧
   .users__list {

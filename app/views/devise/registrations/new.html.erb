@@ -29,7 +29,7 @@
     <div class="form-group">
       <%= f.label :password, class: "label" %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %> 文字以上)</em>
       <% end %>
       <p class="has-icons-left">
       <%= f.password_field :password, autocomplete: "new-password", :placeholder => "パスワード", class: "input neumorphism__concave" %>
