@@ -2,7 +2,7 @@
 # ワンプレ
 ![image](https://user-images.githubusercontent.com/63145482/89443568-6b5e7580-d78b-11ea-8965-2cd17e47e9eb.png)<br>
 
-## URL
+## URL(現在サーバーを停止しております)
 ### **https://www.ones-palce.xyz**<br>
 
 ## 概要
